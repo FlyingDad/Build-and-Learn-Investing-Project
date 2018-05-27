@@ -1,20 +1,28 @@
 //Business Logic
 document.getElementById("test-class").innerHTML = "Paragraph changed from JS. <br> Hi Jim!";
 $("#test-class").append("<br>Whaaaaazzzzuuuppp");
-//
+let dayType = "downDay";  //will let me style things, add icons etc. based on last price either being > or < prev last price. Can you pass me this please :)  
 
 
-// // //UI
-// // expecting var's upDay and downDay from the function. (i used html ID's just as interim place holder
-// // will change bootstrap panel color from grey to green or red based on an up or down day
+//UI
+$("form#selector").submit(function (event) {
+  event.preventDefault();
+  let userInput = $("select#user-input").val();
+  if (userInput !== "none") {
+    $(".panel-body").show();
+  } else {
+    $(".panel-body").hide();
+  }
 
-// $(function () {
-  // if ($("#last-price") > $("#prev-last-price")) { // down day
-//     $("#panel-bias").removeClass("panel-default")
-//     $("#panel-bias").addClass("panel-danger") 
-//   } else if ($("#last-price") < $("#prev-last-price")) { //up day
-//     $("#panel-bias").removeClass("panel-default")
-//     $("#panel-bias").addClass("panel-success") 
-//   }
-//  
-// });
+
+// testing up day down day
+  if (dayType === "downDay") {
+    $("#panel-bias").removeClass("panel-default")
+    $("#panel-bias").addClass("panel-danger") //down day
+  } else if (dayType === "upDay") {
+    $("#panel-bias").removeClass("panel-default")
+    $("#panel-bias").addClass("panel-success") //up day
+  } else {
+
+  }
+});
