@@ -1,3 +1,14 @@
-h1 {
-	color: rgb(6, 128, 6);
+body{
+	margin: 0 auto;
+	padding: 10px;
+	width: 70%;
+}
+
+.form-group * {
+	padding: 5px;
+	margin: 5px;
+}
+
+ul.data-box {
+	list-style-type: none;
 }
