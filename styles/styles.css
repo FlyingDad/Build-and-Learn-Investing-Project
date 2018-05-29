@@ -20,3 +20,7 @@ ul.data-box {
 .panel-danger {
 	background-color: rgba(226, 195, 192, 0.288);
 }
+
+.panel-success {
+	background-color: #d7fdea9d
+}
