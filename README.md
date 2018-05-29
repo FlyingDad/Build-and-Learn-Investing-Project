@@ -8,6 +8,11 @@
 
 _Return current price and other data from exchange or other data source_
 
+### Specs
+| Spec | Input | Output |
+| :------------- | :------------- | :------------- |
+| **Program takes a string and returns a xyz** | User input: "x" | Output: "x" |
+
 ## Known Bugs
 
 ## Support and contact details
