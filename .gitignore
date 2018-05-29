@@ -1,0 +1,6 @@
+.DS_Store
+gulpfile.js
+node_modules/
+*.log
+package*
+scripts*
