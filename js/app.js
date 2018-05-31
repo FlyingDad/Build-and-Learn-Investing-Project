@@ -6,6 +6,14 @@ $("#test-class").append("<br>Whaaaaazzzzuuuppp");
 $("#test-class").append("<br>Nothin', just watching the code, having a Bud!");
 let dayType = "upDay";  //will let me style things, add icons etc. based on last price either being > or < prev last price. Can you pass me this please :)  
 
+// Gets date n days earlier
+Date.prototype.subtractDays = function (n) {
+	var time = this.getTime();
+	var changedDate = new Date(time - (n * 24 * 60 * 60 * 1000));
+	this.setTime(changedDate.getTime());
+	return this;
+};
+
 
 //UI
 $("form#selector").submit(function (event) {
@@ -45,14 +53,13 @@ $("form#selector").submit(function (event) {
 
 // Mikes Code Below
 
-const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=2018-03-21';
-const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=2018-05-20';
+const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
 
 class Bullion {
-	constructor(name, time ,closing){
-		this.name = name;
-		this.time = time;
-		this.closing = closing;
+	constructor(name, priceData){
+		this.name = name;   //Gold, Silver, etc
+		this.priceData = priceData;	 // array of 90 days of bullion prices
 	}
 }
 
@@ -74,7 +81,7 @@ function getData(url){
   .then(json)
   .then(function(data) {
 		console.log('Request succeeded with JSON response', data);
-		//console.table(data);
+		console.table(data);
 		return data;
   }).catch(function(error) {
     console.log('Request failed', error);
@@ -85,28 +92,30 @@ function getData(url){
 function getBullion(url) {
 	return getData(url)
 	.then(data => {
-	let bullion = new Bullion(data.dataset.dataset_code, data.dataset.data[0][0],data.dataset.data[0][1] );
-	// console.log(data.dataset);
-	// console.log(data.dataset.dataset_code);  // Buiiion name
-	// console.log(data.dataset.data[0][1]); // closing price 
+	// create new bullion instance and return
+	let bullion = new Bullion(data.dataset.dataset_code, data.dataset.data);
 	return bullion;
 });
 }
 
 function getUserSlected(selected){
-	getBullion(selected)
-	.then(b=>{
+	getBullion(selected + getDateStamp())
+	.then(bullion=>{
 	//will send to HTML here
-	console.table(b);
-	document.getElementById('time-stamp').innerHTML = b.time;
-	document.getElementById('description').innerHTML = b.name;
-	document.getElementById('last-price').innerHTML = '$' + b.closing;
-
+	console.table(bullion);
+	document.getElementById('time-stamp').innerHTML = bullion.priceData[0][0];
+	document.getElementById('description').innerHTML = bullion.name;
+	document.getElementById('open-price').innerHTML = 'Open: $' + bullion.priceData[0][1];
+	document.getElementById('close-price').innerHTML = 'Close: $' + bullion.priceData[0][2];
+	//console.table(bullion.priceData);
 	});
-	// .then(getBullion(silverUrl)
-	// .then(s=>{
-	// //will send to HTML here
-	// console.table(s);
-	// }));
 }
 
+function getDateStamp(){
+	let now = new Date();
+	let previousDate = now.subtractDays(90);  //gets date 90 days ago
+	let year = previousDate.getFullYear()
+	let month = previousDate.getMonth();
+	let day = previousDate.getDay();
+	return `${year}-${month}-${day}`
+}
