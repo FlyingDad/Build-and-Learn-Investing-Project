@@ -61,6 +61,18 @@ class Bullion {
 		this.name = name;   //Gold, Silver, etc
 		this.priceData = priceData;	 // array of 90 days of bullion prices
 	}
+
+	get sma15Week(){
+		return this.calcSma(75);   // 15wks = 75 days
+	}
+
+	get sma20Day(){
+		return this.calcSma(20);
+	}
+
+	calcSma(days){
+		// calulate sma's here
+	}
 }
 
 function status(response) {
