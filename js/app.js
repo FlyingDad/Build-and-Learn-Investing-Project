@@ -61,6 +61,24 @@ class Bullion {
 		this.name = name;   //Gold, Silver, etc
 		this.priceData = priceData;	 // array of 90 days of bullion prices
 	}
+
+	get sma5Day(){
+		return this.calcSma(5);   // 5 days
+	}
+
+	get sma20Day(){
+		return this.calcSma(20); // 20 days
+	}
+
+	calcSma(days){
+		// calculate sma's here
+		//get last 'days' closing
+		let sum = 0;
+		for(let i = 0; i < days; i++){
+			sum += this.priceData[i][2]; // 2nd element in each day is closing price
+		}
+		return sum / days;
+	}
 }
 
 function status(response) {
@@ -105,9 +123,11 @@ function getUserSlected(selected){
 	console.table(bullion);
 	document.getElementById('time-stamp').innerHTML = bullion.priceData[0][0];
 	document.getElementById('description').innerHTML = bullion.name;
-	document.getElementById('open-price').innerHTML = 'Open: $' + bullion.priceData[0][1];
-	document.getElementById('close-price').innerHTML = 'Close: $' + bullion.priceData[0][2];
-	//console.table(bullion.priceData);
+	document.getElementById('open-price').innerHTML = `Open: $${bullion.priceData[0][1]}`;
+	document.getElementById('close-price').innerHTML = `Close: $' ${bullion.priceData[0][2]}`;
+	document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
+	document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
+	console.log(bullion.sma5Day);
 	});
 }
 
