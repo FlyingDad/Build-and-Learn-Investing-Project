@@ -170,6 +170,7 @@ function calculateSMABias(bullion) {
 	$("ul#bias").append(`<li>Mom 1 ${mom1}</li>`)
 	$("ul#bias").append(`<li>Mom 2 ${mom2}</li>`)
 	$("ul#bias").append(`<li>Mom 3 ${mom3}</li>`)
+	$("ul#bias").append(`<li>MA 20 test: ${bullion.calcSma(20)}</li>`)
 
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = "BUY"
