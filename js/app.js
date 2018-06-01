@@ -1,10 +1,7 @@
 /* jshint esversion: 6 */
 
 //Business Logic
-document.getElementById("test-class").innerHTML = "Paragraph changed from JS. <br> Hi Jim!";
-$("#test-class").append("<br>Whaaaaazzzzuuuppp");
-$("#test-class").append("<br>Nothin', just watching the code, having a Bud!");
-let dayType = "upDay";  //will let me style things, add icons etc. based on last price either being > or < prev last price. Can you pass me this please :)  
+
 
 // Gets date n days earlier
 Date.prototype.subtractDays = function (n) {
@@ -22,7 +19,7 @@ $("form#selector").submit(function (event) {
 	console.log(userInput);
   //check for valid input
   if (userInput !== "none") {
-		$(".panel-body").show();
+		$(".panel-body").slideDown();
 		switch (userInput){
 			case 'gold':
 				getUserSlected(goldUrl);
@@ -36,18 +33,6 @@ $("form#selector").submit(function (event) {
 		}
   } else {
     $(".panel-body").hide();
-  }
-
-
-// testing up day down day
-  if (dayType === "downDay") {
-    $("#panel-bias").removeClass("panel-default");
-    $("#panel-bias").addClass("panel-danger"); //down day
-  } else if (dayType === "upDay") {
-    $("#panel-bias").removeClass("panel-default");
-    $("#panel-bias").addClass("panel-success"); //up day
-  } else {
-    //unchanged
   }
 });
 
@@ -149,8 +134,37 @@ function getDateStamp(){
 function calculateSMABias(bullion){
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
-	let sma50 = bullion.sma50;
+	let sma50 = bullion.sma50Day;
+	let last = bullion.priceData[0][1]; //last price, settle or close value using
+	let priorLast = bullion.priceData[1][1]; // prior last or....
+	$(".bias").append(`<p>Yest Close: ${last}</p>`)
+	
+	if (last > priorLast) {
+		$("#panel-bias").removeClass("panel-default");
+		$("#panel-bias").addClass("panel-success"); //up day
 
-	// *** jim, do your sma bias magic here!! ***/
+	} else if (last < priorLast){	
+		$("#panel-bias").removeClass("panel-default");
+    $("#panel-bias").addClass("panel-danger"); //down day
+	} else {
+		//unchanged
+	}
 
+	let bias = "";
+	let mom1 = (sma5 - last).toFixed(2); 
+	let mom2 = (sma20 - last).toFixed(2);
+	let mom3 = (sma50 - last).toFixed(2);
+	$(".bias").append(`<p>Mom 1 ${mom1}</p>`)
+	$(".bias").append(`<p>Mom 2 ${mom2}</p>`)
+	$(".bias").append(`<p>Mom 3 ${mom3}</p>`)
+	
+	if (mom1 >=0 && mom2 >=0 && mom3 >= 0) {
+		bias = "BUY"
+	} else if (mom1 <=0 && mom2 <=0 && mom3 <= 0) {
+		bias = "SELL"
+	} else {
+		bias = "NONE"
+	}
+	$(".bias").append(`<p>Bias is: ${bias}</p>`)
 }
+
