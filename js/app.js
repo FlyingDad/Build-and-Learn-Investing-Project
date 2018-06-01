@@ -70,6 +70,10 @@ class Bullion {
 		return this.calcSma(20); // 20 days
 	}
 
+	get sma50Day(){
+		return this.calcSma(50); // 20 days
+	}
+
 	calcSma(days){
 		// calculate sma's here
 		//get last 'days' closing
@@ -98,8 +102,8 @@ function getData(url){
   .then(status)
   .then(json)
   .then(function(data) {
-		console.log('Request succeeded with JSON response', data);
-		console.table(data);
+		//console.log('Request succeeded with JSON response', data);
+		//console.table(data);
 		return data;
   }).catch(function(error) {
     console.log('Request failed', error);
@@ -120,15 +124,17 @@ function getUserSlected(selected){
 	getBullion(selected + getDateStamp())
 	.then(bullion=>{
 	//will send to HTML here
-	console.table(bullion);
+	//console.table(bullion);
 	document.getElementById('time-stamp').innerHTML = bullion.priceData[0][0];
 	document.getElementById('description').innerHTML = bullion.name;
 	document.getElementById('open-price').innerHTML = `Open: $${bullion.priceData[0][1]}`;
 	document.getElementById('close-price').innerHTML = `Close: $' ${bullion.priceData[0][2]}`;
 	document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
 	document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
-	console.log(bullion.sma5Day);
+	document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
+	calculateSMABias(bullion);
 	});
+	
 }
 
 function getDateStamp(){
@@ -138,4 +144,13 @@ function getDateStamp(){
 	let month = previousDate.getMonth();
 	let day = previousDate.getDay();
 	return `${year}-${month}-${day}`
+}
+
+function calculateSMABias(bullion){
+	let sma5 = bullion.sma5Day;
+	let sma20 = bullion.sma20Day;
+	let sma50 = bullion.sma50;
+
+	// *** jim, do your sma bias magic here!! ***/
+
 }
