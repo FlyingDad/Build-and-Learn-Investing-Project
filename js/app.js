@@ -38,8 +38,10 @@ $("form#selector").submit(function (event) {
 
 // Mikes Code Below
 
-const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+// const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+// const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key3EbrKYZd4sKnYn7CT79&start_date='
+const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
 
 class Bullion {
 	constructor(name, priceData){
@@ -88,7 +90,7 @@ function getData(url){
   .then(json)
   .then(function(data) {
 		//console.log('Request succeeded with JSON response', data);
-		//console.table(data);
+		console.table(data);
 		return data;
   }).catch(function(error) {
     console.log('Request failed', error);
