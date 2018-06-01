@@ -44,8 +44,9 @@ const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_k
 const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
 
 class Bullion {
-	constructor(name, priceData){
+	constructor(name, description, priceData){
 		this.name = name;   //Gold, Silver, etc
+		this.description = description; //get decription
 		this.priceData = priceData;	 // array of 90 days of bullion prices
 	}
 
@@ -66,7 +67,7 @@ class Bullion {
 		//get last 'days' closing
 		let sum = 0;
 		for(let i = 0; i < days; i++){
-			sum += this.priceData[i][2]; // 2nd element in each day is closing price
+			sum += this.priceData[i][6]; // 6th element in each day is closing price
 		}
 		return sum / days;
 	}
@@ -102,7 +103,7 @@ function getBullion(url) {
 	return getData(url)
 	.then(data => {
 	// create new bullion instance and return
-	let bullion = new Bullion(data.dataset.dataset_code, data.dataset.data);
+	let bullion = new Bullion(data.dataset.name, data.dataset.description, data.dataset.data);
 	return bullion;
 });
 }
@@ -112,13 +113,17 @@ function getUserSlected(selected){
 	.then(bullion=>{
 	//will send to HTML here
 	//console.table(bullion);
-	document.getElementById('time-stamp').innerHTML = bullion.priceData[0][0];
-	document.getElementById('description').innerHTML = bullion.name;
+	//["Date","Open","High","Low","Last","Change","Settle","Volume","Previous Day Open Interest"]
+	document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[0][0]}`;
+	document.getElementById('name').innerHTML = ` ${bullion.name}`;
 	document.getElementById('open-price').innerHTML = `Open: $${bullion.priceData[0][1]}`;
-	document.getElementById('close-price').innerHTML = `Close: $' ${bullion.priceData[0][2]}`;
+	document.getElementById('high-price').innerHTML = `High: $${bullion.priceData[0][2]}`;
+	document.getElementById('low-price').innerHTML = `Low: $${bullion.priceData[0][3]}`;
+	document.getElementById('close-price').innerHTML = `Close: $${bullion.priceData[0][6]}`;
 	document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
 	document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
 	document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
+	document.getElementById('description').innerHTML = `${bullion.description}`;
 	calculateSMABias(bullion);
 	});
 	
@@ -137,9 +142,10 @@ function calculateSMABias(bullion){
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
 	let sma50 = bullion.sma50Day;
-	let last = bullion.priceData[0][1]; //last price, settle or close value using
-	let priorLast = bullion.priceData[1][1]; // prior last or....
-	$(".bias").append(`<p>Yest Close: ${last}</p>`)
+	let last = bullion.priceData[0][6]; //last price, settle or close value using
+	let priorLast = bullion.priceData[1][6]; // prior last or....
+	$("ul#bias").append(`<li>Settle Price: ${last}</li>`)
+	$("ul#bias").append(`<li>Prior Settle Price: ${priorLast}</li>`)
 	
 	if (last > priorLast) {
 		$("#panel-bias").removeClass("panel-default");
@@ -156,9 +162,9 @@ function calculateSMABias(bullion){
 	let mom1 = (sma5 - last).toFixed(2); 
 	let mom2 = (sma20 - last).toFixed(2);
 	let mom3 = (sma50 - last).toFixed(2);
-	$(".bias").append(`<p>Mom 1 ${mom1}</p>`)
-	$(".bias").append(`<p>Mom 2 ${mom2}</p>`)
-	$(".bias").append(`<p>Mom 3 ${mom3}</p>`)
+	$("ul#bias").append(`<li>Mom 1 ${mom1}</li>`)
+	$("ul#bias").append(`<li>Mom 2 ${mom2}</li>`)
+	$("ul#bias").append(`<li>Mom 3 ${mom3}</li>`)
 	
 	if (mom1 >=0 && mom2 >=0 && mom3 >= 0) {
 		bias = "BUY"
@@ -167,6 +173,6 @@ function calculateSMABias(bullion){
 	} else {
 		bias = "NONE"
 	}
-	$(".bias").append(`<p>Bias is: ${bias}</p>`)
+	$("ul#bias").append(`<li>Bias is: ${bias}</li>`)
 }
 
