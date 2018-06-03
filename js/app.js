@@ -134,8 +134,8 @@ function getDateStamp() {
 	let now = new Date();
 	let previousDate = now.subtractDays(90);  //gets date 90 days ago
 	let year = previousDate.getFullYear()
-	let month = previousDate.getMonth();
-	let day = previousDate.getDay();
+	let month = previousDate.getMonth() + 1;
+	let day =now.getDate();
 	return `${year}-${month}-${day}`
 }
 
