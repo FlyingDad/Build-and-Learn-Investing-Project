@@ -103,10 +103,33 @@ function getData(url) {
 function getBullion(url) {
 	return getData(url)
 		.then(data => {
+      // check for nulls in price data 
+      let goodData = validateData(data.dataset.data);
 			// create new bullion instance and return
-			let bullion = new Bullion(data.dataset.name, data.dataset.description, data.dataset.data);
+			let bullion = new Bullion(data.dataset.name, data.dataset.description, goodData);
 			return bullion;
 		});
+}
+
+function validateData(data){
+  // lat at open, high, low, last
+  // if null, change to settle price
+  data.forEach(day => {
+    let settle = day[6];
+    if(day[1] == null){
+      day[1] = settle;
+    }
+    if(day[2] == null){
+      day[2] = settle;
+    }
+    if(day[3] == null){
+      day[3] = settle;
+    }
+    if(day[4] == null){
+      day[4] = settle;
+    }
+  });
+  return data;
 }
 
 function getUserSlected(selected) {
