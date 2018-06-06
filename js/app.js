@@ -1,8 +1,4 @@
-/* jshint esversion: 6 */
-
 //Business Logic
-
-
 // Gets date n days earlier
 Date.prototype.subtractDays = function (n) {
 	var time = this.getTime();
@@ -23,10 +19,10 @@ $("form#selector").submit(function (event) {
 		$(".panel-body").slideDown();
 		switch (userInput) {
 			case 'gold':
-				getUserSlected(goldUrl);
+				getUserSlected(alphaVantageGld);
 				break;
 			case 'silver':
-				getUserSlected(silverUrl);
+				getUserSlected(alphaVantageSLV);
 				break;
 			default:
 				console.log("user selection not defined");
@@ -41,14 +37,15 @@ $("form#selector").submit(function (event) {
 
 // const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
 // const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date='
-const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-
+//const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date='
+//const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+const alphaVantageGld = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=gld&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
+const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=slv&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
 class Bullion {
 	constructor(name, description, priceData) {
 		this.name = name;   //Gold, Silver, etc
 		this.description = description; //get decription
-		this.priceData = priceData;	 // array of 90 days of bullion prices
+    this.priceData = priceData;	 // array of 90 days of bullion prices
 	}
 
 	get sma5Day() {
@@ -68,7 +65,7 @@ class Bullion {
 		//get last 'days' closing
 		let sum = 0;
 		for (let i = 0; i < days; i++) {
-			sum += this.priceData[i][6]; // 6th element in each day is closing price
+      sum += Number(this.priceData[i][4]); // 4th element in each day is closing price
 		}
 		return sum / days;
 	}
@@ -92,7 +89,7 @@ function getData(url) {
 		.then(json)
 		.then(function (data) {
 			//console.log('Request succeeded with JSON response', data);
-			console.table(data);
+			//console.table(data);
 			return data;
 		}).catch(function (error) {
 			console.log('Request failed', error);
@@ -103,10 +100,39 @@ function getData(url) {
 function getBullion(url) {
 	return getData(url)
 		.then(data => {
-      // check for nulls in price data 
-      let goodData = validateData(data.dataset.data);
-			// create new bullion instance and return
-			let bullion = new Bullion(data.dataset.name, data.dataset.description, goodData);
+      let name = data['Meta Data']['2. Symbol'];
+      // dailyData is an object containing all daily data objects
+      let dailyData = data['Time Series (Daily)'];
+      // Make an array of dates for the data, we need these to extract
+      // daily data from each day object in dailyData
+      let dateKeys = Object.keys(dailyData);
+      // dailyDataObjArray will be an array of daily dates
+      let dailyDataObjArray = [];
+      dateKeys.forEach(function(day){
+        dailyDataObjArray.push(dailyData[day]);
+      });
+      // Take each daily object and turn into array
+      // get daily object keys, well get them from first object
+      let dailyKeys = Object.keys(dailyDataObjArray[0]);
+      //console.log(dailyKeys);
+      let dailyDataArray = [];
+      dailyDataObjArray.forEach(function(day){
+        let eachDayData = []
+        dailyKeys.forEach(function(key){
+          eachDayData.push(day[key]);
+        });
+        dailyDataArray.push(eachDayData);
+      });
+
+      // now lets put the date in the first element of each daily data array
+      dailyDataArray.forEach(function(day, index){
+        //console.log(day);
+        day.splice(0, 0, dateKeys[index]);
+        //console.log(day);
+      });
+      // Daily data is now
+      //["Date","Open","High","Low","close","volume"]
+			let bullion = new Bullion(name, 'Test', dailyDataArray);
 			return bullion;
 		});
 }
@@ -133,21 +159,20 @@ function validateData(data){
 }
 
 function getUserSlected(selected) {
-	getBullion(selected + getDateStamp())
+	getBullion(selected)
 		.then(bullion => {
-			//will send to HTML here
-			//console.table(bullion);
-			//["Date","Open","High","Low","Last","Change","Settle","Volume","Previous Day Open Interest"]
+      console.log(bullion);
+			//["Date","Open","High","Low","close","volume"]
 			document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[0][0]}`;
 			document.getElementById('name').innerHTML = ` ${bullion.name}`;
 			document.getElementById('open-price').innerHTML = `Open: $${bullion.priceData[0][1]}`;
 			document.getElementById('high-price').innerHTML = `High: $${bullion.priceData[0][2]}`;
 			document.getElementById('low-price').innerHTML = `Low: $${bullion.priceData[0][3]}`;
-			document.getElementById('close-price').innerHTML = `Close: $${bullion.priceData[0][6]}`;
+			document.getElementById('close-price').innerHTML = `Close: $${bullion.priceData[0][4]}`;
 			document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
 			document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
 			document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
-			document.getElementById('description').innerHTML = `${bullion.description}`;
+			//document.getElementById('description').innerHTML = `${bullion.description}`;
 			calculateSMABias(bullion);
 		});
 
@@ -166,8 +191,8 @@ function calculateSMABias(bullion) {
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
 	let sma50 = bullion.sma50Day;
-	let last = bullion.priceData[0][6]; //last price, settle or close value using
-	let priorLast = bullion.priceData[1][6]; // prior last or....
+	let last = bullion.priceData[0][4]; //last price, settle or close value using
+	let priorLast = bullion.priceData[1][4]; // prior last or....
 	$("ul#bias").append(`<li>Settle Price: ${last}</li>`)
 	$("ul#bias").append(`<li>Prior Settle Price: ${priorLast}</li>`)
 
@@ -202,6 +227,16 @@ function calculateSMABias(bullion) {
 	} else {
 		bias = "NONE"
 	}
-	$("ul#bias").append(`<li>Bias is: ${bias}</li>`)
+  $("ul#bias").append(`<li>Bias is: ${bias}</li>`);
+  
+  let tenDayDiff = [];
+  let smallestDiff;
+  for(let i = 0; i < 10; i++){
+    let high = bullion.priceData[i][2];
+    let low = bullion.priceData[i][3];
+    tenDayDiff.push(Math.abs(high - low));
+    smallestDiff = Math.min(...tenDayDiff);
+  }
+  console.log(tenDayDiff, smallestDiff.toFixed(2));
 }
 
