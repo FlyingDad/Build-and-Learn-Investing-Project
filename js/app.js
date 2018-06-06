@@ -258,10 +258,6 @@ function calculateSMABias(bullion) {
 	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.272)).toFixed(2);
 	console.log("fib High"+ fibPredictedHigh + "fib low" + fibPredictedLow ); 
 
-	// FibHigh = Round((((InptHIGH - InptLOW) * 1.272) + InptLOW), 2)
-	// FibLow = Round(((InptHIGH - (InptHIGH - InptLOW) * 1.272)), 2)
-
-
 
 
 }
