@@ -52,7 +52,7 @@ class Bullion {
 		//get last 'days' closing
 		let sum = 0;
 		for (let i = 1; i < days; i++) {  			// changes i to = 1 as to always use yesterdays data
-			sum += Number(this.priceData[i][4]); // 4th element in each day is closing price
+			sum += this.priceData[i][4]; // 4th element in each day is closing price
 		}
 		return sum / days;
 	}
@@ -62,7 +62,7 @@ class Bullion {
 		//get last 'days' closing
 		let sum = 0;
 		for (let i = 1; i < days; i++) {  			// changes i to = 1 as to always use yesterdays data
-			sum += Number(this.priceData[i][5]); // 5th element in each day is volume
+			sum += this.priceData[i][5]; // 5th element in each day is volume
 		}
 		return sum / days;
 	}
@@ -118,17 +118,19 @@ function getBullion(url) {
 			dailyDataObjArray.forEach(function (day) {
 				let eachDayData = []
 				dailyKeys.forEach(function (key) {
-					eachDayData.push(day[key]);
+					eachDayData.push(Number(day[key]));
 				});
 				dailyDataArray.push(eachDayData);
-			});
+      });
 
 			// now lets put the date in the first element of each daily data array
 			dailyDataArray.forEach(function (day, index) {
 				//console.log(day);
 				day.splice(0, 0, dateKeys[index]);
 				//console.log(day);
-			});
+      });
+      // Convert all data to numbers, except date'
+      
 			// Daily data is now
 			//["Date","Open","High","Low","close","volume"]
 			let bullion = new Bullion(name, lastTimeStamp, 'Test', dailyDataArray);
@@ -245,17 +247,19 @@ function calculateSMABias(bullion) {
 		// idNr7 = 1;
 		$("ul#bias").append(`<li>Buy</li>`)
 	}
-	//floor traders pivot points for the current session
-	let fPP = ((Number(bullion.priceData[1][2]) + Number(bullion.priceData[1][3]) + Number(bullion.priceData[1][4])) / 3).toFixed(2);
-	let r1 = ( (fPP * 2) - Number(bullion.priceData[1][3]) ).toFixed(2);
-	let s1 = ( (fPP * 2) - Number(bullion.priceData[1][2]) ).toFixed(2);
-	let r2 = (fPP - s1) + r1;
-	let s2 = (fPP - (r1 - s1));
+  //floor traders pivot points for the current session
+  let fPP = ((bullion.priceData[1][2] + bullion.priceData[1][3] + bullion.priceData[1][4]) / 3);
+	let r1 = ( (fPP * 2) - bullion.priceData[1][3]);
+	let s1 = ( (fPP * 2) - bullion.priceData[1][2]);
+  let r2 = (fPP - s1) + r1;
+  console.log(typeof(fPP));
+  let s2 = (fPP - (r1 - s1));
+  debugger
 	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
 
-	let fibPredictedHigh = ((( (Number(bullion.priceData[1][2]) - Number(bullion.priceData[1][3])) * 1.272) + (Number(bullion.priceData[1][3])))).toFixed(2);
+	let fibPredictedHigh = ((( (bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.272) + (bullion.priceData[1][3])));
 	
-	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.272)).toFixed(2);
+	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.272));
 	console.log("fib High"+ fibPredictedHigh + "fib low" + fibPredictedLow ); 
 
 
