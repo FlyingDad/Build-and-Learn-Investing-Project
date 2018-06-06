@@ -4,9 +4,10 @@ $("form#selector").submit(function (event) {
 	let userInput = $("select#user-input").val();
 	console.log(userInput);
 	$("ul#bias").empty(); // to clear the ul
+	$(".panel-body, .basic-data, .data-box").hide();
 	//check for valid input
 	if (userInput !== "none") {
-		$(".panel-body").slideDown();
+		$(".panel-body, .basic-data, .data-box").slideDown();
 		switch (userInput) {
 			case 'gold':
 				getUserSlected(alphaVantageGld);
@@ -161,8 +162,8 @@ function calculateSMABias(bullion) {
 	let sma50 = bullion.sma50Day;
 	let last = bullion.priceData[1][4]; //last price, settle or close value using
 	let priorLast = bullion.priceData[2][4]; // prior last or....
-	$("ul#bias").append(`<li>Settle Price: ${last}</li>`)
-	$("ul#bias").append(`<li>Prior Settle Price: ${priorLast}</li>`)
+	// $("ul#bias").append(`<li>Settle Price: ${last}</li>`)
+	// $("ul#bias").append(`<li>Prior Settle Price: ${priorLast}</li>`)
 
 	if (last > priorLast) {
 		$(".panel-bias").removeClass("panel-default");
@@ -183,12 +184,12 @@ function calculateSMABias(bullion) {
 	let mom1 = (sma5 - last).toFixed(2);
 	let mom2 = (sma20 - last).toFixed(2);
 	let mom3 = (sma50 - last).toFixed(2);
-	$("ul#bias").append(`<li>Mom 1 ${mom1}</li>`)
-	$("ul#bias").append(`<li>Mom 2 ${mom2}</li>`)
-	$("ul#bias").append(`<li>Mom 3 ${mom3}</li>`)
-	$("ul#bias").append(`<li>MA 20 test: ${bullion.calcSma(20).toFixed(2)}</li>`)
-	$("ul#bias").append(`<li>VMA 20 test: ${bullion.calcVma(20).toFixed(0)}</li>`)
-	
+	$("ul#bias").append(`<li>Mom 1: ${mom1}</li>`)
+	$("ul#bias").append(`<li>Mom 2: ${mom2}</li>`)
+	$("ul#bias").append(`<li>Mom 3: ${mom3}</li>`)
+	// $("ul#bias").append(`<li>MA 20 test: ${bullion.calcSma(20).toFixed(2)}</li>`)
+	$("ul#bias").append(`<li>VMA 20: ${bullion.calcVma(20).toFixed(0)}</li>`)
+
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = "BUY"
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
@@ -216,21 +217,21 @@ function calculateSMABias(bullion) {
 	let nr7 = 0;
 	if (xDayDiff[1] <= smallestDiff) {
 		nr7 = 1;
-		$("ul#bias").append(`<li>Buy Today</li>`)
 	}
-
+	
 	let insideDay = 0;
 	if (bullion.priceData[1][2] <= bullion.priceData[2][2] && bullion.priceData[1][3] >= bullion.priceData[2][3]) {
 		insideDay = 1;
 	}
-
-	let idNr7 = 0;
+	
+	// let idNr7 = 0;
 	if (nr7 != 0 && insideDay != 0) {
-		idNr7 = 1;
+		// idNr7 = 1;
+		$("ul#bias").append(`<li>Buy</li>`)
 	}
 
 
-	
+
 
 
 

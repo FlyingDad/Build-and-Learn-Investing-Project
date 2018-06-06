@@ -2,8 +2,8 @@ body {
   background: #EEE;
   font-family: sans-serif;
   font-size: 20px;
-  margin: 3em;
-  padding: 0;
+  margin: 3em auto;
+  padding: 0 auto;
 }
 
 #register {
@@ -32,7 +32,7 @@ ul {
 	list-style-type: none;
 }
 
-.panel-body, .basic-data {
+.panel-body, .basic-data, .data-box {
 	display: none;
 }
 
@@ -42,4 +42,11 @@ ul {
 
 .panel-success {
 	background-color: #d7fdea9d
+}
+
+#basic-data, #technical, .bias {
+	border: 1px solid black;
+	border-radius: 3px;
+	padding: 5px;
+	margin-bottom: 10px;
 }
