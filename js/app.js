@@ -1,9 +1,9 @@
 //UI
-let userInput;
+let userInput = $("select#user-input").val();  //placed here so I can use it in the panel header as a title 
 
 $("form#selector").submit(function (event) {
 	event.preventDefault();
-	userInput = $("select#user-input").val();
+	userInput = $("select#user-input").val();  // deleted the let since it is now a global var
 	console.log(userInput);
 	$("ul#bias").empty(); // to clear the ul
 	$(".panel-body, .basic-data, .data-box").hide();
@@ -29,7 +29,6 @@ $("form#selector").submit(function (event) {
 // Mikes Code Below
 const alphaVantageGld = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=gld&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
 const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=slv&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
-
 class Bullion {
 	constructor(name, lastTimeStamp, description, priceData) {
 		this.name = name;   //Gold, Silver, etc
@@ -51,16 +50,20 @@ class Bullion {
 	}
 
 	calcSma(days) {
+		// calculate sma's here
+		//get last 'days' closing
 		let sum = 0;
-		for (let i = 0; i < days; i++) {
+		for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 but values off as to always use yesterdays data
 			sum += this.priceData[i][4]; // 4th element in each day is closing price
 		}
 		return sum / days;
 	}
 
 	calcVma(days) {
+		// calculate sma's here
+		//get last 'days' closing
 		let sum = 0;
-		for (let i = 0; i < days; i++) {
+		for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 as to always use yesterdays data
 			sum += this.priceData[i][5]; // 5th element in each day is volume
 		}
 		return sum / days;
@@ -142,14 +145,14 @@ function getUserSlected(selected) {
 		.then(bullion => {
 			console.log(bullion);
 			//Alphavantage is real time so index of 0 will return current days info
-			//changes first index to 1 as to always use yesterdays data. 
+			//changed first index to 1 as to always use yesterdays data. 
 			//["Date","Open","High","Low","close","volume"]  
 			document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
 
 			document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
-			document.getElementById('c-open-price').innerHTML = `Open: $${(bullion.priceData[0][1]).toFixed(2)}`;
-			document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2]).toFixed(2)}`;
-			document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3]).toFixed(2)}`;
+			document.getElementById('c-open-price').innerHTML = `Open: $${bullion.priceData[0][1]}`;
+			document.getElementById('c-high-price').innerHTML = `High: $${bullion.priceData[0][2]}`;
+			document.getElementById('c-low-price').innerHTML = `Low: $${bullion.priceData[0][3]}`;
 			document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
 			document.getElementById('c-volume').innerHTML = `Volume: ${bullion.priceData[0][5]}`;
 
@@ -165,6 +168,7 @@ function getUserSlected(selected) {
 			document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
 			//document.getElementById('description').innerHTML = `${bullion.description}`;
 			calculateSMABias(bullion);
+			chart(bullion);
 		});
 
 }
@@ -214,21 +218,20 @@ function calculateSMABias(bullion) {
 	let xDayDiff = [];
 	let smallestDiff;
 	let averageDiff;
-	for (let i = 0; i < 8; i++) {
+	for (let i = 1; i < 8; i++) {
 		let high = bullion.priceData[i][2];
 		let low = bullion.priceData[i][3];
 		xDayDiff.push(Math.abs(high - low));
 		smallestDiff = Math.min(...xDayDiff);
-		// having troubles here
-		// xDayDiff.forEach(function (averageDiff) {
-		// 	  (averageDiff +=);
-		// });
-		// averageDiff = (Math.sum (...xDayDiff) / xDayDiff.length);
+		sumDiff = xDayDiff.reduce((previous, current) => current += previous);
+		console.log("sumDiff " + sumDiff)
+		averageDiff = sumDiff / xDayDiff.length;
+		debugger
+		console.log("Avg TR " + averageDiff)
 	}
-	// console.log(xDayDiff, smallestDiff.toFixed(2));
-	// console.log("avg diff" + averageDiffsmallestDiff.toFixed(2));
 
-	console.log("xdaydiff " + xDayDiff[1])
+
+
 	//look for narrowest range in the last 7 session
 	let nr7 = 0;
 	if (xDayDiff[1] <= smallestDiff) {
@@ -240,7 +243,6 @@ function calculateSMABias(bullion) {
 	if (bullion.priceData[1][2] <= bullion.priceData[2][2] && bullion.priceData[1][3] >= bullion.priceData[2][3]) {
 		insideDay = 1;
 	}
-	console.log("Hey"+ (bullion.priceData[1][2] <= bullion.priceData[2][2]));
 
 	// look for idNr7 combo
 	if (nr7 != 0 && insideDay != 0) {
@@ -252,14 +254,136 @@ function calculateSMABias(bullion) {
 	let r1 = ((fPP * 2) - bullion.priceData[1][3]);
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
 	let r2 = (fPP - s1) + r1;
+	console.log(typeof (fPP));
 	let s2 = (fPP - (r1 - s1));
-	// console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
+	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
 
 	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.272) + (bullion.priceData[1][3])));
 
 	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.272));
-	// console.log("fib High"+ fibPredictedHigh + "fib low" + fibPredictedLow ); 
+	console.log("fib High" + fibPredictedHigh + "fib low" + fibPredictedLow);
 
 
 
+}
+
+// // Gets date n days earlier
+// Date.prototype.subtractDays = function (n) {
+// 	var time = this.getTime();
+// 	var changedDate = new Date(time - (n * 24 * 60 * 60 * 1000));
+// 	this.setTime(changedDate.getTime());
+// 	return this;
+// };
+
+
+// function getDateStamp() {
+// 	let now = new Date();
+// 	let previousDate = now.subtractDays(90);  //gets date 90 days ago
+// 	let year = previousDate.getFullYear()
+// 	let month = previousDate.getMonth() + 1;
+// 	let day =now.getDate();
+// 	return `${year}-${month}-${day}`
+// }
+
+// function validateData(data){
+//   // lat at open, high, low, last
+//   // if null, change to settle price
+//   data.forEach(day => {
+//     let settle = day[6];
+//     if(day[1] == null){
+//       day[1] = settle;
+//     }
+//     if(day[2] == null){
+//       day[2] = settle;
+//     }
+//     if(day[3] == null){
+//       day[3] = settle;
+//     }
+//     if(day[4] == null){
+//       day[4] = settle;
+//     }
+//   });
+//   return data;
+// }
+
+
+
+// const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+// const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+//const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date='
+//const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+
+function chart(bullion) {
+	//console.log('chart')
+	var ctx = document.getElementById("myChart");
+	var last50 = [];
+	var last50Dates = [];
+	for (let i = 0; i < 100; i++) {
+		last50.push(bullion.priceData[i][4]);
+		last50Dates.push(bullion.priceData[i][0]);
+	}
+	last50.reverse();
+	last50Dates.reverse();
+	console.log(last50);
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: last50Dates,
+			datasets: [{
+				label: 'Price',
+				pointStyle: 'circle',
+				radius: 1,
+				data: last50,
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.0)'
+					// 'rgba(54, 162, 235, 0.2)',
+					// 'rgba(255, 206, 86, 0.2)',
+					// 'rgba(75, 192, 192, 0.2)',
+					// 'rgba(153, 102, 255, 0.2)',
+					// 'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255,99,132,1)'
+					// 'rgba(54, 162, 235, 1)',
+					// 'rgba(255, 206, 86, 1)',
+					// 'rgba(75, 192, 192, 1)',
+					// 'rgba(153, 102, 255, 1)',
+					// 'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 2
+			}
+				//   {
+				//     label: 'SMA',
+				//     data: [2, 9, 5, 6, 5, 6],
+				//     backgroundColor: [
+				//         'rgba(15, 199, 32, 0.2)'
+				//         // 'rgba(54, 162, 235, 0.2)',
+				//         // 'rgba(255, 206, 86, 0.2)',
+				//         // 'rgba(75, 192, 192, 0.2)',
+				//         // 'rgba(153, 102, 255, 0.2)',
+				//         // 'rgba(255, 159, 64, 0.2)'
+				//     ],
+				//     borderColor: [
+				//         'rgba(55,99,132,1)'
+				//         // 'rgba(54, 162, 235, 1)',
+				//         // 'rgba(255, 206, 86, 1)',
+				//         // 'rgba(75, 192, 192, 1)',
+				//         // 'rgba(153, 102, 255, 1)',
+				//         // 'rgba(255, 159, 64, 1)'
+				//     ],
+				//     borderWidth: 1
+				// }],
+			],
+
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: false
+					}
+				}]
+			}
+		}
+	});
 }

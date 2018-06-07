@@ -13,8 +13,8 @@ body {
 
 #ticket {
   background: white;
-  margin: 0 1em;
-  padding: 1em;
+  margin: 0 0.1em;
+  padding: 0.1em;
   box-shadow: 0 0 25px rgba(0, 0, 0, .25);
 }
 
@@ -46,7 +46,13 @@ ul {
 
 #basic-data, #technical, .bias {
 	border: 1px solid black;
-	border-radius: 10px;
+	border-radius: 3px;
 	padding: 5px;
 	margin-bottom: 10px;
+}
+
+canvas {
+  max-width: 500px;
+  max-height: 500px;
+  margin: 30px auto;
 }
