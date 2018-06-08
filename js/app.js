@@ -29,6 +29,8 @@ $("form#selector").submit(function (event) {
 // Mikes Code Below
 const alphaVantageGld = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=gld&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
 const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=slv&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
+
+
 class Bullion {
 	constructor(name, lastTimeStamp, description, priceData) {
 		this.name = name;   //Gold, Silver, etc
@@ -223,6 +225,7 @@ function calculateSMABias(bullion) {
 		let low = bullion.priceData[i][3];
 		xDayDiff.push(Math.abs(high - low));
 		smallestDiff = Math.min(...xDayDiff);
+
 		sumDiff = xDayDiff.reduce((previous, current) => current += previous);
 		console.log("sumDiff " + sumDiff)
 		averageDiff = sumDiff / xDayDiff.length;
