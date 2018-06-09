@@ -229,7 +229,6 @@ function calculateSMABias(bullion) {
 		sumDiff = xDayDiff.reduce((previous, current) => current += previous);
 		console.log("sumDiff " + sumDiff)
 		averageDiff = sumDiff / xDayDiff.length;
-		debugger
 		console.log("Avg TR " + averageDiff)
 	}
 
