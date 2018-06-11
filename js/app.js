@@ -200,6 +200,8 @@ function getUserSlected(selected) {
 			document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
 			document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
 			document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
+			$("#sma-50day").append(`<br>20 Day VMA: ${bullion.calcVma(20).toFixed(0)}`) //add div?
+
 			//document.getElementById('description').innerHTML = `${bullion.description}`;
 			calculateSMABias();
     })
@@ -221,20 +223,37 @@ function calculateSMABias() {
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
 	let sma50 = bullion.sma50Day;
+
+	// let cOpen = bullion.priceData[0][1];
+	// let cHigh = bullion.priceData[0][2];
+	// let cLow = bullion.priceData[0][3];	
+	// let cClose = bullion.priceData[0][4];
+	// let cVolume = bullion.priceData[0][5];
+	// let pOpen = bullion.priceData[1][1];
+	// let pHigh = bullion.priceData[1][2];
+	// let pLow = bullion.priceData[1][3];	
+	// let pClose = bullion.priceData[1][4];
+	// let pVolume = bullion.priceData[1][5];
+
+
 	let last = bullion.priceData[1][4]; //last price, settle or close value using
 	let priorLast = bullion.priceData[2][4]; // prior last or....
 	let change = (bullion.priceData[0][4] - last);
 	$("#c-change").html(`Change: $${change.toFixed(2)}`);
 
-	if (last > priorLast) {
+	if (change > 0) {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-danger");
 		$(".panel-bias").addClass("panel-success"); //up day
+		// $("ul#bias").append(`<li><h2>Todays Projected High: ${fibPredictedHigh.toFixed(2)}</h2></li>`);
 
-	} else if (last < priorLast) {
+
+	} else if (change < 0) {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").addClass("panel-danger"); //down day
+		// $("ul#bias").append(`<li><h2>Todays Projected Low: ${fibPredictedLow.toFixed(2)}</h2></li>`);
+
 	} else {
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").removeClass("panel-danger");
@@ -242,22 +261,25 @@ function calculateSMABias() {
 	}
 
 	let bias = "";
-	let mom1 = (sma5 - last).toFixed(2);
-	let mom2 = (sma20 - last).toFixed(2);
-	let mom3 = (sma50 - last).toFixed(2);
-	$("ul#bias").append(`<li>Mom 1: ${mom1}</li>`)
-	$("ul#bias").append(`<li>Mom 2: ${mom2}</li>`)
-	$("ul#bias").append(`<li>Mom 3: ${mom3}</li>`)
-	$("ul#bias").append(`<li>VMA 20: ${bullion.calcVma(20).toFixed(0)}</li>`)
+	let mom1 = (last - sma5).toFixed(2);
+	let mom2 = (last - sma20).toFixed(2);
+	let mom3 = (last - sma50).toFixed(2);
+	// $("ul#bias").append(`<li>Mom 1: ${mom1}</li>`)
+	// $("ul#bias").append(`<li>Mom 2: ${mom2}</li>`)
+	// $("ul#bias").append(`<li>Mom 3: ${mom3}</li>`)
+	// $("ul#bias").append(`<li>VMA 20: ${bullion.calcVma(20).toFixed(0)}</li>`)
 
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
-		bias = "BUY"
+		bias = `BULLISH FOR ${bullion.lastTimeStamp}`;
+		biasText = `Secret Sauce is looking for price to advance higher.<br> Since it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.`
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
-		bias = "SELL"
+		bias = `BEARISH FOR ${bullion.lastTimeStamp}`
+		biasText = `Secret Sauce is looking for price to decline lower.<br> Since it is s down day, look for price to potentially trade down to or through the 'Projected Low' listed below.`
 	} else {
-		bias = "NONE"
+		bias = `NEUTRAL FOR ${bullion.lastTimeStamp}`
+		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.`
 	}
-	$("ul#bias").append(`<li>Bias is: ${bias}</li>`);
+	$("ul#bias").append(`<li>Bias is: ${bias}</li><li>${biasText}</li>`);
 
 	let xDayDiff = [];
 	let smallestDiff;
@@ -302,57 +324,18 @@ function calculateSMABias() {
 	let s2 = (fPP - (r1 - s1));
 	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
 
-	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.272) + (bullion.priceData[1][3])));
+	//predictions
+	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.618) + (bullion.priceData[1][3])));
+	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.618));
+	let atrPredictedHigh = 0;
+	let atrPredictedLow = 0;
+	let totHigh;
+	let totLow;
 
-	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.272));
-	console.log("fib High" + fibPredictedHigh + "fib low" + fibPredictedLow);
+	$("ul#bias").append(`<li><h2>Projected High >= ${fibPredictedHigh.toFixed(2)}</h2></li><li><h2>Projected Low <= ${fibPredictedLow.toFixed(2)}</h2></li>`);
+
+	console.log();
 }
-
-// // Gets date n days earlier
-// Date.prototype.subtractDays = function (n) {
-// 	var time = this.getTime();
-// 	var changedDate = new Date(time - (n * 24 * 60 * 60 * 1000));
-// 	this.setTime(changedDate.getTime());
-// 	return this;
-// };
-
-
-// function getDateStamp() {
-// 	let now = new Date();
-// 	let previousDate = now.subtractDays(90);  //gets date 90 days ago
-// 	let year = previousDate.getFullYear()
-// 	let month = previousDate.getMonth() + 1;
-// 	let day =now.getDate();
-// 	return `${year}-${month}-${day}`
-// }
-
-// function validateData(data){
-//   // lat at open, high, low, last
-//   // if null, change to settle price
-//   data.forEach(day => {
-//     let settle = day[6];
-//     if(day[1] == null){
-//       day[1] = settle;
-//     }
-//     if(day[2] == null){
-//       day[2] = settle;
-//     }
-//     if(day[3] == null){
-//       day[3] = settle;
-//     }
-//     if(day[4] == null){
-//       day[4] = settle;
-//     }
-//   });
-//   return data;
-// }
-
-
-
-// const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-// const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-//const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date='
-//const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
 
 function chart() {
 
@@ -447,6 +430,55 @@ function chart() {
 		}
 	});
 }
+
+// // Gets date n days earlier
+// Date.prototype.subtractDays = function (n) {
+// 	var time = this.getTime();
+// 	var changedDate = new Date(time - (n * 24 * 60 * 60 * 1000));
+// 	this.setTime(changedDate.getTime());
+// 	return this;
+// };
+
+
+// function getDateStamp() {
+// 	let now = new Date();
+// 	let previousDate = now.subtractDays(90);  //gets date 90 days ago
+// 	let year = previousDate.getFullYear()
+// 	let month = previousDate.getMonth() + 1;
+// 	let day =now.getDate();
+// 	return `${year}-${month}-${day}`
+// }
+
+// function validateData(data){
+//   // lat at open, high, low, last
+//   // if null, change to settle price
+//   data.forEach(day => {
+//     let settle = day[6];
+//     if(day[1] == null){
+//       day[1] = settle;
+//     }
+//     if(day[2] == null){
+//       day[2] = settle;
+//     }
+//     if(day[3] == null){
+//       day[3] = settle;
+//     }
+//     if(day[4] == null){
+//       day[4] = settle;
+//     }
+//   });
+//   return data;
+// }
+
+
+
+// const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+// const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+//const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date='
+//const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
+
+
+
 
 
 //this function manually calc the data before we decided to get it from URL

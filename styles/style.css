@@ -172,12 +172,20 @@ ul {
     background-color: #d7fdea9d
 }
 
-#basic-data, #technical, .bias {
+#basic-data, #technical {
     border: 1px solid black;
     border-radius: 3px;
     padding: 5px;
     margin-bottom: 10px;
     color: black;
+}
+
+.bias {
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 13px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 canvas {
