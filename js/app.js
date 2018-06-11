@@ -143,6 +143,7 @@ function getBullion(url) {
 
 			// Daily data is now
 			//["Date","Open","High","Low","close","volume"]
+			//["2018-06-11", 123.1, 123.42, 123.0175, 123.2, 1672195]
 			bullion = new Bullion(name, lastTimeStamp, 'Test', dailyDataArray);
 			return bullion;
 		});
@@ -296,10 +297,10 @@ function calculateSMABias() {
 	let fPP = ((bullion.priceData[1][2] + bullion.priceData[1][3] + bullion.priceData[1][4]) / 3);
 	let r1 = ((fPP * 2) - bullion.priceData[1][3]);
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
-	let r2 = (fPP - s1) + r1;
-	// console.log(typeof (fPP));
+	let r2 = ((fPP - s1) + r1);
+	console.log(typeof (fPP));
 	let s2 = (fPP - (r1 - s1));
-	// console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
+	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
 
 	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.272) + (bullion.priceData[1][3])));
 

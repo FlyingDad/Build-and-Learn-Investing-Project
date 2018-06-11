@@ -186,3 +186,7 @@ max-height: 900px;
 margin: 30px auto;
 background-color: lightgrey
 }
+
+#email {
+    margin-top: 400px;
+}
