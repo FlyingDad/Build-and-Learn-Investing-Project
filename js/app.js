@@ -30,8 +30,8 @@ $("form#selector").submit(function (event) {
 // Mikes Code Below
 const alphaVantageGld = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=gld&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
 const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=slv&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
-let alphavantageSMA = function (symbol, period){
-  return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
+let alphavantageSMA = function (symbol, period) {
+	return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
 };
 
 class Bullion {
@@ -39,10 +39,10 @@ class Bullion {
 		this.name = name;   //Gold, Silver, etc
 		this.lastTimeStamp = lastTimeStamp;   //meta data ['3. Last Refreshed']
 		this.description = description; //get decription
-    this.priceData = priceData;	 // array of 90 days of bullion prices
-    this.sma5Data = [];
-    this.sma20Data = [];
-    this.sma50Data = [];
+		this.priceData = priceData;	 // array of 90 days of bullion prices
+		this.sma5Data = [];
+		this.sma20Data = [];
+		this.sma50Data = [];
 	}
 
 	get sma5Day() {
@@ -150,27 +150,27 @@ function getBullion(url) {
 }
 
 function getSma(commodity, period) {
-  let url = alphavantageSMA(commodity, period);
+	let url = alphavantageSMA(commodity, period);
 	return getData(url)
 		.then(data => {
-      // get object that has array of daily objects
-      let dailyDataObj = data['Technical Analysis: SMA'];
+			// get object that has array of daily objects
+			let dailyDataObj = data['Technical Analysis: SMA'];
 
-      for(let i in dailyDataObj){
-        switch (period){
-          case 5:
-          bullion.sma5Data.push(dailyDataObj[i]['SMA']);
-          break;
-          case 20:
-          bullion.sma20Data.push(dailyDataObj[i]['SMA']);
-          break;
-          case 50:
-          bullion.sma50Data.push(dailyDataObj[i]['SMA']);
-          default:
-          break;
-        }
-        
-      }
+			for (let i in dailyDataObj) {
+				switch (period) {
+					case 5:
+						bullion.sma5Data.push(dailyDataObj[i]['SMA']);
+						break;
+					case 20:
+						bullion.sma20Data.push(dailyDataObj[i]['SMA']);
+						break;
+					case 50:
+						bullion.sma50Data.push(dailyDataObj[i]['SMA']);
+					default:
+						break;
+				}
+
+			}
 		});
 }
 
@@ -204,20 +204,20 @@ function getUserSlected(selected) {
 
 			//document.getElementById('description').innerHTML = `${bullion.description}`;
 			calculateSMABias();
-    })
-    .then(function(){
-      getSma(selected, 20).then(function(){
-      })
-      .then(function(){
-        getSma(selected, 50).then(function(){
-        });
-      }).then(function(){
-        getSma(selected, 5).then(function(){
-        chart();
-        });
-      })     
-    })
-  }
+		})
+		.then(function () {
+			getSma(selected, 20).then(function () {
+			})
+				.then(function () {
+					getSma(selected, 50).then(function () {
+					});
+				}).then(function () {
+					getSma(selected, 5).then(function () {
+						chart();
+					});
+				})
+		})
+}
 
 function calculateSMABias() {
 	let sma5 = bullion.sma5Day;
@@ -264,6 +264,14 @@ function calculateSMABias() {
 	let mom1 = (last - sma5).toFixed(2);
 	let mom2 = (last - sma20).toFixed(2);
 	let mom3 = (last - sma50).toFixed(2);
+	//floor traders pivot points for the current session
+	let fPP = ((bullion.priceData[1][2] + bullion.priceData[1][3] + bullion.priceData[1][4]) / 3);
+	let r1 = ((fPP * 2) - bullion.priceData[1][3]);
+	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
+	let r2 = ((fPP - s1) + r1);
+	let s2 = (fPP - (r1 - s1));
+	// console.log(typeof (fPP));
+	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
 	// $("ul#bias").append(`<li>Mom 1: ${mom1}</li>`)
 	// $("ul#bias").append(`<li>Mom 2: ${mom2}</li>`)
 	// $("ul#bias").append(`<li>Mom 3: ${mom3}</li>`)
@@ -271,13 +279,13 @@ function calculateSMABias() {
 
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = `BULLISH FOR ${bullion.lastTimeStamp}`;
-		biasText = `Secret Sauce is looking for price to advance higher.<br> Since it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.`
+		biasText = `Secret Sauce is looking for price to advance higher.<br> Since it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
 		bias = `BEARISH FOR ${bullion.lastTimeStamp}`
-		biasText = `Secret Sauce is looking for price to decline lower.<br> Since it is s down day, look for price to potentially trade down to or through the 'Projected Low' listed below.`
+		biasText = `Secret Sauce is looking for price to decline lower.<br> Since it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
 	} else {
 		bias = `NEUTRAL FOR ${bullion.lastTimeStamp}`
-		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.`
+		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	}
 	$("ul#bias").append(`<li>Bias is: ${bias}</li><li>${biasText}</li>`);
 
@@ -315,14 +323,14 @@ function calculateSMABias() {
 		// idNr7 = 1;
 		$("ul#bias").append(`<li>Buy</li>`)
 	}
-	//floor traders pivot points for the current session
-	let fPP = ((bullion.priceData[1][2] + bullion.priceData[1][3] + bullion.priceData[1][4]) / 3);
-	let r1 = ((fPP * 2) - bullion.priceData[1][3]);
-	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
-	let r2 = ((fPP - s1) + r1);
-	console.log(typeof (fPP));
-	let s2 = (fPP - (r1 - s1));
-	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
+	// //floor traders pivot points for the current session
+	// let fPP = ((bullion.priceData[1][2] + bullion.priceData[1][3] + bullion.priceData[1][4]) / 3);
+	// let r1 = ((fPP * 2) - bullion.priceData[1][3]);
+	// let s1 = ((fPP * 2) - bullion.priceData[1][2]);
+	// let r2 = ((fPP - s1) + r1);
+	// console.log(typeof (fPP));
+	// let s2 = (fPP - (r1 - s1));
+
 
 	//predictions
 	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.618) + (bullion.priceData[1][3])));
@@ -339,14 +347,14 @@ function calculateSMABias() {
 
 function chart() {
 
-  // reset the chart
-  // https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
-  document.getElementById("myChart").remove();
-  document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
-  // get smadata 
-  let sma20Data = bullion.sma20Data.slice(0,100).reverse();
-  let sma50Data = bullion.sma50Data.slice(0,100).reverse();
-  let sma5Data = bullion.sma5Data.slice(0,100).reverse();
+	// reset the chart
+	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
+	document.getElementById("myChart").remove();
+	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
+	// get smadata 
+	let sma20Data = bullion.sma20Data.slice(0, 100).reverse();
+	let sma50Data = bullion.sma50Data.slice(0, 100).reverse();
+	let sma5Data = bullion.sma5Data.slice(0, 100).reverse();
 
 	var ctx = document.getElementById("myChart");
 	var last50 = [];
@@ -361,64 +369,64 @@ function chart() {
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-      labels: last50Dates,
-      
-              datasets: [{
-                label: 'Price',
-                pointStyle: 'circle',
-                radius: 3,
-                data: last50,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(4, 55, 137,1)',
-                ],
-                borderWidth: 3
-              },
-              {
-                label: 'SMA20',
-                pointStyle: 'circle',
-                radius: 1,
-                data: sma20Data,
-                backgroundColor: [
-                  'rgba(2,199, 1, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(2,199, 1,1)',
-                ],
-                borderWidth: 1
-              },
-              {
-                label: 'SMA50',
-                pointStyle: 'circle',
-                radius: 1,
-                data: sma50Data,
-                backgroundColor: [
-                  'rgba(100,1, 100, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(100,1, 100,1)',
-                ],
-                borderWidth: 1
-              },
-              {
-                label: 'SMA5',
-                pointStyle: 'circle',
-                radius: 1,
-                data: sma5Data,
-                backgroundColor: [
-                  'rgba(255,0, 0, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(255 ,0, 0, 1)',
-                ],
-                borderWidth: 1
-              },
+			labels: last50Dates,
 
-      ]
+			datasets: [{
+				label: 'Price',
+				pointStyle: 'circle',
+				radius: 3,
+				data: last50,
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.0)',
+				],
+				borderColor: [
+					'rgba(4, 55, 137,1)',
+				],
+				borderWidth: 3
+			},
+			{
+				label: 'SMA20',
+				pointStyle: 'circle',
+				radius: 1,
+				data: sma20Data,
+				backgroundColor: [
+					'rgba(2,199, 1, 0.0)',
+				],
+				borderColor: [
+					'rgba(2,199, 1,1)',
+				],
+				borderWidth: 1
+			},
+			{
+				label: 'SMA50',
+				pointStyle: 'circle',
+				radius: 1,
+				data: sma50Data,
+				backgroundColor: [
+					'rgba(100,1, 100, 0.0)',
+				],
+				borderColor: [
+					'rgba(100,1, 100,1)',
+				],
+				borderWidth: 1
+			},
+			{
+				label: 'SMA5',
+				pointStyle: 'circle',
+				radius: 1,
+				data: sma5Data,
+				backgroundColor: [
+					'rgba(255,0, 0, 0.0)',
+				],
+				borderColor: [
+					'rgba(255 ,0, 0, 1)',
+				],
+				borderWidth: 1
+			},
 
-    },    
+			]
+
+		},
 		options: {
 			scales: {
 				yAxes: [{
@@ -486,10 +494,10 @@ function chart() {
 //   // smaDays is the sma average we want: ie: 20day
 //   // get all closing prices
 //   let smas = [];
-  
+
 //   let closingPrices = [];
 //   bullion.priceData.forEach(data => closingPrices.push(data[4]));
-  
+
 //   // we can only get averages from pricedata length - the avaerage value
 //   for(let i = 0; i < closingPrices.length - smaDays; i++){
 //     // this loop calulates each average

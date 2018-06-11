@@ -162,6 +162,7 @@ ul {
 
 .panel-body, .basic-data, .data-box, #chart-wrapper {
     display: none;
+    margin-left: 0;
 }
 
 .panel-danger {
@@ -183,18 +184,24 @@ ul {
 .bias {
     background-color: lightgray;
     border: 1px solid black;
-    border-radius: 13px;
+    border-radius: 25px;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 10px 10px;
 }
 
 canvas {
-max-width: 900px;
-max-height: 900px;
-margin: 30px auto;
-background-color: lightgrey
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 13px;    
+    max-width: 900px;
+    max-height: 800px;
+    margin: 30px auto;
 }
 
 #email {
     margin-top: 400px;
 }
+
+.text-justify {
+    text-align: justify;
+  }
