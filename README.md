@@ -14,17 +14,18 @@ _Return current price and other data from exchange or other data source_
 | **Program outputs price prediction** | User input: "GOLD" | Output: "Bias" |
 
 ## Known Bugs
+A few :)
 
 ## Support and contact details
 Leave message here.
 
-## Technologies Used
+## Languages and Libraries Used
 * _HTML_
 * _CSS_
-* _Bootstrap_
+* _https://getbootstrap.com/_ Bootstrap
 * _JavaScript_
 * _https://www.alphavantage.co/_ API
-* _Chart.js_
+* _https://www.chartjs.org_ Chart.js
 
 ### License
 
