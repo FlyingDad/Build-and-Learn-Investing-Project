@@ -104,7 +104,7 @@ p {
 }
 
 #videoMessage {
-    text-shadow: 2px 2px 2px #000000;
+    text-shadow: 4px 4px 4px #3B5998;
     color:white;
 }
 
@@ -132,7 +132,7 @@ p {
 
 .videoClick a{
     color:white;
-    background-color:rgba(241, 241, 241, 0.25);
+    background-color:rgba(0, 0, 0, 0.89);
     font-size: 1.7em;
     cursor:pointer;
     cursor:hand;
