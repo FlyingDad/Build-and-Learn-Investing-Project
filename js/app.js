@@ -1,15 +1,16 @@
 //UI
 let userInput = $("select#user-input").val();  //placed here so I can use it in the panel header as a title 
+let bullion;
 
 $("form#selector").submit(function (event) {
 	event.preventDefault();
 	userInput = $("select#user-input").val();  // deleted the let since it is now a global var
 	console.log(userInput);
 	$("ul#bias").empty(); // to clear the ul
-	$(".panel-body, .basic-data, .data-box").hide();
+	$(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").hide();
 	//check for valid input
 	if (userInput !== "none") {
-		$(".panel-body, .basic-data, .data-box").slideDown();
+		$(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").slideDown();
 		switch (userInput) {
 			case 'gold':
 				getUserSlected(alphaVantageGld);
@@ -29,14 +30,19 @@ $("form#selector").submit(function (event) {
 // Mikes Code Below
 const alphaVantageGld = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=gld&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
 const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=slv&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
-
+let alphavantageSMA = function (symbol, period){
+  return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
+};
 
 class Bullion {
 	constructor(name, lastTimeStamp, description, priceData) {
 		this.name = name;   //Gold, Silver, etc
 		this.lastTimeStamp = lastTimeStamp;   //meta data ['3. Last Refreshed']
 		this.description = description; //get decription
-		this.priceData = priceData;	 // array of 90 days of bullion prices
+    this.priceData = priceData;	 // array of 90 days of bullion prices
+    this.sma5Data = [];
+    this.sma20Data = [];
+    this.sma50Data = [];
 	}
 
 	get sma5Day() {
@@ -137,8 +143,33 @@ function getBullion(url) {
 
 			// Daily data is now
 			//["Date","Open","High","Low","close","volume"]
-			let bullion = new Bullion(name, lastTimeStamp, 'Test', dailyDataArray);
+			bullion = new Bullion(name, lastTimeStamp, 'Test', dailyDataArray);
 			return bullion;
+		});
+}
+
+function getSma(commodity, period) {
+  let url = alphavantageSMA(commodity, period);
+	return getData(url)
+		.then(data => {
+      // get object that has array of daily objects
+      let dailyDataObj = data['Technical Analysis: SMA'];
+
+      for(let i in dailyDataObj){
+        switch (period){
+          case 5:
+          bullion.sma5Data.push(dailyDataObj[i]['SMA']);
+          break;
+          case 20:
+          bullion.sma20Data.push(dailyDataObj[i]['SMA']);
+          break;
+          case 50:
+          bullion.sma50Data.push(dailyDataObj[i]['SMA']);
+          default:
+          break;
+        }
+        
+      }
 		});
 }
 
@@ -169,13 +200,23 @@ function getUserSlected(selected) {
 			document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
 			document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
 			//document.getElementById('description').innerHTML = `${bullion.description}`;
-			calculateSMABias(bullion);
-			chart(bullion);
-		});
+			calculateSMABias();
+    })
+    .then(function(){
+      getSma(selected, 20).then(function(){
+      })
+      .then(function(){
+        getSma(selected, 50).then(function(){
+        });
+      }).then(function(){
+        getSma(selected, 5).then(function(){
+        chart();
+        });
+      })     
+    })
+  }
 
-}
-
-function calculateSMABias(bullion) {
+function calculateSMABias() {
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
 	let sma50 = bullion.sma50Day;
@@ -315,8 +356,17 @@ function calculateSMABias(bullion) {
 //const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date='
 //const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
 
-function chart(bullion) {
-	//console.log('chart')
+function chart() {
+
+  // reset the chart
+  // https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
+  document.getElementById("myChart").remove();
+  document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
+  // get smadata 
+  let sma20Data = bullion.sma20Data.slice(0,100).reverse();
+  let sma50Data = bullion.sma50Data.slice(0,100).reverse();
+  let sma5Data = bullion.sma5Data.slice(0,100).reverse();
+
 	var ctx = document.getElementById("myChart");
 	var last50 = [];
 	var last50Dates = [];
@@ -326,58 +376,68 @@ function chart(bullion) {
 	}
 	last50.reverse();
 	last50Dates.reverse();
-	console.log(last50);
+	//console.log(last50);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: last50Dates,
-			datasets: [{
-				label: 'Price',
-				pointStyle: 'circle',
-				radius: 1,
-				data: last50,
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.0)'
-					// 'rgba(54, 162, 235, 0.2)',
-					// 'rgba(255, 206, 86, 0.2)',
-					// 'rgba(75, 192, 192, 0.2)',
-					// 'rgba(153, 102, 255, 0.2)',
-					// 'rgba(255, 159, 64, 0.2)'
-				],
-				borderColor: [
-					'rgba(255,99,132,1)'
-					// 'rgba(54, 162, 235, 1)',
-					// 'rgba(255, 206, 86, 1)',
-					// 'rgba(75, 192, 192, 1)',
-					// 'rgba(153, 102, 255, 1)',
-					// 'rgba(255, 159, 64, 1)'
-				],
-				borderWidth: 2
-			}
-				//   {
-				//     label: 'SMA',
-				//     data: [2, 9, 5, 6, 5, 6],
-				//     backgroundColor: [
-				//         'rgba(15, 199, 32, 0.2)'
-				//         // 'rgba(54, 162, 235, 0.2)',
-				//         // 'rgba(255, 206, 86, 0.2)',
-				//         // 'rgba(75, 192, 192, 0.2)',
-				//         // 'rgba(153, 102, 255, 0.2)',
-				//         // 'rgba(255, 159, 64, 0.2)'
-				//     ],
-				//     borderColor: [
-				//         'rgba(55,99,132,1)'
-				//         // 'rgba(54, 162, 235, 1)',
-				//         // 'rgba(255, 206, 86, 1)',
-				//         // 'rgba(75, 192, 192, 1)',
-				//         // 'rgba(153, 102, 255, 1)',
-				//         // 'rgba(255, 159, 64, 1)'
-				//     ],
-				//     borderWidth: 1
-				// }],
-			],
+      labels: last50Dates,
+      
+              datasets: [{
+                label: 'Price',
+                pointStyle: 'circle',
+                radius: 0,
+                data: last50,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.0)',
+                ],
+                borderColor: [
+                  'rgba(4, 55, 137,1)',
+                ],
+                borderWidth: 3
+              },
+              {
+                label: 'SMA20',
+                pointStyle: 'circle',
+                radius: 0,
+                data: sma20Data,
+                backgroundColor: [
+                  'rgba(2,199, 1, 0.0)',
+                ],
+                borderColor: [
+                  'rgba(2,199, 1,1)',
+                ],
+                borderWidth: 1
+              },
+              {
+                label: 'SMA50',
+                pointStyle: 'circle',
+                radius: 0,
+                data: sma50Data,
+                backgroundColor: [
+                  'rgba(100,1, 100, 0.0)',
+                ],
+                borderColor: [
+                  'rgba(100,1, 100,1)',
+                ],
+                borderWidth: 1
+              },
+              {
+                label: 'SMA5',
+                pointStyle: 'circle',
+                radius: 0,
+                data: sma5Data,
+                backgroundColor: [
+                  'rgba(255,0, 0, 0.0)',
+                ],
+                borderColor: [
+                  'rgba(255 ,0, 0, 1)',
+                ],
+                borderWidth: 1
+              },
 
-		},
+      ]
+
+    },    
 		options: {
 			scales: {
 				yAxes: [{
@@ -389,3 +449,38 @@ function chart(bullion) {
 		}
 	});
 }
+
+
+//this function manually calc the data before we decided to get it from URL
+// function getSMAHistory(smaDays){
+//   // smaDays is the sma average we want: ie: 20day
+//   // get all closing prices
+//   let smas = [];
+  
+//   let closingPrices = [];
+//   bullion.priceData.forEach(data => closingPrices.push(data[4]));
+  
+//   // we can only get averages from pricedata length - the avaerage value
+//   for(let i = 0; i < closingPrices.length - smaDays; i++){
+//     // this loop calulates each average
+//     let prices = []
+//     for(let j = 0; j < smaDays; j++){
+//       prices.push(closingPrices[i + j]);
+//     }
+//     //debugger
+//     const sum = prices.reduce(function(total, num) {
+//       return total + num;
+//     });
+//     smas.push(sum / smaDays);
+//   }
+//   // while(smas.length < closingPrices.length){
+//   //   smas.push(0);
+//   // }
+//  // debugger;
+//  // fill first values with null so data matches up
+//  for(let i = 0; i < smaDays; i++){
+//   smas.push(null);
+// }
+//   console.log(smas.reverse());
+//   return smas;
+// }
