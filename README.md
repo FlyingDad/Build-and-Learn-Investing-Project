@@ -22,7 +22,8 @@ Leave message here.
 * _HTML_
 * _CSS_
 * _Bootstrap_
-* _JavaSCript_
+* _JavaScript_
+* _https://www.alphavantage.co/_ API
 * _Chart.js_
 
 ### License
