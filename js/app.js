@@ -5,7 +5,7 @@ let bullion;
 $("form#selector").submit(function (event) {
 	event.preventDefault();
 	userInput = $("select#user-input").val();  // deleted the let since it is now a global var
-	console.log(userInput);
+	// console.log(userInput);
 	$("ul#bias").empty(); // to clear the ul
 	$(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").hide();
 	//check for valid input
@@ -268,9 +268,9 @@ function calculateSMABias() {
 		smallestDiff = Math.min(...xDayDiff);
 
 		sumDiff = xDayDiff.reduce((previous, current) => current += previous);
-		console.log("sumDiff " + sumDiff)
+		// console.log("sumDiff " + sumDiff)
 		averageDiff = sumDiff / xDayDiff.length;
-		console.log("Avg TR " + averageDiff)
+		// console.log("Avg TR " + averageDiff)
 	}
 
 
@@ -297,17 +297,14 @@ function calculateSMABias() {
 	let r1 = ((fPP * 2) - bullion.priceData[1][3]);
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
 	let r2 = (fPP - s1) + r1;
-	console.log(typeof (fPP));
+	// console.log(typeof (fPP));
 	let s2 = (fPP - (r1 - s1));
-	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
+	// console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
 
 	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.272) + (bullion.priceData[1][3])));
 
 	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.272));
 	console.log("fib High" + fibPredictedHigh + "fib low" + fibPredictedLow);
-
-
-
 }
 
 // // Gets date n days earlier
@@ -385,7 +382,7 @@ function chart() {
               datasets: [{
                 label: 'Price',
                 pointStyle: 'circle',
-                radius: 0,
+                radius: 3,
                 data: last50,
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.0)',
@@ -398,7 +395,7 @@ function chart() {
               {
                 label: 'SMA20',
                 pointStyle: 'circle',
-                radius: 0,
+                radius: 1,
                 data: sma20Data,
                 backgroundColor: [
                   'rgba(2,199, 1, 0.0)',
@@ -411,7 +408,7 @@ function chart() {
               {
                 label: 'SMA50',
                 pointStyle: 'circle',
-                radius: 0,
+                radius: 1,
                 data: sma50Data,
                 backgroundColor: [
                   'rgba(100,1, 100, 0.0)',
@@ -424,7 +421,7 @@ function chart() {
               {
                 label: 'SMA5',
                 pointStyle: 'circle',
-                radius: 0,
+                radius: 1,
                 data: sma5Data,
                 backgroundColor: [
                   'rgba(255,0, 0, 0.0)',
