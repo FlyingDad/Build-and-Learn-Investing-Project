@@ -1,0 +1,188 @@
+body {
+    font-family: Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f8f8f8;
+}
+
+p {
+    font-size: 16px;
+    text-align: left;
+}
+
+.margin {
+    margin-bottom: 45px;
+    margin-top: 45px;
+}
+
+.bg-1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url(../img/bg-1068x564.jpg);
+    min-height: 100vh;
+    color: #ffffff;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 0;
+}
+
+.bg-2 {
+    background-color:  #474e5d;
+    /* color: #ffffff; */
+}
+
+.bg-4 {
+    background-color: #2f2f2f;
+    color: #fff;
+}
+
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.navbar {
+    /* width: 100%; */
+    padding-top: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    letter-spacing: 7px;
+    background-color: #f8f8f8;
+    z-index: 900;
+    border: none;
+    float: none;
+    /* position: fixed; */
+    /* display: inline-block; */
+}
+
+.navbar-nav li a:hover {
+    color: orange !important;
+    cursor:pointer;
+    cursor:hand;
+}
+
+.col-sm-4 > p{
+    min-height: 180px;
+}
+/* 
+#navbar-brand>img {
+    height: 100%;
+    padding: 0px;
+    width: auto;
+} */
+  
+/* backgroundvideo */
+.videoBlock {
+    /* width: 100%;
+    height: 100%; */
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#video{
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    margin-bottom: -10px;
+}
+
+#videoMessage {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 100px;
+    left: 0;
+}
+
+#videoMessage * {
+    padding:0.6em;
+    /* margin:0; */
+}
+
+#videoMessage {
+    text-shadow: 4px 4px 4px #3B5998;
+    color:white;
+}
+
+#videoMessage h1{
+    font-size: 2em;
+    color:#ffffff;
+    text-align:center;
+}
+
+#videoMessage h2{
+    font-size: 1.5em;
+    color:#ffffff;
+    text-align:center;
+}
+
+#videoMessage h3{
+    font-size: 1.2em;
+    color:#ffffff;
+    text-align:center;
+}
+
+.videoClick {
+    text-align:center
+}
+
+.videoClick a{
+    color:white;
+    background-color:rgba(0, 0, 0, 0.89);
+    font-size: 1.7em;
+    cursor:pointer;
+    cursor:hand;
+}
+
+@media only screen and (max-width: 600px) {
+
+#videoMessage, .videoClick {
+    top: 10px;
+    font-size: 8px;
+}
+.col-sm-4 > p{
+    min-height: 50px;
+}
+}
+ 
+ 
+.form-group * {
+    padding: 5px;
+    margin: 5px;
+    color: #000000;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.panel-body, .basic-data, .data-box, #chart-wrapper {
+    display: none;
+}
+
+.panel-danger {
+    background-color: rgba(226, 195, 192, 0.288);
+}
+
+.panel-success {
+    background-color: #d7fdea9d
+}
+
+#basic-data, #technical, .bias {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+canvas {
+max-width: 900px;
+max-height: 900px;
+margin: 30px auto;
+background-color: lightgrey
+}
