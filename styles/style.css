@@ -208,12 +208,12 @@ ul {
 
 
 canvas {
-    background-color: lightgray;
+    /* background-color: lightgray;
     border: 1px solid black;
-    border-radius: 13px;    
+    border-radius: 13px;     */
     max-width: 900px;
-    max-height: 800px;
-    margin: 30px auto;
+    max-height: 600px;
+    /* margin: 30px auto; */
 }
 
 #email {
