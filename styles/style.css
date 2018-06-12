@@ -66,13 +66,18 @@ p {
 .col-sm-4 > p {
     font-size: 25px;
 }
-.col-sm-4 {
+
+.col-md-6 {
+    min-height: 500px;
+}
+
+.well{
     border: 0.1px solid black;
     border-radius: 3px;
-    padding: 0px 15px;
-    margin: 5px 0px;
+    /* padding-right: 15px; */
+    margin-right: 15px;
     color: black;
-    min-height: 220px;
+    min-height: 250px;
 }
 /* 
 #navbar-brand>img {
@@ -173,7 +178,7 @@ ul {
     display: none;
     color: black;
     /* margin: 10px 10px; */
-    margin-left: 0;
+    /* margin-left: 0; */
 }
 
 .panel-danger {
@@ -185,19 +190,19 @@ ul {
 }
 
 #basic-data, #technical {
-    border: 1px solid black;
+    border: 3px solid black;
     border-radius: 3px;
     padding: 0px;
     margin-bottom: 10px;
     color: black;
 }
 
-.bias {
+.bias, .well {
     background-color: lightgray;
     border: 1px solid black;
     border-radius: 25px;
-    padding-right: 10px;
-    margin: 10px 35px;
+    padding: 5px 30px;
+    margin: 10px 0px;
 }
 
 

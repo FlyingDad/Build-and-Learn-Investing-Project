@@ -60,11 +60,11 @@
     <div id="what" class="container-fluid bg-2 text-center">
       <br>
       <h3 class="margin">What Is our Super Secret Sauce?</h3>
-      <p class="text-center">We use a quantitative ranking system based on a variety of well known technical indicators along with a mix of fundamental
+      <p class="text-justify">We use a quantitative ranking system based on a variety of well known technical indicators along with a mix of fundamental
         data. If you would like to bottle our sauce, just ask about our API.</p>
       <br>
       <h3 class="margin">GOLD is always free!</h3>
-      <p class="text-center">Well, not exactly. But you can always get your FREE look into GOLD along with exact price prediction, an easy to follow
+      <p class="text-justify">Well, not exactly. But you can always get your FREE look into GOLD along with exact price prediction, an easy to follow
         chart and a report explaining exactly how we arrived at our predictions. When looking at gold prices, the figures
         quoted are typically going to be ETF prices unless otherwise specified. The spot gold price refers to the price of
         gold for delivery right now as opposed to some date in the future. Spot gold prices are derived from exchange-traded
@@ -96,16 +96,21 @@
                 <option value="gold">Gold</option>
                 <option value="silver">Silver</option>
               </select>
-              <button id="" type="submit" class="btn btn-success">Go</button>
+              <br><button id="" type="submit" class="btn btn-info btn-block">Select Gold or Silver then<br>click here for Todays Info</button>
             </div>
           </form>
 
-          <div class="bias text-justify">
+          <div class="bias text-justify col-md-6">
             <ul id="bias" class="data-box ">
             </ul>
-          </div> *********
+          </div>
+          <div class="bias text-justify col-md-6">
+              <div id="chart-wrapper">
+                  <canvas id="myChart"></canvas>
+                </div>
+            </div> *********
           <div class="panel-bias panel-body">
-            <div id="" class="col-sm-4 well">
+            <div id="" class="row col-sm-4 well text-justify">
               <p>
                 <span id="c-time-stamp">Lorem, ipsum.</span>
               </p>
@@ -130,7 +135,7 @@
                 </li>
               </ul>
             </div>
-            <div id="" class="col-sm-4 well">
+            <div id="" class="col-sm-4 well text-justify">
               <p>
                 <span id="time-stamp">Lorem, ipsum.</span>
               </p>
@@ -152,7 +157,7 @@
                 </li>
               </ul>
             </div>
-            <div id="" class="col-sm-4 well">
+            <div id="" class="col-sm-4 well text-justify">
               <p>Averages:</p>
               <ul class="data-box">
                 <li>
@@ -167,9 +172,9 @@
               </ul>
             </div>
           </div>
-          <div id="chart-wrapper">
+          <!-- <div id="chart-wrapper">
             <canvas id="myChart"></canvas>
-          </div>
+          </div> -->
         </div>
 
       </div>
