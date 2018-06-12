@@ -184,9 +184,9 @@ function getUserSlected(selected) {
 			document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
 
 			document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
-			document.getElementById('c-open-price').innerHTML = `Open: $${bullion.priceData[0][1]}`;
-			document.getElementById('c-high-price').innerHTML = `High: $${bullion.priceData[0][2]}`;
-			document.getElementById('c-low-price').innerHTML = `Low: $${bullion.priceData[0][3]}`;
+			document.getElementById('c-open-price').innerHTML = `Open: $${(bullion.priceData[0][1].toFixed(2))}`;
+			document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
+			document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
 			document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
 			document.getElementById('c-volume').innerHTML = `Volume: ${bullion.priceData[0][5]}`;
 
@@ -220,6 +220,7 @@ function getUserSlected(selected) {
 }
 
 function calculateSMABias() {
+	$(".bias").show();
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
 	let sma50 = bullion.sma50Day;
@@ -279,10 +280,10 @@ function calculateSMABias() {
 
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = `BULLISH FOR ${bullion.lastTimeStamp}`;
-		biasText = `Secret Sauce is looking for price to advance higher.<br> Since it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
+		biasText = `Secret Sauce is looking for price to advance higher.<br> If it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
 		bias = `BEARISH FOR ${bullion.lastTimeStamp}`
-		biasText = `Secret Sauce is looking for price to decline lower.<br> Since it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
+		biasText = `Secret Sauce is looking for price to decline lower.<br> If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
 	} else {
 		bias = `NEUTRAL FOR ${bullion.lastTimeStamp}`
 		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
