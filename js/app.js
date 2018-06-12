@@ -382,7 +382,7 @@ function chart() {
               datasets: [{
                 label: 'Price',
                 pointStyle: 'circle',
-                radius: 3,
+                radius: 0,
                 data: last50,
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.0)',
@@ -395,7 +395,7 @@ function chart() {
               {
                 label: 'SMA20',
                 pointStyle: 'circle',
-                radius: 1,
+                radius: 0,
                 data: sma20Data,
                 backgroundColor: [
                   'rgba(2,199, 1, 0.0)',
@@ -408,7 +408,7 @@ function chart() {
               {
                 label: 'SMA50',
                 pointStyle: 'circle',
-                radius: 1,
+                radius: 0,
                 data: sma50Data,
                 backgroundColor: [
                   'rgba(100,1, 100, 0.0)',
@@ -421,7 +421,7 @@ function chart() {
               {
                 label: 'SMA5',
                 pointStyle: 'circle',
-                radius: 1,
+                radius: 0,
                 data: sma5Data,
                 backgroundColor: [
                   'rgba(255,0, 0, 0.0)',
