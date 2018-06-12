@@ -374,7 +374,7 @@ function chart() {
 			datasets: [{
 				label: 'Price',
 				pointStyle: 'circle',
-				radius: 3,
+				radius: 0,
 				data: last50,
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.0)',
@@ -387,7 +387,7 @@ function chart() {
 			{
 				label: 'SMA20',
 				pointStyle: 'circle',
-				radius: 1,
+				radius: 0,
 				data: sma20Data,
 				backgroundColor: [
 					'rgba(2,199, 1, 0.0)',
@@ -400,7 +400,7 @@ function chart() {
 			{
 				label: 'SMA50',
 				pointStyle: 'circle',
-				radius: 1,
+				radius: 0,
 				data: sma50Data,
 				backgroundColor: [
 					'rgba(100,1, 100, 0.0)',
@@ -413,7 +413,7 @@ function chart() {
 			{
 				label: 'SMA5',
 				pointStyle: 'circle',
-				radius: 1,
+				radius: 0,
 				data: sma5Data,
 				backgroundColor: [
 					'rgba(255,0, 0, 0.0)',
@@ -439,153 +439,3 @@ function chart() {
 	});
 }
 
-// // Gets date n days earlier
-// Date.prototype.subtractDays = function (n) {
-// 	var time = this.getTime();
-// 	var changedDate = new Date(time - (n * 24 * 60 * 60 * 1000));
-// 	this.setTime(changedDate.getTime());
-// 	return this;
-// };
-
-
-// function getDateStamp() {
-// 	let now = new Date();
-// 	let previousDate = now.subtractDays(90);  //gets date 90 days ago
-// 	let year = previousDate.getFullYear()
-// 	let month = previousDate.getMonth() + 1;
-// 	let day =now.getDate();
-// 	return `${year}-${month}-${day}`
-// }
-
-// function validateData(data){
-//   // lat at open, high, low, last
-//   // if null, change to settle price
-//   data.forEach(day => {
-//     let settle = day[6];
-//     if(day[1] == null){
-//       day[1] = settle;
-//     }
-//     if(day[2] == null){
-//       day[2] = settle;
-//     }
-//     if(day[3] == null){
-//       day[3] = settle;
-//     }
-//     if(day[4] == null){
-//       day[4] = settle;
-//     }
-//   });
-//   return data;
-// }
-
-
-
-// const goldUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/GOLD.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-// const silverUrl = 'https://www.quandl.com/api/v3/datasets/LBMA/SILVER.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-//const goldUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_GC1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date='
-//const silverUrl = 'https://www.quandl.com/api/v3/datasets/CHRIS/CME_SI1.json?api_key=3EbrKYZd4sKnYn7CT79Q&start_date=';
-
-
-
-	var ctx = document.getElementById("myChart");
-	var last50 = [];
-	var last50Dates = [];
-	for (let i = 0; i < 100; i++) {
-		last50.push(bullion.priceData[i][4]);
-		last50Dates.push(bullion.priceData[i][0]);
-	}
-	last50.reverse();
-	last50Dates.reverse();
-	//console.log(last50);
-	var myChart = new Chart(ctx, {
-		type: 'line',
-		data: {
-      labels: last50Dates,
-      
-              datasets: [{
-                label: 'Price',
-                pointStyle: 'circle',
-                radius: 0,
-                data: last50,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(4, 55, 137,1)',
-                ],
-                borderWidth: 3
-              },
-              {
-                label: 'SMA20',
-                pointStyle: 'circle',
-                radius: 0,
-                data: sma20Data,
-                backgroundColor: [
-                  'rgba(2,199, 1, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(2,199, 1,1)',
-                ],
-                borderWidth: 1
-              },
-              {
-                label: 'SMA50',
-                pointStyle: 'circle',
-                radius: 0,
-                data: sma50Data,
-                backgroundColor: [
-                  'rgba(100,1, 100, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(100,1, 100,1)',
-                ],
-                borderWidth: 1
-              },
-              {
-                label: 'SMA5',
-                pointStyle: 'circle',
-                radius: 0,
-                data: sma5Data,
-                backgroundColor: [
-                  'rgba(255,0, 0, 0.0)',
-                ],
-                borderColor: [
-                  'rgba(255 ,0, 0, 1)',
-                ],
-                borderWidth: 1
-              },
-
-
-//this function manually calc the data before we decided to get it from URL
-// function getSMAHistory(smaDays){
-//   // smaDays is the sma average we want: ie: 20day
-//   // get all closing prices
-//   let smas = [];
-
-//   let closingPrices = [];
-//   bullion.priceData.forEach(data => closingPrices.push(data[4]));
-
-//   // we can only get averages from pricedata length - the avaerage value
-//   for(let i = 0; i < closingPrices.length - smaDays; i++){
-//     // this loop calulates each average
-//     let prices = []
-//     for(let j = 0; j < smaDays; j++){
-//       prices.push(closingPrices[i + j]);
-//     }
-//     //debugger
-//     const sum = prices.reduce(function(total, num) {
-//       return total + num;
-//     });
-//     smas.push(sum / smaDays);
-//   }
-//   // while(smas.length < closingPrices.length){
-//   //   smas.push(0);
-//   // }
-//  // debugger;
-//  // fill first values with null so data matches up
-//  for(let i = 0; i < smaDays; i++){
-//   smas.push(null);
-// }
-//   console.log(smas.reverse());
-//   return smas;
-// }
