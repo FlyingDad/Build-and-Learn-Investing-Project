@@ -162,6 +162,7 @@ ul {
 
 .panel-body, .basic-data, .data-box, #chart-wrapper {
     display: none;
+    margin-left: 0;
 }
 
 .panel-danger {
@@ -172,7 +173,7 @@ ul {
     background-color: #d7fdea9d
 }
 
-#basic-data, #technical, .bias {
+#basic-data, #technical {
     border: 1px solid black;
     border-radius: 3px;
     padding: 5px;
@@ -180,9 +181,27 @@ ul {
     color: black;
 }
 
-canvas {
-max-width: 900px;
-max-height: 900px;
-margin: 30px auto;
-background-color: lightgrey
+.bias {
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 5px;
+    margin-bottom: 10px 10px;
 }
+
+canvas {
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 13px;    
+    max-width: 900px;
+    max-height: 800px;
+    margin: 30px auto;
+}
+
+#email {
+    margin-top: 400px;
+}
+
+.text-justify {
+    text-align: justify;
+  }
