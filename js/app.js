@@ -286,9 +286,9 @@ function calculateSMABias() {
 		biasText = `Secret Sauce is looking for price to decline lower.<br> If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
 	} else {
 		bias = `NEUTRAL FOR ${bullion.lastTimeStamp}`
-		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
+		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	}
-	$("ul#bias").append(`<li>Bias is: ${bias}</li><li>${biasText}</li>`);
+	$("ul#bias").append(`<br><li><h2>Bias is: ${bias}</h2></li><li>${biasText}<br></li><br>`);
 
 	let xDayDiff = [];
 	let smallestDiff;

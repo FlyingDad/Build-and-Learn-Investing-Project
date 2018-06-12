@@ -172,7 +172,8 @@ ul {
 .panel-body, .basic-data, .data-box, #chart-wrapper, .bias {
     display: none;
     color: black;
-    /* margin-left: 0; */
+    /* margin: 10px 10px; */
+    margin-left: 0;
 }
 
 .panel-danger {
@@ -195,9 +196,11 @@ ul {
     background-color: lightgray;
     border: 1px solid black;
     border-radius: 25px;
-    padding: 10px 10px;
-    margin-bottom: 10px 10px;
+    padding-right: 10px;
+    margin: 10px 35px;
 }
+
+
 
 canvas {
     background-color: lightgray;
