@@ -60,19 +60,26 @@
     <div id="what" class="container-fluid bg-2 text-center">
       <br>
       <h3 class="margin">What Is our Super Secret Sauce?</h3>
-      <p class="text-center">We use a quantitative ranking system based on a variety of well known technical indicators along with a mix of fundamental
+      <p class="text-justify">We use a quantitative ranking system based on a variety of well known technical indicators along with a mix of fundamental
         data. If you would like to bottle our sauce, just ask about our API.</p>
       <br>
       <h3 class="margin">GOLD is always free!</h3>
-      <p class="text-center">Well, not exactly. But you can always get your FREE look into GOLD along with exact price prediction, an easy to follow chart and a report explaining exactly how we arrived at our predictions. When looking at gold prices, the figures quoted are typically going to be ETF prices unless otherwise specified. The spot gold price refers to the price of gold for delivery right now as opposed to some date in the future. Spot gold prices are derived from exchange-traded futures contracts such as those that trade on the COMEX Exchange. The nearest month contract with the most trading volume is used to determine the spot gold price.  We use ETF's (Exchange Traded Funds) to track prices.</p>
+      <p class="text-justify">Well, not exactly. But you can always get your FREE look into GOLD along with exact price prediction, an easy to follow
+        chart and a report explaining exactly how we arrived at our predictions. When looking at gold prices, the figures
+        quoted are typically going to be ETF prices unless otherwise specified. The spot gold price refers to the price of
+        gold for delivery right now as opposed to some date in the future. Spot gold prices are derived from exchange-traded
+        futures contracts such as those that trade on the COMEX Exchange. The nearest month contract with the most trading
+        volume is used to determine the spot gold price. We use ETF's (Exchange Traded Funds) to track prices.</p>
       <br>
       <h3 class="margin">How to use this site.</h3>
-      <p class="text-center"><ul>
-        <li>Step 1</li>
-        <li>Step 2</li>
-        <li>Step 3</li>
-      </ul></p>
-      
+      <p class="text-center">
+        <ul>
+          <li>Step 1</li>
+          <li>Step 2</li>
+          <li>Step 3</li>
+        </ul>
+      </p>
+
 
       <div id="pick1" class="col-md-12 container-fluid">
         <div class="panel panel-bias panel-default">
@@ -89,18 +96,22 @@
                 <option value="gold">Gold</option>
                 <option value="silver">Silver</option>
               </select>
-              <button id="" type="submit" class="btn btn-success">Go</button>
+              <br><button id="" type="submit" class="btn btn-success">Select Gold or Silver then<br>click here for Todays Info</button>
             </div>
           </form>
 
-
+          <div class="bias text-justify col-md-6">
+            <ul id="bias" class="data-box ">
+            </ul>
+          </div>
+          <div id="chart-wrapper" class="bias text-justify col-md-6">
+                  <canvas id="myChart"></canvas>
+            </div> *********
           <div class="panel-bias panel-body">
-            <div id="basic-data">
-              <div>
-                <p>
-                  <span id="c-time-stamp">Lorem, ipsum.</span>
-                </p>
-              </div>
+            <div id="" class="row col-sm-4 well text-justify">
+              <p>
+                <span id="c-time-stamp">Lorem, ipsum.</span>
+              </p>
               <ul class="data-box">
                 <li>
                   <span id="c-change">Lorem, ipsum.</span>
@@ -122,12 +133,10 @@
                 </li>
               </ul>
             </div>
-            <div id="basic-data">
-              <div>
-                <p>
-                  <span id="time-stamp">Lorem, ipsum.</span>
-                </p>
-              </div>
+            <div id="" class="col-sm-4 well text-justify">
+              <p>
+                <span id="time-stamp">Lorem, ipsum.</span>
+              </p>
               <ul class="data-box">
                 <li>
                   <span id="open-price">Lorem, ipsum.</span>
@@ -146,7 +155,7 @@
                 </li>
               </ul>
             </div>
-            <div id="technical">
+            <div id="" class="col-sm-4 well text-justify">
               <p>Averages:</p>
               <ul class="data-box">
                 <li>
@@ -160,16 +169,10 @@
                 </li>
               </ul>
             </div>
-            <div class="bias text-primary text-justify">
-              
-              <!-- <p>Bias</p> -->
-              <ul id="bias" class="data-box">
-              </ul>
-            </div> *********
           </div>
-          <div id="chart-wrapper">
+          <!-- <div id="chart-wrapper">
             <canvas id="myChart"></canvas>
-          </div>
+          </div> -->
         </div>
 
       </div>
@@ -404,12 +407,13 @@
     <p class="text-center">
       The software provides information only. It is not meant to be a recommendation to buy or to sell securities nor an offer
       to buy or sell securities. The publishers are not brokers, dealers or registered investment advisors and do not attempt
-      or intend to influence the purchase or sale of any security or other trade-able items such as futures or commodities.<br>
-      The publishers do not guarantee the accuracy or completeness of the information displayed in any section of the web
+      or intend to influence the purchase or sale of any security or other trade-able items such as futures or commodities.
+      <br> The publishers do not guarantee the accuracy or completeness of the information displayed in any section of the web
       site.
     </p>
-    <div id="email"class="info-request">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdbYdFDf1nAOVUxPhxFoJ7_gpPityNJKljxrVXqqyoPBSTHKQ/viewform?embedded=true" width="90%" height="1500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    <div id="email" class="info-request">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdbYdFDf1nAOVUxPhxFoJ7_gpPityNJKljxrVXqqyoPBSTHKQ/viewform?embedded=true"
+        width="90%" height="1500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
     </div>
   </footer>
   <script src="js/app.js"></script>
