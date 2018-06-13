@@ -63,9 +63,9 @@ p {
     cursor:hand;
 }
 
-.col-sm-4 > p {
+/* .col-sm-4 > p {
     font-size: 25px;
-}
+} */
 
 .col-md-6 {
     min-height: 500px;

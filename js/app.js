@@ -262,7 +262,7 @@ function calculateSMABias() {
 	}
 
 	let bias = "";
-	let mom1 = (last - sma5).toFixed(2);
+	let mom1 = (last - sma5).toFixed(2); //*************** needs to use last value of sma, not present value */
 	let mom2 = (last - sma20).toFixed(2);
 	let mom3 = (last - sma50).toFixed(2);
 	//floor traders pivot points for the current session
@@ -279,16 +279,16 @@ function calculateSMABias() {
 	// $("ul#bias").append(`<li>VMA 20: ${bullion.calcVma(20).toFixed(0)}</li>`)
 
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
-		bias = `BULLISH FOR ${bullion.lastTimeStamp}`;
+		bias = `BULLISH ON ${bullion.lastTimeStamp}`;
 		biasText = `Secret Sauce is looking for price to advance higher.<br> If it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
-		bias = `BEARISH FOR ${bullion.lastTimeStamp}`
+		bias = `BEARISH ON ${bullion.lastTimeStamp}`
 		biasText = `Secret Sauce is looking for price to decline lower.<br> If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
 	} else {
-		bias = `NEUTRAL FOR ${bullion.lastTimeStamp}`
+		bias = `NEUTRAL ON ${bullion.lastTimeStamp}`
 		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	}
-	$("ul#bias").append(`<br><li><h2>BIAS FOR ${userInput.toUpperCase()} IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
+	$("ul#bias").append(`<br><li><h2>${userInput.toUpperCase()} BIAS IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
 
 	let xDayDiff = [];
 	let smallestDiff;
