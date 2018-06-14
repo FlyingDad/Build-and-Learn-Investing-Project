@@ -468,11 +468,19 @@ function intradayChart() {
 	var ctx = document.getElementById("intradayChart");
 	var intradayPrices = [];
   var intradayTimes = [];
-  for(key in bullion.intraDay15minData){
+
+  for(key in bullion.intraDay15minData){   
     intradayTimes.push(key);
-    intradayPrices.push(bullion.intraDay15minData[key]['4. close']);
+    intradayPrices.push(bullion.intraDay15minData[key]['4. close']);   
   }
-  
+  //filter to keep only todays data
+  let date = intradayTimes[0].split(' ')[0];
+  let dateSet = false;
+  let filteredTimes = intradayTimes.filter(time => {
+    return time.includes(date)
+  }) 
+  let filteredPrices = intradayPrices.slice(0, filteredTimes.length); 
+  console.log(filteredTimes, filteredPrices);
 	// for (let i = 0; bullion.intraDay15minData.length; i++) {
 	// 	intrdayPrices.push(bullion.priceData[i][]);
 	// 	last50Dates.push(bullion.priceData[i][0]);
@@ -482,20 +490,21 @@ function intradayChart() {
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: intradayTimes,
+			labels: filteredTimes.reverse(),
 
 			datasets: [{
 				label: 'Intraday Price',
 				pointStyle: 'circle',
 				radius: 1,
-				data: intradayPrices.reverse(),
+				data: filteredPrices.reverse(),
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.0)',
 				],
 				borderColor: [
 					'rgba(4, 55, 137,1)',
 				],
-        borderWidth: 3
+        borderWidth: 3,
+        steppedLine: true
       }
 			// },
 			// {
@@ -548,7 +557,7 @@ function intradayChart() {
 						beginAtZero: false
 					}
 				}]
-			}
+      }
 		}
 	});
 }
