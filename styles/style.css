@@ -198,7 +198,7 @@ ul {
 }
 
 .bias, .well {
-    background-color: lightgray;
+    background-color: rgb(233, 233, 233);
     border: 1px solid black;
     border-radius: 25px;
     padding: 5px 30px;
@@ -211,8 +211,8 @@ canvas {
     /* background-color: lightgray;
     border: 1px solid black;
     border-radius: 13px;     */
-    max-width: 900px;
-    max-height: 600px;
+    max-width: 1200px;
+    max-height: 900px;
     /* margin: 30px auto; */
 }
 
