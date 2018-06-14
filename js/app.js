@@ -462,7 +462,7 @@ function intradayChart() {
 	document.getElementById("intradayChart").remove();
 	document.getElementById("intraday-chart-wrapper").innerHTML = '<canvas id="intradayChart" width="400" height="400"></canvas>';
   // get smadata 
-  console.log('intraday')
+  // console.log('intraday')
 	let intradayData = bullion.sma20Data.slice(0, 100).reverse();
 
 	var ctx = document.getElementById("intradayChart");
@@ -493,18 +493,18 @@ function intradayChart() {
 			labels: filteredTimes.reverse(),
 
 			datasets: [{
-				label: 'Intraday Price',
+				label: 'Todays Chart',
 				pointStyle: 'circle',
-				radius: 1,
+				radius: 5,
 				data: filteredPrices.reverse(),
 				backgroundColor: [
-					'rgba(255, 99, 132, 0.0)',
+					'#474e5d',//'rgba(255, 99, 132, 0.0)',
 				],
 				borderColor: [
-					'rgba(4, 55, 137,1)',
+					'#5cb85c', //'rgba(4, 55, 137,1)',
 				],
-        borderWidth: 3,
-        steppedLine: true
+        borderWidth: 1,
+        // steppedLine: true
       }
 			// },
 			// {
