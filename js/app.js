@@ -213,7 +213,8 @@ function getUserSlected(selected) {
 					});
 				}).then(function () {
 					getSma(selected, 5).then(function () {
-						chart();
+            intradayChart();
+            chart();
 					});
 				})
 		})
@@ -424,6 +425,102 @@ function chart() {
 				],
 				borderWidth: 1
 			},
+
+			]
+
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: false
+					}
+				}]
+			}
+		}
+	});
+}
+
+function intradayChart() {
+
+	// reset the chart
+	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
+	document.getElementById("intradayChart").remove();
+	document.getElementById("intraday-chart-wrapper").innerHTML = '<canvas id="intradayChart" width="400" height="400"></canvas>';
+  // get smadata 
+  console.log('intraday')
+	let sma20Data = bullion.sma20Data.slice(0, 100).reverse();
+	let sma50Data = bullion.sma50Data.slice(0, 100).reverse();
+	let sma5Data = bullion.sma5Data.slice(0, 100).reverse();
+
+	var ctx = document.getElementById("intradayChart");
+	var last50 = [];
+	var last50Dates = [];
+	for (let i = 0; i < 100; i++) {
+		last50.push(bullion.priceData[i][4]);
+		last50Dates.push(bullion.priceData[i][0]);
+	}
+	last50.reverse();
+	last50Dates.reverse();
+	//console.log(last50);
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: last50Dates,
+
+			datasets: [{
+				label: 'Intraday Price',
+				pointStyle: 'circle',
+				radius: 1,
+				data: last50,
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.0)',
+				],
+				borderColor: [
+					'rgba(4, 55, 137,1)',
+				],
+        borderWidth: 3
+      }
+			// },
+			// {
+			// 	label: 'SMA20',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma20Data,
+			// 	backgroundColor: [
+			// 		'rgba(2,199, 1, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'rgba(2,199, 1,1)',
+			// 	],
+			// 	borderWidth: 1
+			// },
+			// {
+			// 	label: 'SMA50',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma50Data,
+			// 	backgroundColor: [
+			// 		'rgba(100,1, 100, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'rgba(100,1, 100,1)',
+			// 	],
+			// 	borderWidth: 1
+			// },
+			// {
+			// 	label: 'SMA5',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma5Data,
+			// 	backgroundColor: [
+			// 		'rgba(255,0, 0, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'rgba(255 ,0, 0, 1)',
+			// 	],
+			// 	borderWidth: 1
+			// },
 
 			]
 
