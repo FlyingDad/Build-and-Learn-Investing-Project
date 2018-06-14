@@ -33,6 +33,9 @@ const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_
 let alphavantageSMA = function (symbol, period) {
 	return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
 };
+let alohaAdvantageIntraday = function(symbol){
+  return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
+}
 
 class Bullion {
 	constructor(name, lastTimeStamp, description, priceData) {
@@ -42,7 +45,8 @@ class Bullion {
 		this.priceData = priceData;	 // array of 90 days of bullion prices
 		this.sma5Data = [];
 		this.sma20Data = [];
-		this.sma50Data = [];
+    this.sma50Data = [];
+    this.intraDay15minData;
 	}
 
 	get sma5Day() {
@@ -174,6 +178,19 @@ function getSma(commodity, period) {
 		});
 }
 
+function getIntraday(commodity) {
+	let url = alohaAdvantageIntraday(commodity);
+	return getData(url)
+		.then(data => {
+      // get object that has array of daily objects
+      bullion.intraDay15minData = data['Time Series (15min)']
+			// let intradayDataObj = (data['Time Series (15min)']);
+      // for(let i in intradayDataObj){
+      //   bullion.intraDay15minData.push(intradayDataObj[i]);
+      // }
+		});
+}
+
 function getUserSlected(selected) {
 	getBullion(selected)
 		.then(bullion => {
@@ -204,18 +221,16 @@ function getUserSlected(selected) {
 
 			//document.getElementById('description').innerHTML = `${bullion.description}`;
 			calculateSMABias();
-		})
+    })
 		.then(function () {
-			getSma(selected, 20).then(function () {
+			getIntraday(selected).then(function () {
+        intradayChart();
 			})
-				.then(function () {
-					getSma(selected, 50).then(function () {
-					});
-				}).then(function () {
-					getSma(selected, 5).then(function () {
-						chart();
-					});
-				})
+			.then(function () {
+				getSma(selected, 5).then(function () {
+          chart();
+				});
+			})
 		})
 }
 
@@ -436,6 +451,113 @@ function chart() {
 					}
 				}]
 			}
+		}
+	});
+}
+
+function intradayChart() {
+
+	// reset the chart
+	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
+	document.getElementById("intradayChart").remove();
+	document.getElementById("intraday-chart-wrapper").innerHTML = '<canvas id="intradayChart" width="400" height="400"></canvas>';
+  // get smadata 
+  console.log('intraday')
+	let intradayData = bullion.sma20Data.slice(0, 100).reverse();
+
+	var ctx = document.getElementById("intradayChart");
+	var intradayPrices = [];
+  var intradayTimes = [];
+
+  for(key in bullion.intraDay15minData){   
+    intradayTimes.push(key);
+    intradayPrices.push(bullion.intraDay15minData[key]['4. close']);   
+  }
+  //filter to keep only todays data
+  let date = intradayTimes[0].split(' ')[0];
+  let dateSet = false;
+  let filteredTimes = intradayTimes.filter(time => {
+    return time.includes(date)
+  }) 
+  let filteredPrices = intradayPrices.slice(0, filteredTimes.length); 
+  console.log(filteredTimes, filteredPrices);
+	// for (let i = 0; bullion.intraDay15minData.length; i++) {
+	// 	intrdayPrices.push(bullion.priceData[i][]);
+	// 	last50Dates.push(bullion.priceData[i][0]);
+	// }
+	// last50.reverse();
+	// last50Dates.reverse();
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: filteredTimes.reverse(),
+
+			datasets: [{
+				label: 'Intraday Price',
+				pointStyle: 'circle',
+				radius: 1,
+				data: filteredPrices.reverse(),
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.0)',
+				],
+				borderColor: [
+					'rgba(4, 55, 137,1)',
+				],
+        borderWidth: 3,
+        steppedLine: true
+      }
+			// },
+			// {
+			// 	label: 'SMA20',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma20Data,
+			// 	backgroundColor: [
+			// 		'rgba(2,199, 1, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'rgba(2,199, 1,1)',
+			// 	],
+			// 	borderWidth: 1
+			// },
+			// {
+			// 	label: 'SMA50',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma50Data,
+			// 	backgroundColor: [
+			// 		'rgba(100,1, 100, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'rgba(100,1, 100,1)',
+			// 	],
+			// 	borderWidth: 1
+			// },
+			// {
+			// 	label: 'SMA5',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma5Data,
+			// 	backgroundColor: [
+			// 		'rgba(255,0, 0, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'rgba(255 ,0, 0, 1)',
+			// 	],
+			// 	borderWidth: 1
+			// },
+
+			]
+
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: false
+					}
+				}]
+      }
 		}
 	});
 }
