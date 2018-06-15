@@ -176,11 +176,11 @@ ul {
 
 
 .panel-danger {
-    background-color: mistyrose;
+    background-color: #d1c1c3;
 }
 
 .panel-success {
-    background-color:skyblue;
+    background-color: #dbeedb;
 }
 
 #basic-data, #technical {
@@ -200,8 +200,9 @@ ul {
 }
 
 .well{
-    min-height: 220px;
-    border: none;
+    min-height: 210px;
+
+    /* border: none; */
 }
 
 
