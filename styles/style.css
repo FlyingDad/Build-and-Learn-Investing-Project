@@ -71,14 +71,7 @@ p {
     min-height: 500px;
 } */
 
-.well{
-    border: 0.1px solid black;
-    border-radius: 3px;
-    /* padding-right: 15px; */
-    margin-right: 15px;
-    color: black;
-    min-height: 250px;
-}
+
 /* 
 #navbar-brand>img {
     height: 100%;
@@ -206,6 +199,11 @@ ul {
     margin: 10px 0px;
 }
 
+.well{
+    min-height: 220px;
+    border: none;
+}
+
 
 canvas#intradayChart {
     max-height: 600px;
@@ -226,10 +224,11 @@ canvas#myChart {
     text-align: justify;
 }
 
-#sauce1 {
+i#sauce1 {
     width: 150px;
     height: 150px;
     padding: 10px;
+    margin: 5px;
 }
 
 #gold1 {
