@@ -17,7 +17,7 @@ p {
 
 .bg-1 {
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url(../img/bg-1068x564.jpg);
-    min-height: 100vh;
+    min-height: 70vh;
     color: #ffffff;
     background-attachment: fixed;
     background-position: center;
