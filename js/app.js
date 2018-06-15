@@ -268,19 +268,22 @@ function calculateSMABias() {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-danger");
 		$(".panel-bias").addClass("panel-success"); //up day
+		$(".bias-smile").html(`<br><i class="fas fa-smile fa-7x text-success text-center"></i>`); //up day
 		// $("ul#bias").append(`<li><h2>Todays Projected High: ${fibPredictedHigh.toFixed(2)}</h2></li>`);
-
-
+		
+		
 	} else if (change < 0) {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").addClass("panel-danger"); //down day
+		$(".bias-smile").html(`<br><i class="fas fa-frown fa-7x text-danger text-center"></i>`); 
 		// $("ul#bias").append(`<li><h2>Todays Projected Low: ${fibPredictedLow.toFixed(2)}</h2></li>`);
-
+		
 	} else {
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").removeClass("panel-danger");
 		$(".panel-bias").addClass("panel-default"); //unchanged
+		$(".bias-smile").html(`<br><i class="fas fa-meh fa-7x text-default text-center"></i>`); 
 	}
 
 	let bias = "";
@@ -363,7 +366,9 @@ function calculateSMABias() {
 	let totHigh;
 	let totLow;
 
-	$("ul#bias").append(`<li><h2>Projected High >= ${fibPredictedHigh.toFixed(2)}</h2></li><li><h2>Projected Low <= ${fibPredictedLow.toFixed(2)}</h2></li>`);
+	$(".bias-smile").append(`<ul><li><h3 class="text-primary pull-left">Projected High >= ${fibPredictedHigh.toFixed(2)}</h3></li><li><h3 class="text-primary pull-left">Projected Low <= ${fibPredictedLow.toFixed(2)}</h3></li></ul>`);
+	
+	// $("ul#bias").append(`<li><h2 class="text-primary">Projected High >= ${fibPredictedHigh.toFixed(2)}</h2></li><li><h2 class="text-primary">Projected Low <= ${fibPredictedLow.toFixed(2)}</h2></li>`);
 
 	console.log();
 }

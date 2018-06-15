@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="styles/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -50,6 +52,7 @@
     <div class="container-fluid bg-1 text-center" id="bgx">
       <br>
       <h1 class="margin">WHAT DO WE DO?</h1>
+      <!-- <i class="fas fa-dollar-sign fa-10x img-responsive img-circle margin" style="display:inline" alt="FreeBird" width="450" height="450"></i> -->
       <img src="img/rebel.jpg" class="img-responsive img-circle margin" style="display:inline" alt="FreeBird" width="450" height="450">
       <h3>We rank 10 of the most liquid ETF's using super secret sauce giving concise bullish, bearish or neutral vision.</h3>
     </div>
@@ -62,11 +65,12 @@
         <div class="text-justify col-sm-4 card">
           <h3 class="">What Is our Super Secret Sauce?</h3>
           <p>
-            <img src="img/secret-sauce.png" alt="Gold Bars" id="sauce1" class="img-circle img-responsive pull-left">
+            <i id="sauce1" class="fa fa-sort-numeric-up fa-10x pull-left"></i>
+            <!-- <img src="img/secret-sauce.png" alt="Gold Bars" id="sauce1" class="img-circle img-responsive pull-left"> -->
           </p>
-          <p>We use a quantitative ranking system to rank our basket of 10 of the most liquid and diverse ETF's traded.
-            The ranking system is based on a few well known technical indicators along with a mix of fundamental data. For
-            more information, see our blog page.</p>
+          <p>We use a quantitative ranking system to rank our basket of 10 of the most liquid and diverse ETF's traded. The
+            ranking system is based on a few well known technical indicators along with a mix of fundamental data. For more
+            information, see our blog page.</p>
           <br>
           <br>
           <p>If you would like to bottle our sauce, just ask about our API.</p>
@@ -82,29 +86,43 @@
             follow chart and a report explaining exactly how we arrived at our predictions. When looking at gold prices,
             the figures quoted are typically going to be ETF prices unless otherwise specified. We use ETF's (Exchange Traded
             Funds) to track prices.</p>
-            <img src="img/goldbars.jpg" alt="Gold Bars" id="gold1" class="img-circle img-responsive pull-left">
-            <p class="margin">SPDR Gold Shares (also known as SPDR Gold Trust) is part of the SPDR family of exchange-traded funds (ETFs) managed
+          <!-- <img src="img/goldbars.jpg" alt="Gold Bars" id="gold1" class="img-circle img-responsive pull-left"> -->
+          <p class="margin">SPDR Gold Shares (also known as SPDR Gold Trust) is part of the SPDR family of exchange-traded funds (ETFs) managed
             and marketed by State Street Global Advisors. For a few years, the fund was the second-largest exchange-traded
-            fund in the world, and it was briefly the largest. This ETF denotes a share of gold bullion, which is unlike
-            many ETFs which represent ownership in a basket of stocks. SPDR Gold Shares are designed to track the price of
-            a tenth of an ounce of gold. If the share price differs from the gold market price, the fund's manager exchanges
-            blocks of 100,000 shares for 10,000 ounces of gold. The possibility of such exchanges keeps the ETF price roughly
-            in line with the gold price, although the prices can diverge during each day.</p>
+            <i id="gold1" class="fas fa-chart-area fa-7x pull-left"></i>
+            fund in the world, and it was briefly the largest. This ETF denotes a share of gold bullion, which is unlike many ETFs which
+            represent ownership in a basket of stocks. SPDR Gold Shares are designed to track the price of a tenth of an
+            ounce of gold. If the share price differs from the gold market price, the fund's manager exchanges blocks of
+            100,000 shares for 10,000 ounces of gold. The possibility of such exchanges keeps the ETF price roughly in line
+            with the gold price, although the prices can diverge during each day.</p>
         </div>
 
         <div class="text-justify col-sm-4 card">
-          <h3 class="">How am I supposed to use the information?</h3>
-          <p>Click here to watch a quick 2 minute video explaining EXACTLY how to use this information.</p>
+          <h3 class="">Maximize the use of our information</h3>
+          <p>Click here to watch a quick 2 minute video explaining EXACTLY how to get started now and use this information.</p>
+          <!-- <button type="button" class="btn btn-warning btn-lg">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Watch Video
+          </button> -->
           <iframe width="100%" height="415" src="https://www.youtube.com/embed/ek1ePFp-nBI" frameborder="0" allow="autoplay; encrypted-media"
             allowfullscreen></iframe>
         </div>
       </div>
 
-
+      <div class=" card col-md-12 container-fluid">
+        <div class="col-sm-4">
+          <i class="fas fa-greater-than-equal fa-7x text-center"></i>
+        </div>
+        <div class="col-sm-4">
+          <i class="fas fa-arrow-down fa-10x text-center"> Do It</i>
+        </div>
+        <div class="col-sm-4">
+          <i class="fas fa-not-equal fa-7x text-center"></i>
+        </div>
+      </div>
       <div id="pick1" class="col-md-12 container-fluid">
         <div class="panel panel-bias panel-default">
           <div class="panel-heading">
-            <h1 class="panel-title">Item:
+            <h1 class="panel-title">Free ETF ANALYSIS for:
               <span id="name"></span>
             </h1>
           </div>
@@ -117,19 +135,28 @@
                 <option value="silver">Silver</option>
               </select>
               <br>
-              <button id="" type="submit" class="btn btn-success">Select Gold or Silver then
-                <br>click here for Todays Info</button>
+              <button id="" type="submit" class="btn btn-success btn-lg btn-block">Select Gold or Silver then
+                <br>click here for Todays Free ETF ANALYSIS</button>
+              </span>
             </div>
           </form>
 
           <div class="panel-bias panel-body">
             <div class="row">
-              <div class="text-justify col-md-6">
-                <ul id="bias" class="data-box ">bias
+              <div class="text-justify col-md-4">
+                <ul id="bias" class="">bias
                 </ul>
               </div>
+              <div class=" text-justify well col-md-2 bias-smile">
+                <i class="fas fa-meh fa-7x pull-right text-default"></i>
+                <i class="fas fa-smile fa-7x pull-right text-success"></i>
+                <i class="fas fa-frown fa-7x pull-right text-danger"></i>
+              </div>
+
               <div id="intraday-chart-wrapper" class="text-justify col-md-6">
-                <p>Real Time Intraday Chart is Loading Now!</p>
+                <p>Real Time Intraday Chart is Loading Now!
+                </p>
+                <i class="fas fa-chart-area fa-10x"></i>
                 <canvas id="intradayChart"></canvas>
               </div> *********
             </div>
@@ -247,7 +274,10 @@
 
   <script>
     $('.nav a').on('click', function () {
-      $('.navbar-collapse').collapse('hide') //bootstrap 3.x
+      $('.navbar-collapse').collapse('hide')
+    });
+    $('.videoClick a').on('click', function () {
+      $('#email').toggle()
     });
 
     $('#bgx').mousemove(function (e) {
