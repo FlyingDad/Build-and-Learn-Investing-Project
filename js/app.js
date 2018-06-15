@@ -227,11 +227,18 @@ function getUserSlected(selected) {
         intradayChart();
 			})
 			.then(function () {
-				getSma(selected, 5).then(function () {
-          chart();
+        getSma(selected, 5)
+        .then(function () {
+          getSma(selected, 20)
+          .then(function(){
+            getSma(selected, 50)
+            .then(function () {
+              chart();
+            });
+          })
 				});
-			})
-		})
+      })
+    })
 }
 
 function calculateSMABias() {
