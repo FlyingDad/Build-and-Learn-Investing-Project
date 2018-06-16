@@ -180,7 +180,8 @@ ul {
 }
 
 .panel-success {
-    background-color: #dbeedb;
+    /* background-color: #dbeedb; */
+    background-color: #99b9ca;
 }
 
 #basic-data, #technical {
@@ -205,11 +206,17 @@ ul {
     /* border: none; */
 }
 
+.bias {
+    line-height: 1.5em;
+    
+}
+
 
 canvas#intradayChart {
-    max-height: 600px;
+    max-width: 100vw;
+    max-height: 86vh;
     padding-right: 0px;
-    margin-left: 22px;
+    margin-left: 23px;
 }
 canvas#myChart {
     max-width: 100vw;
