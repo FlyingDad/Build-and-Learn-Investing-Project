@@ -193,35 +193,6 @@ function getIntraday(commodity) {
 
 function getUserSlected(selected) {
 	getBullion(selected)
-		.then(bullion => {
-			console.log(bullion);
-			//Alphavantage is real time so index of 0 will return current days info
-			//changed first index to 1 as to always use yesterdays data. 
-			//["Date","Open","High","Low","close","volume"]  
-			document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
-
-			document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
-			document.getElementById('c-open-price').innerHTML = `Open: $${(bullion.priceData[0][1].toFixed(2))}`;
-			document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
-			document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
-			document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
-			document.getElementById('c-volume').innerHTML = `Volume: ${bullion.priceData[0][5]}`;
-
-			document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[1][0]}`;
-			document.getElementById('open-price').innerHTML = `Open: $${(bullion.priceData[1][1]).toFixed(2)}`;
-			document.getElementById('high-price').innerHTML = `High: $${(bullion.priceData[1][2]).toFixed(2)}`;
-			document.getElementById('low-price').innerHTML = `Low: $${(bullion.priceData[1][3]).toFixed(2)}`;
-			document.getElementById('close-price').innerHTML = `Close: $${(bullion.priceData[1][4]).toFixed(2)}`;
-			document.getElementById('volume').innerHTML = `Volume: ${bullion.priceData[1][5]}`;
-
-			document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
-			document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
-			document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
-			$("#sma-50day").append(`<br>20 Day VMA: ${bullion.calcVma(20).toFixed(0)}`) //add div?
-
-			//document.getElementById('description').innerHTML = `${bullion.description}`;
-			calculateSMABias();
-    })
 		.then(function () {
 			getIntraday(selected).then(function () {
         intradayChart();
@@ -234,11 +205,42 @@ function getUserSlected(selected) {
             getSma(selected, 50)
             .then(function () {
               chart();
+              displayStats();
             });
           })
 				});
       })
     })
+}
+
+function displayStats(){
+  console.log(bullion);
+  //Alphavantage is real time so index of 0 will return current days info
+  //changed first index to 1 as to always use yesterdays data. 
+  //["Date","Open","High","Low","close","volume"]  
+  document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
+
+  document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
+  document.getElementById('c-open-price').innerHTML = `Open: $${(bullion.priceData[0][1].toFixed(2))}`;
+  document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
+  document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
+  document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
+  document.getElementById('c-volume').innerHTML = `Volume: ${bullion.priceData[0][5]}`;
+
+  document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[1][0]}`;
+  document.getElementById('open-price').innerHTML = `Open: $${(bullion.priceData[1][1]).toFixed(2)}`;
+  document.getElementById('high-price').innerHTML = `High: $${(bullion.priceData[1][2]).toFixed(2)}`;
+  document.getElementById('low-price').innerHTML = `Low: $${(bullion.priceData[1][3]).toFixed(2)}`;
+  document.getElementById('close-price').innerHTML = `Close: $${(bullion.priceData[1][4]).toFixed(2)}`;
+  document.getElementById('volume').innerHTML = `Volume: ${bullion.priceData[1][5]}`;
+
+  document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
+  document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
+  document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
+  $("#sma-50day").append(`<br>20 Day VMA: ${bullion.calcVma(20).toFixed(0)}`) //add div?
+
+  //document.getElementById('description').innerHTML = `${bullion.description}`;
+  calculateSMABias();
 }
 
 function calculateSMABias() {
