@@ -383,13 +383,13 @@ function calculateSMABias() {
 }
 
 function getToday() {
-	fetch('../data/rank.json')
+	fetch('./data/rank.json')
 		.then((res) => res.json())
 		.then((data) => {
 			let output = '<h2 class="mb-4">ETF-15</h2>';
 			data.forEach(function (today) {
 				output += `
-				<ul class="list-group mb-3">
+				<ul class="etf15 list-group text-justify mb-3">
 					<li class="list-group-item">Symbol:   ${today.Symbol}</li>
 					<li class="list-group-item">Score:    ${today.score}</li>
 					<li class="list-group-item">Prev. Score:    ${today.yestScore}</li>
@@ -406,6 +406,7 @@ function getToday() {
 			});
 			document.getElementById('output').innerHTML = output;
 		})
+		return
 }
 
 function chart() {

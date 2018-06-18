@@ -244,3 +244,10 @@ i#sauce1 {
     height: 150px;
     padding: 10px;
 }
+
+.list-group {
+    margin: 2.6rem 4.0rem;
+    padding: 0 auto;
+
+    color:black;
+}
