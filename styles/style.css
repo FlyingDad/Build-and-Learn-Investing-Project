@@ -247,6 +247,8 @@ i#sauce1 {
 
 .etf15 {
     /* margin: 2.6rem 4.0rem; */
+    line-height: 1.0rem;
+    font-size: 0.8rem;
     padding: 5px 50px 5px 50px;
     margin-top: 10px;
     color:black;
