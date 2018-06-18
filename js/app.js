@@ -417,7 +417,7 @@ function getTodayRank() {
 				</ul>
 				</div>
 			`;
-				console.log(today);
+				// console.log(today);
 			});
 			document.getElementById('dOutput').innerHTML = output;
 		})
@@ -431,7 +431,7 @@ function getWeeklyRank() {
 			data.forEach(function (week) {
 				output += `<div class="col-md-4 etf15 text-justify"
 				<ul class=" list-group mb-3">
-				<li class="list-group-item">Symbol:   					<h2>${week.Symbol}</h2></li>
+					<li class="list-group-item">Symbol:   				<h2>${week.Symbol}</h2></li>
 					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
 					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
@@ -456,7 +456,7 @@ function getWeeklyRank() {
 				</ul>
 				</div>
 			`;
-				console.log(week);
+				// console.log(week);
 			});
 			document.getElementById('wOutput').innerHTML = output;
 		})
