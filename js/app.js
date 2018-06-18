@@ -392,7 +392,7 @@ function getTodayRank() {
 			data.forEach(function (today) {
 				output += `<div class="col-md-4 etf15 text-justify"
 				<ul class=" list-group mb-3">
-				<li class="list-group-item">Symbol:   					<h2>${today.Symbol}</h2></li>
+					<li class="list-group-item">Symbol:   					<h2>${today.Symbol}</h2></li>
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
 					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
@@ -421,46 +421,46 @@ function getTodayRank() {
 			});
 			document.getElementById('dOutput').innerHTML = output;
 		})
-		return
+	return
 }
 function getWeeklyRank() {
 	fetch('./data/weeklyRank.json')
 		.then((res) => res.json())
 		.then((data) => {
 			let output = '<h2 class="mb-4">ETF-15 Weekly Ranking</h2>';
-			data.forEach(function (today) {
+			data.forEach(function (week) {
 				output += `<div class="col-md-4 etf15 text-justify"
 				<ul class=" list-group mb-3">
-				<li class="list-group-item">Symbol:   					<h2>${today.Symbol}</h2></li>
-					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
-					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
-					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
-					<li class="list-group-item">Open:     				${today.open.toFixed(2)}</li>
-					<li class="list-group-item">High:     				${today.high.toFixed(2)}</li>
-					<li class="list-group-item">Low:      ${today.low.toFixed(2)}</li>
-					<li class="list-group-item">Close:    ${today.close.toFixed(2)}</li>
-					<li class="list-group-item">Volume:   ${today.volume}</li>
-					<li class="list-group-item">SMA 5:   	${today.sma5.toFixed(2)}</li>
-					<li class="list-group-item">SMA 20:   ${today.sma20.toFixed(2)}</li>
-					<li class="list-group-item">SMA 50:   ${today.sma50.toFixed(2)}</li>
-					<li class="list-group-item">VMA 5:   	${today.vma5.toFixed(2)}</li>
-					<li class="list-group-item">VMA 20:   ${today.vma20.toFixed(2)}</li>
-					<li class="list-group-item">VMA 50:   ${today.vma50.toFixed(2)}</li>
-					<li class="list-group-item">Close +/- ETF Master Trail Stop:   ${today.trailstop.toFixed(2)}</li>
-					<li class="list-group-item">ROC 21:   ${today.roc21.toFixed(2)}</li>
-					<li class="list-group-item">Sharpe 21:   ${today.sharpe21.toFixed(2)}</li>
-					<li class="list-group-item">RSI Buy?   ${today.rsi2lessthan20}</li>
-					<li class="list-group-item">%B Buy?:   ${today.closelessthanbbandlow}</li>
-					<li class="list-group-item">Volume:   ${today.volume}</li>
+				<li class="list-group-item">Symbol:   					<h2>${week.Symbol}</h2></li>
+					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
+					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
+					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
+					<li class="list-group-item">Open:     				${week.open.toFixed(2)}</li>
+					<li class="list-group-item">High:     				${week.high.toFixed(2)}</li>
+					<li class="list-group-item">Low:      ${week.low.toFixed(2)}</li>
+					<li class="list-group-item">Close:    ${week.close.toFixed(2)}</li>
+					<li class="list-group-item">Volume:   ${week.volume}</li>
+					<li class="list-group-item">SMA 5:   	${week.sma5.toFixed(2)}</li>
+					<li class="list-group-item">SMA 20:   ${week.sma20.toFixed(2)}</li>
+					<li class="list-group-item">SMA 50:   ${week.sma50.toFixed(2)}</li>
+					<li class="list-group-item">VMA 5:   	${week.vma5.toFixed(2)}</li>
+					<li class="list-group-item">VMA 20:   ${week.vma20.toFixed(2)}</li>
+					<li class="list-group-item">VMA 50:   ${week.vma50.toFixed(2)}</li>
+					<li class="list-group-item">Close +/- ETF Master Trail Stop:   ${week.trailstop.toFixed(2)}</li>
+					<li class="list-group-item">ROC 21:   ${week.roc21.toFixed(2)}</li>
+					<li class="list-group-item">Sharpe 21:   ${week.sharpe21.toFixed(2)}</li>
+					<li class="list-group-item">RSI Buy?   ${week.rsi2lessthan20}</li>
+					<li class="list-group-item">%B Buy?:   ${week.closelessthanbbandlow}</li>
+					<li class="list-group-item">Volume:   ${week.volume}</li>
 
 				</ul>
 				</div>
 			`;
-				console.log(today);
+				console.log(week);
 			});
 			document.getElementById('wOutput').innerHTML = output;
 		})
-		return
+	return
 }
 
 function chart() {
