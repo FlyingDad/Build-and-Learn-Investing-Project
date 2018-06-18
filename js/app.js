@@ -33,8 +33,10 @@ const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_
 let alphavantageSMA = function (symbol, period) {
 	return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
 };
+
 let alohaAdvantageIntraday = function (symbol) {
 	return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
+
 }
 
 class Bullion {
@@ -45,8 +47,10 @@ class Bullion {
 		this.priceData = priceData;	 // array of 90 days of bullion prices
 		this.sma5Data = [];
 		this.sma20Data = [];
+
 		this.sma50Data = [];
 		this.intraDay15minData;
+
 	}
 
 	get sma5Day() {
@@ -182,12 +186,14 @@ function getIntraday(commodity) {
 	let url = alohaAdvantageIntraday(commodity);
 	return getData(url)
 		.then(data => {
+
 			// get object that has array of daily objects
 			bullion.intraDay15minData = data['Time Series (15min)']
 			// let intradayDataObj = (data['Time Series (15min)']);
 			// for(let i in intradayDataObj){
 			//   bullion.intraDay15minData.push(intradayDataObj[i]);
 			// }
+
 		});
 }
 
@@ -210,6 +216,7 @@ function getUserSlected(selected) {
 								})
 						});
 				})
+
 		})
 }
 
@@ -563,12 +570,15 @@ function intradayChart() {
 	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
 	document.getElementById("intradayChart").remove();
 	document.getElementById("intraday-chart-wrapper").innerHTML = '<canvas id="intradayChart" width="400" height="400"></canvas>';
+
 	// get smadata 
 	// console.log('intraday')
+
 	let intradayData = bullion.sma20Data.slice(0, 100).reverse();
 
 	var ctx = document.getElementById("intradayChart");
 	var intradayPrices = [];
+
 	var intradayTimes = [];
 
 	for (key in bullion.intraDay15minData) {
@@ -583,6 +593,7 @@ function intradayChart() {
 	})
 	let filteredPrices = intradayPrices.slice(0, filteredTimes.length);
 	console.log(filteredTimes, filteredPrices);
+
 	// for (let i = 0; bullion.intraDay15minData.length; i++) {
 	// 	intrdayPrices.push(bullion.priceData[i][]);
 	// 	last50Dates.push(bullion.priceData[i][0]);
@@ -595,6 +606,7 @@ function intradayChart() {
 			labels: filteredTimes.reverse(),
 
 			datasets: [{
+
 				label: 'Todays Chart',
 				pointStyle: 'circle',
 				radius: 5,
@@ -649,6 +661,7 @@ function intradayChart() {
 				// 	borderWidth: 1
 				// },
 
+
 			]
 
 		},
@@ -659,7 +672,9 @@ function intradayChart() {
 						beginAtZero: false
 					}
 				}]
+
 			}
+
 		}
 	});
 }
