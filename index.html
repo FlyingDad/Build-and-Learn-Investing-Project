@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="styles/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -50,6 +52,7 @@
     <div class="container-fluid bg-1 text-center" id="bgx">
       <br>
       <h1 class="margin">WHAT DO WE DO?</h1>
+      <!-- <i class="fas fa-dollar-sign fa-10x img-responsive img-circle margin" style="display:inline" alt="FreeBird" width="450" height="450"></i> -->
       <img src="img/rebel.jpg" class="img-responsive img-circle margin" style="display:inline" alt="FreeBird" width="450" height="450">
       <h3>We rank 10 of the most liquid ETF's using super secret sauce giving concise bullish, bearish or neutral vision.</h3>
     </div>
@@ -61,46 +64,70 @@
       <div class="row">
         <div class="text-justify col-sm-4 card">
           <h3 class="">What Is our Super Secret Sauce?</h3>
-          <p>We use a quantitative ranking system based to rank our basket of 10 of the most liquid and diverse ETF's traded.
-            The ranking system is based on a few well known technical indicators along with a mix of fundamental data. For
-            more information, see our blog page.
-            <br>
-            <br>If you would like to bottle our sauce, just ask about our API.</p>
+          <p>
+            <i id="sauce1" class="fa fa-sort-numeric-up fa-7x pull-left" style="color: limegreen"></i>
+            <!-- <img src="img/secret-sauce.png" alt="Gold Bars" id="sauce1" class="img-circle img-responsive pull-left"> -->
+          </p>
+          <p>We use a quantitative ranking system to rank our basket of 10 of the most liquid and diverse ETF's traded. The
+            ranking system is based on a few well known technical indicators along with a mix of fundamental data. For more
+            information, see our blog page.</p>
+          <br>
+          <br>
+          <p>If you would like to bottle our sauce, just ask about our API.</p>
           <h3 class="margin">How to trade using this site.</h3>
           <p>Step 1: Open an account with Nadex.</p>
-          <img src="img/goldbars.jpg" alt="Gold Bars" id="gold1" class="img-circle img-responsive pull-right">
-          <p>Step 2: Place your wager with your mobile device or computer.</p>
-          <p>Step 3: Win or lose. Nadex is a binary options exchange that gives you the access to trade these signals.</p>
+          <p class="">Step 2: Place your wager with your mobile device or computer.</p>
+          <p class="">Step 3: Win or lose. Nadex is a binary options exchange that gives you the access to trade these signals.</p>
 
         </div>
         <div class="text-justify col-sm-4 card">
           <h3 class="">GOLD is always free!</h3>
+          <p>
+            <i id="gold1" class="text-warning fas fa-chart-area fa-7x pull-left"></i>
+          </p>
           <p>Well, not exactly. But you can always get your FREE look into GOLD along with exact price prediction, an easy to
             follow chart and a report explaining exactly how we arrived at our predictions. When looking at gold prices,
             the figures quoted are typically going to be ETF prices unless otherwise specified. We use ETF's (Exchange Traded
             Funds) to track prices.</p>
-          <p>SPDR Gold Shares (also known as SPDR Gold Trust) is part of the SPDR family of exchange-traded funds (ETFs) managed
+          <!-- <img src="img/goldbars.jpg" alt="Gold Bars" id="gold1" class="img-circle img-responsive pull-left"> -->
+          <p class="margin">SPDR Gold Shares (also known as SPDR Gold Trust) is part of the SPDR family of exchange-traded funds (ETFs) managed
             and marketed by State Street Global Advisors. For a few years, the fund was the second-largest exchange-traded
             fund in the world, and it was briefly the largest. This ETF denotes a share of gold bullion, which is unlike
             many ETFs which represent ownership in a basket of stocks. SPDR Gold Shares are designed to track the price of
             a tenth of an ounce of gold. If the share price differs from the gold market price, the fund's manager exchanges
             blocks of 100,000 shares for 10,000 ounces of gold. The possibility of such exchanges keeps the ETF price roughly
             in line with the gold price, although the prices can diverge during each day.</p>
+
         </div>
 
         <div class="text-justify col-sm-4 card">
-          <h3 class="">How am I supposed to use the information?</h3>
-          <p>Click here to watch a quick 2 minute video explaining EXACTLY how to use this information.</p>
-          <iframe width="100%" height="315" src="https://www.youtube.com/embed/ek1ePFp-nBI" frameborder="0" allow="autoplay; encrypted-media"
+          <h3 class="">Maximize the use of our information</h3>
+          <p>Click here to watch a quick 2 minute video explaining EXACTLY how to get started now and use this information.</p>
+          <!-- <button type="button" class="btn btn-warning btn-lg">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Watch Video
+          </button> -->
+          <iframe width="100%" height="415" src="https://www.youtube.com/embed/ek1ePFp-nBI" frameborder="0" allow="autoplay; encrypted-media"
             allowfullscreen></iframe>
         </div>
       </div>
 
 
+      <div class="col-md-12 container-fluid">
+        <div class="col-sm-4">
+          <i class="fas fa-greater-than-equal fa-3x text-center" style="color: yellow"></i>
+        </div>
+        <div class="col-sm-4">
+          <i class="fas fa-arrow-down fa-10x text-center" style="color: limegreen"> Do It</i>
+        </div>
+        <div class="col-sm-4">
+          <i class="fas fa-not-equal fa-5x text-center" style="color: red"></i>
+
+        </div>
+      </div>
       <div id="pick1" class="col-md-12 container-fluid">
         <div class="panel panel-bias panel-default">
           <div class="panel-heading">
-            <h1 class="panel-title">Item:
+            <h1 class="panel-title">Free ETF ANALYSIS for:
               <span id="name"></span>
             </h1>
           </div>
@@ -108,294 +135,114 @@
             <div class="form-group">
               <label for="user-input">Select</label>
               <select id="user-input" type="submit">
-                <option value="none"></option>
+                <!-- <option value="none"></option> -->
                 <option value="gold">Gold</option>
                 <option value="silver">Silver</option>
               </select>
               <br>
-              <button id="" type="submit" class="btn btn-success">Select Gold or Silver then
-                <br>click here for Todays Info</button>
+              <button id="" type="submit" class="btn btn-success btn-lg">Select Gold or Silver then
+                <br>click here for Todays Free ETF ANALYSIS</button>
+              </span>
             </div>
           </form>
 
-          <div class="bias text-justify col-md-6">
-            <ul id="bias" class="data-box ">
-            </ul>
-          </div>
-          <div id="intraday-chart-wrapper" class="bias text-justify col-md-6">
-            <canvas id="intradayChart"></canvas>
-          </div> *********
           <div class="panel-bias panel-body">
-            <div id="" class="row col-sm-4 well text-justify">
-              <p>
-                <span id="c-time-stamp"></span>
-              </p>
-              <ul class="data-box">
-                <li>
-                  <span id="c-change"></span>
-                </li>
-                <li>
-                  <span id="c-close-price"></span>
-                </li>
-                <li>
-                  <span id="c-open-price"></span>
-                </li>
-                <li>
-                  <span id="c-high-price"></span>
-                </li>
-                <li>
-                  <span id="c-low-price"></span>
-                </li>
-                <li>
-                  <span id="c-volume"></span>
-                </li>
-              </ul>
-            </div>
-            <div id="" class="col-sm-4 well text-justify">
-              <p>
-                <span id="time-stamp"></span>
-              </p>
-              <ul class="data-box">
-                <li>
-                  <span id="open-price"></span>
-                </li>
-                <li>
-                  <span id="high-price"></span>
-                </li>
-                <li>
-                  <span id="low-price"></span>
-                </li>
-                <li>
-                  <span id="close-price"></span>
-                </li>
-                <li>
-                  <span id="volume"></span>
-                </li>
-              </ul>
-            </div>
-            <div id="" class="col-sm-4 well text-justify">
-              <p>Averages:</p>
-              <ul class="data-box">
-                <li>
-                  <span id="sma-5day"></span>
-                </li>
-                <li>
-                  <span id="sma-20day"></span>
-                </li>
-                <li>
-                  <span id="sma-50day"></span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div id="chart-wrapper" class="bias text-justify col-md-6">
-            <canvas id="myChart"></canvas>
-          </div>
-        </div>
+            <div class="row">
+              <div class="text-justify col-md-4">
+                <ul id="bias" class="text-justify">bias
+                </ul>
+                <div class="bias-smile text-justify">
+                  <i class="fas fa-meh fa-7x pull-right text-default"></i>
+                  <i class="fas fa-smile fa-7x pull-right text-success"></i>
+                  <i class="fas fa-frown fa-7x pull-right text-danger"></i>
+                </div>
+              </div>
 
-      </div>
-      <!-- <div id="pick2" class="col-sm-4 container-fluid">
-        <div class="panel panel-bias panel-default">
-          <div class="panel-heading">
-            <h1 class="panel-title">Item:
-              <span id="name"></span>
-            </h1>
-          </div>
-          <form action="" id="selector">
-            <div class="form-group">
-              <label for="user-input">Select</label>
-              <select id="user-input" type="submit">
-                <option value="none"></option>
-                <option value="gold">Gold</option>
-                <option value="silver">Silver</option>
-              </select>
-              <button id="" type="submit" class="btn btn-success">Go</button>
+              <div id="intraday-chart-wrapper" class="text-justify col-md-8">
+                <p>Real Time Intraday Chart is Loading Now!
+                </p>
+                <i class="fas fa-chart-area fa-10x"></i>
+                <canvas id="intradayChart"></canvas>
+              </div> *********
             </div>
-          </form>
-
-
-          <div class="panel-bias panel-body">
-
-            <div id="basic-data">
-              <div>
+            <div class="row">
+              <div id="" class="col-sm-4 well text-justify">
                 <p>
                   <span id="c-time-stamp"></span>
                 </p>
+                <ul class="data-box">
+                  <li>
+                    <span id="c-change"></span>
+                  </li>
+                  <li>
+                    <span id="c-close-price"></span>
+                  </li>
+                  <li>
+                    <span id="c-open-price"></span>
+                  </li>
+                  <li>
+                    <span id="c-high-price"></span>
+                  </li>
+                  <li>
+                    <span id="c-low-price"></span>
+                  </li>
+                  <li>
+                    <span id="c-volume"></span>
+                  </li>
+                </ul>
               </div>
-              <ul class="data-box">
-
-                <li>
-                  <span id="c-change"></span>
-                </li>
-                <li>
-                  <span id="c-close-price"></span>
-                </li>
-                <li>
-                  <span id="c-open-price"></span>
-                </li>
-                <li>
-                  <span id="c-high-price"></span>
-                </li>
-                <li>
-                  <span id="c-low-price"></span>
-                </li>
-                <li>
-                  <span id="c-volume"></span>
-                </li>
-              </ul>
-            </div>
-            <div id="basic-data">
-              <div>
+              <div id="" class="col-sm-4 well text-justify">
                 <p>
                   <span id="time-stamp"></span>
                 </p>
+                <ul class="data-box">
+                  <li>
+                    <span id="open-price"></span>
+                  </li>
+                  <li>
+                    <span id="high-price"></span>
+                  </li>
+                  <li>
+                    <span id="low-price"></span>
+                  </li>
+                  <li>
+                    <span id="close-price"></span>
+                  </li>
+                  <li>
+                    <span id="volume"></span>
+                  </li>
+                </ul>
               </div>
-              <ul class="data-box">
-
-                <li>
-                  <span id="open-price"></span>
-                </li>
-                <li>
-                  <span id="high-price"></span>
-                </li>
-                <li>
-                  <span id="low-price"></span>
-                </li>
-                <li>
-                  <span id="close-price"></span>
-                </li>
-                <li>
-                  <span id="volume"></span>
-                </li>
-              </ul>
+              <div id="" class="col-sm-4 well text-justify">
+                <p>Averages:</p>
+                <ul class="data-box">
+                  <li>
+                    <span id="sma-5day"></span>
+                  </li>
+                  <li>
+                    <span id="sma-20day"></span>
+                  </li>
+                  <li>
+                    <span id="sma-50day"></span>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div id="technical">
-              <p>Averages:</p>
-              <ul class="data-box">
-                <li>
-                  <span id="sma-5day"></span>
-                </li>
-                <li>
-                  <span id="sma-20day"></span>
-                </li>
-                <li>
-                  <span id="sma-50day"></span>
-                </li>
-              </ul>
-            </div>
-            <div class="bias">
-              <p>Bias</p>
-              <ul id="bias" class="data-box">
-              </ul>
+            <div class="row">
+              <div id="chart-wrapper" class="bias col-md-12">
+                <canvas id="myChart"></canvas>
+              </div>
             </div>
           </div>
-
-        </div>
-        <div id="chart1">
-          <canvas id="myChart" width="400" height="400"></canvas>
         </div>
       </div>
-      <div id="pick3" class="col-sm-4 container-fluid">
-        <div class="panel panel-bias panel-default">
-          <div class="panel-heading">
-            <h1 class="panel-title">Item:
-              <span id="name"></span>
-            </h1>
-          </div>
-          <form action="" id="selector">
-            <div class="form-group">
-              <label for="user-input">Select</label>
-              <select id="user-input" type="submit">
-                <option value="none"></option>
-                <option value="gold">Gold</option>
-                <option value="silver">Silver</option>
-              </select>
-              <button id="" type="submit" class="btn btn-success">Go</button>
-            </div>
-          </form>
+      <div class="row">
+        <div id="dOutput"></div>
+      </div>
+      <div class="row">
+        <div id="wOutput"></div>
+      </div>
 
-
-          <div class="panel-bias panel-body">
-
-            <div id="basic-data">
-              <div>
-                <p>
-                  <span id="c-time-stamp"></span>
-                </p>
-              </div>
-              <ul class="data-box">
-
-                <li>
-                  <span id="c-change"></span>
-                </li>
-                <li>
-                  <span id="c-close-price"></span>
-                </li>
-                <li>
-                  <span id="c-open-price"></span>
-                </li>
-                <li>
-                  <span id="c-high-price"></span>
-                </li>
-                <li>
-                  <span id="c-low-price"></span>
-                </li>
-                <li>
-                  <span id="c-volume"></span>
-                </li>
-              </ul>
-            </div>
-            <div id="basic-data">
-              <div>
-                <p>
-                  <span id="time-stamp"></span>
-                </p>
-              </div>
-              <ul class="data-box">
-
-                <li>
-                  <span id="open-price"></span>
-                </li>
-                <li>
-                  <span id="high-price"></span>
-                </li>
-                <li>
-                  <span id="low-price"></span>
-                </li>
-                <li>
-                  <span id="close-price"></span>
-                </li>
-                <li>
-                  <span id="volume"></span>
-                </li>
-              </ul>
-            </div>
-            <div id="technical">
-              <p>Averages:</p>
-              <ul class="data-box">
-                <li>
-                  <span id="sma-5day"></span>
-                </li>
-                <li>
-                  <span id="sma-20day"></span>
-                </li>
-                <li>
-                  <span id="sma-50day"></span>
-                </li>
-              </ul>
-            </div>
-            <div class="bias">
-              <p>Bias</p>
-              <ul id="bias" class="data-box">
-              </ul>
-            </div>
-          </div>
-
-        </div>
-        <div id="chart1">
-          <canvas id="myChart" width="400" height="400"></canvas>
-        </div>
-      </div> -->
     </div>
 
     <!-- Third Container (Video bkgr) call to action-->
@@ -438,7 +285,10 @@
 
   <script>
     $('.nav a').on('click', function () {
-      $('.navbar-collapse').collapse('hide') //bootstrap 3.x
+      $('.navbar-collapse').collapse('hide')
+    });
+    $('.videoClick a').on('click', function () {
+      $('#email').toggle()
     });
 
     $('#bgx').mousemove(function (e) {

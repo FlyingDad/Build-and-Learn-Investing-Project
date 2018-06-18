@@ -17,7 +17,7 @@ p {
 
 .bg-1 {
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url(../img/bg-1068x564.jpg);
-    min-height: 100vh;
+    min-height: 70vh;
     color: #ffffff;
     background-attachment: fixed;
     background-position: center;
@@ -67,18 +67,11 @@ p {
     font-size: 25px;
 } */
 
-.col-md-6 {
+/* .col-md-6 {
     min-height: 500px;
-}
+} */
 
-.well{
-    border: 0.1px solid black;
-    border-radius: 3px;
-    /* padding-right: 15px; */
-    margin-right: 15px;
-    color: black;
-    min-height: 250px;
-}
+
 /* 
 #navbar-brand>img {
     height: 100%;
@@ -181,12 +174,14 @@ ul {
     /* margin-left: 0; */
 }
 
+
 .panel-danger {
-    background-color: rgba(226, 195, 192, 0.288);
+    background-color: #d1c1c3;
 }
 
 .panel-success {
-    background-color: #d7fdea9d
+    /* background-color: #dbeedb; */
+    background-color: #99b9ca;
 }
 
 #basic-data, #technical {
@@ -198,28 +193,65 @@ ul {
 }
 
 .bias, .well {
-    background-color: lightgray;
+    background-color: rgb(233, 233, 233);
     border: 1px solid black;
     border-radius: 25px;
-    padding: 5px 30px;
+    padding: 5px 15px;
     margin: 10px 0px;
 }
 
+.well{
+    min-height: 210px;
+
+    /* border: none; */
+}
+
+.bias {
+    line-height: 1.5em;
+    
+}
 
 
-canvas {
-    /* background-color: lightgray;
-    border: 1px solid black;
-    border-radius: 13px;     */
-    max-width: 900px;
-    max-height: 600px;
-    /* margin: 30px auto; */
+canvas#intradayChart {
+    max-width: 100vw;
+    max-height: 86vh;
+    padding-right: 0px;
+    margin-left: 23px;
+}
+canvas#myChart {
+    max-width: 100vw;
+    max-height: 100vh;
 }
 
 #email {
     margin-top: 400px;
+    display: none;
 }
 
 .text-justify {
     text-align: justify;
-  }
+}
+
+i#sauce1 {
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    margin: 5px;
+}
+
+#gold1 {
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+}
+
+.etf15 {
+    /* margin: 2.6rem 4.0rem; */
+    line-height: 1.2rem;
+    font-size: 1.0rem;
+    font-weight: bold;
+    padding: 5px 20px 5px 20px;
+    margin-top: 10px;
+    color:black;
+
+}
