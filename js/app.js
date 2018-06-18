@@ -388,8 +388,8 @@ function getToday() {
 		.then((data) => {
 			let output = '<h2 class="mb-4">ETF-15</h2>';
 			data.forEach(function (today) {
-				output += `
-				<ul class="etf15 list-group text-justify mb-3">
+				output += `<div class="col-md-4 etf15 text-justify"
+				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   ${today.Symbol}</li>
 					<li class="list-group-item">Score:    ${today.score}</li>
 					<li class="list-group-item">Prev. Score:    ${today.yestScore}</li>
@@ -401,6 +401,7 @@ function getToday() {
 					<li class="list-group-item">Volume:   ${today.volume}</li>
 
 				</ul>
+				</div>
 			`;
 				console.log(today);
 			});
