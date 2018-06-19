@@ -17,7 +17,7 @@
 // https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api
 
 // this will hold each etf's data (1 objects for each etf)
-let etfData = [];
+let etfData = {};
 
 function readResponseAsText(response) {
   return response.text();
@@ -88,20 +88,22 @@ function parseText(responseAsText) {
         etf.Sharpe21.push(row[12]);
         etf.roc21.push(row[13]);
       }
-      etfData.push(etf);
+      
     })
+    etfData[name] = etf;
   })
   //console.table(etfData[0]);
   // convert to JSON
-  //let etfJSON = JSON.stringify(etfData);
+  let etfJSON = JSON.stringify(etfData);
   //write new file
-  //var blob = new Blob([etfJSON], {type: "text/plain;charset=utf-8"});anchor = document.createElement('a');
+  var blob = new Blob([etfJSON], {type: "text/plain;charset=utf-8"});anchor = document.createElement('a');
 
-  // anchor.download = "hello.json";
-  // anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
-  // anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
-  // anchor.click();
-debugger
+  anchor.download = "hello.json";
+  anchor.href = (window.URL).createObjectURL(blob);
+  anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
+
+  //uncomment to get file (download through browser)
+  //anchor.click();
 }//end of parseText()
 
 function fetchText(pathToResource) {
