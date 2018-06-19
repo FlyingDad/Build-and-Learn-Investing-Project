@@ -250,6 +250,7 @@ function displayStats() {
 	calculateSMABias();
 	getTodayRank();
 	getWeeklyRank();
+	getCryptoTodayRank()
 
 }
 
@@ -491,20 +492,14 @@ function getCryptoTodayRank() {
 					<li class="list-group-item">High:     				${cryptoToday.high.toFixed(2)}</li>
 					<li class="list-group-item">Low:      ${cryptoToday.low.toFixed(2)}</li>
 					<li class="list-group-item">Close:    ${cryptoToday.close.toFixed(2)}</li>
-					<li class="list-group-item">Volume:   ${cryptoToday.volume}</li>
 					<li class="list-group-item">SMA 5:   	${cryptoToday.sma5.toFixed(2)}</li>
 					<li class="list-group-item">SMA 20:   ${cryptoToday.sma20.toFixed(2)}</li>
 					<li class="list-group-item">SMA 50:   ${cryptoToday.sma50.toFixed(2)}</li>
-					<li class="list-group-item">VMA 5:   	${cryptoToday.vma5.toFixed(2)}</li>
-					<li class="list-group-item">VMA 20:   ${cryptoToday.vma20.toFixed(2)}</li>
-					<li class="list-group-item">VMA 50:   ${cryptoToday.vma50.toFixed(2)}</li>
 					<li class="list-group-item">Close +/- ETF Master Trail Stop:   ${cryptoToday.trailstop.toFixed(2)}</li>
 					<li class="list-group-item">ROC 21:   ${cryptoToday.roc21.toFixed(2)}</li>
 					<li class="list-group-item">Sharpe 21:   ${cryptoToday.sharpe21.toFixed(2)}</li>
 					<li class="list-group-item">RSI Buy?   ${cryptoToday.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${cryptoToday.closelessthanbbandlow}</li>
-					<li class="list-group-item">Spike in Volume:   ${cryptoToday.vspike}</li>
-
 				</ul>
 				</div>
 			`;
