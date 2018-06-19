@@ -395,11 +395,13 @@ function getTodayRank() {
 	fetch('./data/rank.json')
 		.then((res) => res.json())
 		.then((data) => {
-			let output = '<h2 class="mb-4">ETF-15 Daily Ranking</h2>';
+			let output = '<h2 class="mb-4">Current ETF-15 Daily Ranking</h2>';
 			data.forEach(function (today) {
 				output += `<div class="col-md-4 etf15 text-justify"
 				<ul class=" list-group mb-3">
-					<li class="list-group-item">Symbol:   					<h2>${today.Symbol}</h2></li>
+					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
+					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
+
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
 					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
@@ -419,7 +421,7 @@ function getTodayRank() {
 					<li class="list-group-item">Sharpe 21:   ${today.sharpe21.toFixed(2)}</li>
 					<li class="list-group-item">RSI Buy?   ${today.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${today.closelessthanbbandlow}</li>
-					<li class="list-group-item">Volume:   ${today.volume}</li>
+					<li class="list-group-item">Spike in Volume:   ${today.vspike}</li>
 
 				</ul>
 				</div>
