@@ -400,7 +400,6 @@ function getTodayRank() {
 			data.forEach(function (today) {
 				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
-					<p> Timestamp: Close of Business</p>
 					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
 					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
 
@@ -424,8 +423,8 @@ function getTodayRank() {
 					<li class="list-group-item">RSI Buy?   ${today.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${today.closelessthanbbandlow}</li>
 					<li class="list-group-item">Spike in Volume:   ${today.vspike}</li>
-
 				</ul>
+				<p>Timestamp: ${today.date}</p>
 				</div>
 			`;
 				// console.log(today);
