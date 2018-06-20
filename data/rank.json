@@ -33,6 +33,8 @@
     "rank6": 35.7099990844727,
     "dpp": 120.289997666667,
     "weeklypp": 120.033333333333,
+    "fullname": "iShares Lehman 20 Year Treasury Bond Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -69,6 +71,8 @@
     "rank6": 14.289999961853,
     "dpp": 167.980000333333,
     "weeklypp": 167.346666666667,
+    "fullname": "iShares Russell 2000",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -105,6 +109,8 @@
     "rank6": 7.1399998664856,
     "dpp": 176.029998333333,
     "weeklypp": 176.383333333333,
+    "fullname": "SPDR NASDAQ 100",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -141,6 +147,8 @@
     "rank6": 85.7099990844727,
     "dpp": 121.179999666667,
     "weeklypp": 122.01,
+    "fullname": "SPDR Gold Trust",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -177,6 +185,8 @@
     "rank6": 78.5699996948242,
     "dpp": 46.3266664666667,
     "weeklypp": 46.9996666666665,
+    "fullname": "iShares S&P Europe 350 Index Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -213,6 +223,8 @@
     "rank6": 71.4300003051758,
     "dpp": 59.8200009333333,
     "weeklypp": 60.5195,
+    "fullname": "iShares MSCI Japan Index Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -249,6 +261,8 @@
     "rank6": 21.4300003051758,
     "dpp": 15.5166667,
     "weeklypp": 15.7899999999999,
+    "fullname": "SPDR Silver Trust",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -285,6 +299,8 @@
     "rank6": 92.8600006103516,
     "dpp": 46.1333325333333,
     "weeklypp": 47.0633333333334,
+    "fullname": "iShares FTSE/Xinhua China 25 Index Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -321,6 +337,8 @@
     "rank6": 57.1399993896484,
     "dpp": 17.3866665666667,
     "weeklypp": 17.4866666666667,
+    "fullname": "PowerShares DB Commodity Index Trac",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -357,6 +375,8 @@
     "rank6": 0,
     "dpp": 83.2500025,
     "weeklypp": 83.2166666666668,
+    "fullname": "iShares Lehman Short Treasury Bond Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -393,6 +413,8 @@
     "rank6": 100,
     "dpp": 57.8533324666667,
     "weeklypp": 60.2933333333333,
+    "fullname": "iShares MSCI South Africa Index Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -429,6 +451,8 @@
     "rank6": 42.8600006103516,
     "dpp": 276.070007,
     "weeklypp": 276.903137,
+    "fullname": "SPDR S&P 500",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -465,6 +489,8 @@
     "rank6": 64.2900009155273,
     "dpp": 32.5399996,
     "weeklypp": 33.3461333333334,
+    "fullname": "iShares MSCI Brazil Index Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -501,6 +527,8 @@
     "rank6": 50,
     "dpp": 29.5633334666667,
     "weeklypp": 30.0666666666667,
+    "fullname": "iShares Latin America 40 Index Fund",
+    "date": "06/19/2018",
     "": ""
   },
   {
@@ -537,6 +565,8 @@
     "rank6": 28.5699996948242,
     "dpp": 13.2466656666667,
     "weeklypp": 13.2166663333333,
+    "fullname": "United States Oil Fund",
+    "date": "06/19/2018",
     "": ""
   }
 ]
