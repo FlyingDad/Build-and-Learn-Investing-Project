@@ -7,7 +7,7 @@ $("form#selector").submit(function (event) {
 	userInput = $("select#user-input").val();  // deleted the let since it is now a global var
 	// console.log(userInput);
 	$("ul#bias").empty(); // to clear the ul
-	$(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").hide();
+	// $(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").hide();
 	//check for valid input
 	if (userInput !== "none") {
 		$(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").slideDown();
@@ -23,7 +23,7 @@ $("form#selector").submit(function (event) {
 				break;
 		}
 	} else {
-		$(".panel-body").hide();
+		// $(".panel-body").hide();
 	}
 });
 
@@ -212,6 +212,10 @@ function getUserSlected(selected) {
 										.then(function () {
 											chart();
 											displayStats();
+											calculateSMABias();
+											getTodayRank();
+											getWeeklyRank();
+											getCryptoTodayRank()
 										});
 								})
 						});
@@ -221,7 +225,7 @@ function getUserSlected(selected) {
 }
 
 function displayStats() {
-	console.log(bullion);
+	// console.log(bullion);
 	//Alphavantage is real time so index of 0 will return current days info
 	//changed first index to 1 as to always use yesterdays data. 
 	//["Date","Open","High","Low","close","volume"]  
@@ -234,24 +238,19 @@ function displayStats() {
 	document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
 	document.getElementById('c-volume').innerHTML = `Volume: ${bullion.priceData[0][5]}`;
 
-	document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[1][0]}`;
-	document.getElementById('open-price').innerHTML = `Open: $${(bullion.priceData[1][1]).toFixed(2)}`;
-	document.getElementById('high-price').innerHTML = `High: $${(bullion.priceData[1][2]).toFixed(2)}`;
-	document.getElementById('low-price').innerHTML = `Low: $${(bullion.priceData[1][3]).toFixed(2)}`;
-	document.getElementById('close-price').innerHTML = `Close: $${(bullion.priceData[1][4]).toFixed(2)}`;
-	document.getElementById('volume').innerHTML = `Volume: ${bullion.priceData[1][5]}`;
+	// document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[1][0]}`;
+	// document.getElementById('open-price').innerHTML = `Open: $${(bullion.priceData[1][1]).toFixed(2)}`;
+	// document.getElementById('high-price').innerHTML = `High: $${(bullion.priceData[1][2]).toFixed(2)}`;
+	// document.getElementById('low-price').innerHTML = `Low: $${(bullion.priceData[1][3]).toFixed(2)}`;
+	// document.getElementById('close-price').innerHTML = `Close: $${(bullion.priceData[1][4]).toFixed(2)}`;
+	// document.getElementById('volume').innerHTML = `Volume: ${bullion.priceData[1][5]}`;
 
-	document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
-	document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
-	document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
-	$("#sma-50day").append(`<br>20 Day VMA: ${bullion.calcVma(20).toFixed(0)}`) //add div?
+	// document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
+	// document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
+	// document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
+	// $("#sma-50day").append(`<br>20 Day VMA: ${bullion.calcVma(20).toFixed(0)}`) //add div?
 
 	//document.getElementById('description').innerHTML = `${bullion.description}`;
-	calculateSMABias();
-	getTodayRank();
-	getWeeklyRank();
-	getCryptoTodayRank()
-
 }
 
 function calculateSMABias() {
@@ -259,18 +258,6 @@ function calculateSMABias() {
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
 	let sma50 = bullion.sma50Day;
-
-	// let cOpen = bullion.priceData[0][1];
-	// let cHigh = bullion.priceData[0][2];
-	// let cLow = bullion.priceData[0][3];	
-	// let cClose = bullion.priceData[0][4];
-	// let cVolume = bullion.priceData[0][5];
-	// let pOpen = bullion.priceData[1][1];
-	// let pHigh = bullion.priceData[1][2];
-	// let pLow = bullion.priceData[1][3];	
-	// let pClose = bullion.priceData[1][4];
-	// let pVolume = bullion.priceData[1][5];
-
 
 	let last = bullion.priceData[1][4]; //last price, settle or close value using
 	let priorLast = bullion.priceData[2][4]; // prior last or....
@@ -284,7 +271,7 @@ function calculateSMABias() {
 		$(".bias-smile").html(`<i class="fas fa-smile fa-7x text-success"></i> `); //up day
 		$(".bias-smile").append(`<i class="fas fa-meh fa-7x text-default"></i> `);
 		$("#c-change").removeClass("fa-sort-amount-down");
-		$("#c-change").prepend(` <i class="fas fa-sort-amount-up" style="color:green"></i>`);
+		$("#c-change").append(` <i class="fas fa-sort-amount-up" style="color:green"></i>`);
 		// $("ul#bias").append(`<li><h2>Todays Projected High: ${fibPredictedHigh.toFixed(2)}</h2></li>`);
 
 
@@ -295,7 +282,7 @@ function calculateSMABias() {
 		$(".bias-smile").html(`<i class="fas fa-frown fa-7x text-danger"></i>`);
 		$(".bias-smile").append(`<i class="fas fa-meh fa-7x text-default"></i>`);
 		$("#c-change").removeClass("fa-sort-amount-up");
-		$("#c-change").prepend(` <i class="fas fa-sort-amount-down" style="color:red"></i>`);
+		$("#c-change").append(` <i class="fas fa-sort-amount-down" style="color:red"></i>`);
 		// $("ul#bias").append(`<li><h2>Todays Projected Low: ${fibPredictedLow.toFixed(2)}</h2></li>`);
 
 	} else {
@@ -315,12 +302,6 @@ function calculateSMABias() {
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
 	let r2 = ((fPP - s1) + r1);
 	let s2 = (fPP - (r1 - s1));
-	// console.log(typeof (fPP));
-	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
-	// $("ul#bias").append(`<li>Mom 1: ${mom1}</li>`)
-	// $("ul#bias").append(`<li>Mom 2: ${mom2}</li>`)
-	// $("ul#bias").append(`<li>Mom 3: ${mom3}</li>`)
-	// $("ul#bias").append(`<li>VMA 20: ${bullion.calcVma(20).toFixed(0)}</li>`)
 
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = `BULLISH ON ${bullion.lastTimeStamp}`;
@@ -368,28 +349,17 @@ function calculateSMABias() {
 		// idNr7 = 1;
 		$("ul#bias").append(`<li>Buy</li>`)
 	}
-	// //floor traders pivot points for the current session
-	// let fPP = ((bullion.priceData[1][2] + bullion.priceData[1][3] + bullion.priceData[1][4]) / 3);
-	// let r1 = ((fPP * 2) - bullion.priceData[1][3]);
-	// let s1 = ((fPP * 2) - bullion.priceData[1][2]);
-	// let r2 = ((fPP - s1) + r1);
-	// console.log(typeof (fPP));
-	// let s2 = (fPP - (r1 - s1));
 
 
 	//predictions
 	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.618) + (bullion.priceData[1][3])));
 	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.618));
-	let atrPredictedHigh = 0;
-	let atrPredictedLow = 0;
-	let totHigh;
-	let totLow;
+	// let atrPredictedHigh = 0;
+	// let atrPredictedLow = 0;
+	// let totHigh;
+	// let totLow;
 
 	$(".bias-smile").append(`<ul><li><h3 class="text-primary pull-left">Projected High >= ${fibPredictedHigh.toFixed(2)}</h3></li><li><h3 class="text-primary pull-left">Projected Low <= ${fibPredictedLow.toFixed(2)}</h3></li></ul>`);
-
-	// $("ul#bias").append(`<li><h2 class="text-primary">Projected High >= ${fibPredictedHigh.toFixed(2)}</h2></li><li><h2 class="text-primary">Projected Low <= ${fibPredictedLow.toFixed(2)}</h2></li>`);
-
-	// console.log();
 }
 
 function getTodayRank() {
@@ -521,22 +491,22 @@ function getCryptoTodayRank() {
 					</div>
 					</div>
 					`;
-					// console.log(today);
-				});
-				document.getElementById('cOutput').innerHTML = output;
-				$('button#showmore').on('click', function () {
-					// $("div.showmore").next().toggle();
-					$('.showmore').toggle()
-				});
-			})
-			return
-		}
-		
-		function chart() {
-			
-			// reset the chart
-			// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
-			document.getElementById("myChart").remove();
+				// console.log(today);
+			});
+			document.getElementById('cOutput').innerHTML = output;
+			$('button#showmore').on('click', function () {
+				// $("div.showmore").next().toggle();
+				$('.showmore').toggle()
+			});
+		})
+	return
+}
+
+function chart() {
+
+	// reset the chart
+	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
+	document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
 	// get smadata 
 	let sma20Data = bullion.sma20Data.slice(0, 100).reverse();
