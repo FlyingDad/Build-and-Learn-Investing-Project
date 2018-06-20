@@ -56,7 +56,8 @@ function parseText(responseAsText) {
       rsi2: [],
       rsi21: [],
       Sharpe21: [],
-      roc21: []
+      roc21: [],
+      
     };
     rowsArray.forEach(row => {
       let dates = [];
@@ -94,7 +95,7 @@ function parseText(responseAsText) {
   })
   //console.table(etfData[0]);
   // convert to JSON
-  let etfJSON = JSON.stringify(etfData);
+  let etfJSON = JSON(etfData);
   //write new file
   var blob = new Blob([etfJSON], {type: "text/plain;charset=utf-8"});anchor = document.createElement('a');
 
@@ -103,7 +104,7 @@ function parseText(responseAsText) {
   anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
 
   //uncomment to get file (download through browser)
-  //anchor.click();
+  anchor.click();
 }//end of parseText()
 
 function fetchText(pathToResource) {

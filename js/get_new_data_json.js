@@ -1,26 +1,42 @@
 // ETF Object
-  // name
-    // open
-    // high
-    // low
-    // close
-    // volume
-    // sma(5)
-    // sma(20)
-    // MTbeta2(1.272,1,"HL/2")
-    // rsi(2)
-    // rsi(21)
-    // Sharpe(close,21)
-    // roc(21)
-
+// name: name,
+//       dates: [],
+//       open: [],
+//       high: [],
+//       low: [],
+//       close: [],
+//       volume: [],
+//       sma5: [],
+//       sma20: [],
+//       MTbeta2: [],
+//       rsi2: [],
+//       rsi21: [],
+//       Sharpe21: [],
+//       roc21: [],
+let etfData;
 
 function parseJSON(etfJSON){
+  // set global var
+  etfData = etfJSON;
   // Key etf names (keys)
+  
   let etfNames = Object.keys(etfJSON);
-  console.log(etfNames);
-  // example of how to get array of open prices
-  let openArray = etfJSON[etfNames[0]].open;
-  console.log(openArray);
+
+  etfNames.forEach(name => {
+    etfJSON[name].open = etfJSON[name].open.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].high = etfJSON[name].high.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].low = etfJSON[name].low.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].close = etfJSON[name].close.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].volume = etfJSON[name].volume.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].sma5 = etfJSON[name].sma5.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].sma20 = etfJSON[name].sma20.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].MTbeta2 = etfJSON[name].MTbeta2.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].rsi2 = etfJSON[name].rsi2.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].rsi21 = etfJSON[name].rsi21.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].Sharpe21 = etfJSON[name].Sharpe21.map(e=>parseFloat(e)).reverse();
+    etfJSON[name].roc21 = etfJSON[name].roc21.map(e=>parseFloat(e)).reverse();
+  });
+  
 }
 
 
