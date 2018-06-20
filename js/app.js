@@ -405,6 +405,11 @@ function getTodayRank() {
 					<li class="list-group-item">Date:   								${today.date}</li>
 					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
+					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-primary">Show More Info</li>
+					</ul>
+					<div class="showmore">
+					<ul class=" list-group mb-3">
+					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
 					<li class="list-group-item">Open:     				${today.open.toFixed(2)}</li>
@@ -425,7 +430,7 @@ function getTodayRank() {
 					<li class="list-group-item">%B Buy?:   ${today.closelessthanbbandlow}</li>
 					<li class="list-group-item">Spike in Volume:   ${today.vspike}</li>
 				</ul>
-				<p>Timestamp: ${today.date}</p>
+				</div>
 				</div>
 			`;
 				// console.log(today);
@@ -440,10 +445,15 @@ function getWeeklyRank() {
 		.then((data) => {
 			let output = '<h2 class="mb-4">ETF-15 Weekly Ranking</h2>';
 			data.forEach(function (week) {
-				output += `<div class="col-md-4 etf15 text-justify"
+				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   				<h2>${week.Symbol}</h2></li>
 					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
+					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-primary">Show More Info</li>
+					</ul>
+					<div class="showmore">
+					<ul class=" list-group mb-3">
+					<li class="list-group-item">Name:   								${week.fullname}</li>
 					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
 					<li class="list-group-item">Open:     				${week.open.toFixed(2)}</li>
@@ -463,8 +473,8 @@ function getWeeklyRank() {
 					<li class="list-group-item">RSI Buy?   ${week.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${week.closelessthanbbandlow}</li>
 					<li class="list-group-item">Volume:   ${week.volume}</li>
-
 				</ul>
+				</div>
 				</div>
 			`;
 				// console.log(week);
@@ -481,13 +491,18 @@ function getCryptoTodayRank() {
 		.then((data) => {
 			let output = '<h2 class="mb-4">Top 3 Cryptos</h2>';
 			data.forEach(function (cryptoToday) {
-				output += `<div class="col-md-4 etf15 text-justify"
+				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   					<h3>${cryptoToday.Symbol}/USD</h3></li>
 					<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
 					<li class="list-group-item">Date:   								${cryptoToday.date}</li>
 					<li class="list-group-item">Change:   					${cryptoToday.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${cryptoToday.score}</h4></li>
+					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-primary">Show More Info</li>
+					</ul>
+					<div class="showmore">
+					<ul class=" list-group mb-3">
+					<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
 					<li class="list-group-item">Score Change:    	${cryptoToday.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${cryptoToday.yestscore}</li>
 					<li class="list-group-item">Open:     				${cryptoToday.open.toFixed(2)}</li>
@@ -502,21 +517,26 @@ function getCryptoTodayRank() {
 					<li class="list-group-item">Sharpe 21:   ${cryptoToday.sharpe21.toFixed(2)}</li>
 					<li class="list-group-item">RSI Buy?   ${cryptoToday.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${cryptoToday.closelessthanbbandlow}</li>
-				</ul>
-				</div>
-			`;
-				// console.log(today);
-			});
-			document.getElementById('cOutput').innerHTML = output;
-		})
-	return
-}
-
-function chart() {
-
-	// reset the chart
-	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
-	document.getElementById("myChart").remove();
+					</ul>
+					</div>
+					</div>
+					`;
+					// console.log(today);
+				});
+				document.getElementById('cOutput').innerHTML = output;
+				$('button#showmore').on('click', function () {
+					// $("div.showmore").next().toggle();
+					$('.showmore').toggle()
+				});
+			})
+			return
+		}
+		
+		function chart() {
+			
+			// reset the chart
+			// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
+			document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
 	// get smadata 
 	let sma20Data = bullion.sma20Data.slice(0, 100).reverse();
