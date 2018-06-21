@@ -211,11 +211,11 @@ function getUserSlected(selected) {
 									getSma(selected, 50)
 										.then(function () {
 											chart();
-											displayStats();
-											calculateSMABias();
+											getCryptoTodayRank();
 											getTodayRank();
 											getWeeklyRank();
-											getCryptoTodayRank()
+											displayStats();
+											calculateSMABias();
 										});
 								})
 						});
