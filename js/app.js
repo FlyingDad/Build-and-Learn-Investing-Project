@@ -232,7 +232,9 @@ function displayStats() {
 	document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
 
 	document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
-	document.getElementById('c-open-price').innerHTML = `Open: $${(bullion.priceData[0][1].toFixed(2))}`;
+	document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.open[0]}`;
+	document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.rsi[0]}`;
+	// document.getElementById('c-open-price').innerHTML = `Open: $${etfJSON[SLV].open[0].toFixed(2)}`;
 	document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
 	document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
 	document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
@@ -509,9 +511,9 @@ function chart() {
 	document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
 	// get smadata 
-	let sma20Data = bullion.sma20Data.slice(0, 100).reverse();
-	let sma50Data = bullion.sma50Data.slice(0, 100).reverse();
-	let sma5Data = bullion.sma5Data.slice(0, 100).reverse();
+	let sma5Data = etfData.SLV.sma5.slice(0,100);
+	let sma20Data = etfData.SLV.sma20.slice(0,100);
+
 
 	var ctx = document.getElementById("myChart");
 	var last50 = [];
