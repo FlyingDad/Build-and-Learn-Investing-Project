@@ -117,18 +117,6 @@ p {
     cursor:pointer;
     cursor:hand;
 }
-
-@media only screen and (max-width: 600px) {
-
-#videoMessage, .videoClick {
-    top: 10px;
-    font-size: 8px;
-}
-.col-sm-4 > p{
-    min-height: 50px;
-}
-}
- 
  
 .form-group * {
     padding: 5px;
@@ -230,3 +218,15 @@ i#sauce1 {
 .list-group-item {
     background-color: white;
 }
+
+
+@media only screen and (max-width: 600px) {
+
+    #videoMessage, .videoClick {
+        top: 10px;
+        font-size: 8px;
+    }
+    .col-sm-4 > p{
+        min-height: 50px;
+    }
+    }

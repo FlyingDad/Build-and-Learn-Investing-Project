@@ -204,23 +204,13 @@ function getUserSlected(selected) {
 				intradayChart();
 			})
 				.then(function () {
-					getSma(selected, 5)
-						.then(function () {
-							getSma(selected, 20)
-								.then(function () {
-									getSma(selected, 50)
-										.then(function () {
-											chart();
-											getCryptoTodayRank();
-											getTodayRank();
-											getWeeklyRank();
-											displayStats();
-											calculateSMABias();
-										});
-								})
-						});
-				})
-
+					chart();
+					getCryptoTodayRank();
+					getTodayRank();
+					getWeeklyRank();
+					displayStats();
+					calculateSMABias();
+				});
 		})
 }
 
@@ -233,7 +223,7 @@ function displayStats() {
 
 	document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
 	document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.open[0]}`;
-	document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.rsi[0]}`;
+	// document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.rsi2[0]}`;
 	// document.getElementById('c-open-price').innerHTML = `Open: $${etfJSON[SLV].open[0].toFixed(2)}`;
 	document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
 	document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
@@ -511,20 +501,14 @@ function chart() {
 	document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
 	// get smadata 
-	let sma5Data = etfData.SLV.sma5.slice(0,100);
-	let sma20Data = etfData.SLV.sma20.slice(0,100);
+	let sma5Data = etfData.GLD.sma5.slice(0, 50).reverse();
+	let sma20Data = etfData.GLD.sma20.slice(0, 50).reverse();
 
 
 	var ctx = document.getElementById("myChart");
-	var last50 = [];
-	var last50Dates = [];
-	for (let i = 0; i < 100; i++) {
-		last50.push(bullion.priceData[i][4]);
-		last50Dates.push(bullion.priceData[i][0]);
-	}
-	last50.reverse();
-	last50Dates.reverse();
-	//console.log(last50);
+	var last50 = etfData.GLD.close.slice(0, 50).reverse();
+	var last50Dates = etfData.GLD.dates.slice(0, 50).reverse();;
+	console.log(last50);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -553,19 +537,6 @@ function chart() {
 				],
 				borderColor: [
 					'rgba(2,199, 1,1)',
-				],
-				borderWidth: 1
-			},
-			{
-				label: 'SMA50',
-				pointStyle: 'circle',
-				radius: 0,
-				data: sma50Data,
-				backgroundColor: [
-					'rgba(100,1, 100, 0.0)',
-				],
-				borderColor: [
-					'rgba(100,1, 100,1)',
 				],
 				borderWidth: 1
 			},
@@ -608,7 +579,7 @@ function intradayChart() {
 	// get smadata 
 	// console.log('intraday')
 
-	let intradayData = bullion.sma20Data.slice(0, 100).reverse();
+	// let intradayData = bullion.sma20Data.slice(0, 100).reverse();
 
 	var ctx = document.getElementById("intradayChart");
 	var intradayPrices = [];
@@ -620,12 +591,12 @@ function intradayChart() {
 		intradayPrices.push(bullion.intraDay15minData[key]['4. close']);
 	}
 	//filter to keep only todays data
-	let date = intradayTimes[0].split(' ')[0];
-	let dateSet = false;
-	let filteredTimes = intradayTimes.filter(time => {
-		return time.includes(date)
-	})
-	let filteredPrices = intradayPrices.slice(0, filteredTimes.length);
+	// let date = intradayTimes[0].split(' ')[0];
+	// let dateSet = false;
+	let filteredTimes = intradayTimes.slice(0, 30);
+	// 	return time.includes(date)
+	// })
+	let filteredPrices = intradayPrices.slice(0, 30);
 	console.log(filteredTimes, filteredPrices);
 
 	// for (let i = 0; bullion.intraDay15minData.length; i++) {
