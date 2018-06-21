@@ -185,17 +185,17 @@ function getIntraday(commodity) {
 function getUserSlected(selected) {
 	getBullion(selected)
 		.then(function () {
+			chart();
+			getCryptoTodayRank();
+			getTodayRank();
+			getWeeklyRank();
+			displayStats();
+			calculateSMABias();
+		})
+		.then(function () {
 			getIntraday(selected).then(function () {
 				intradayChart();
-			})
-				.then(function () {
-					chart();
-					getCryptoTodayRank();
-					getTodayRank();
-					getWeeklyRank();
-					displayStats();
-					calculateSMABias();
-				});
+			});
 		})
 }
 
@@ -272,9 +272,14 @@ function calculateSMABias() {
 	}
 	$("ul#bias").append(`<br><li><h2>${userInput.toUpperCase()} BIAS IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
 
-	let toClone = $('div.GLD').clone();
-	$('ul#bias').append(toClone);
-	
+	$(function () {
+		let toClone = $('div.GLD').clone().removeClass("col-md-3");
+		$('#showGold').html(toClone);
+
+		// $(".showmore-daily").show();
+		// $("button#showmore").remove();
+	})
+
 	let xDayDiff = [];
 	let smallestDiff;
 	let averageDiff;
@@ -328,6 +333,7 @@ function getTodayRank() {
 		.then((data) => {
 			let output = '<h2 class="mb-4">Current ETF-15 Daily Ranking</h2>';
 			data.forEach(function (today) {
+				// <li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
 				output += `<div class="col-md-3 etf15 text-justify ${today.Symbol}">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
@@ -335,7 +341,6 @@ function getTodayRank() {
 					<li class="list-group-item">Date:   								${today.date}</li>
 					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
-					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
 					</ul>
 					<div class="showmore-daily">
 					<ul class=" list-group mb-3">
@@ -427,10 +432,6 @@ function getCryptoTodayRank() {
 				<li class="list-group-item">Date:   								${cryptoToday.date}</li>
 				<li class="list-group-item">Change:   					${cryptoToday.change.toFixed(2)}</li>
 				<li class="list-group-item">Score:   					<h4>${cryptoToday.score}</h4></li>
-				<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-info">More Details</li>
-					</ul>
-					<div class="showmore-crypto">
-					<ul class=" list-group mb-3">
 					<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
 					<li class="list-group-item">Score Change:    	${cryptoToday.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${cryptoToday.yestscore}</li>
@@ -447,7 +448,6 @@ function getCryptoTodayRank() {
 					<li class="list-group-item">RSI Buy?   ${cryptoToday.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${cryptoToday.closelessthanbbandlow}</li>
 					</ul>
-					</div>
 					</div>
 					`;
 				// console.log(today);
