@@ -163,12 +163,12 @@
               <div class="text-justify col-md-4">
                 <ul id="bias" class="text-justify">bias
                 </ul>
-                <!-- <div class="row bias-smile text-justify">
-                  <i class="fas fa-meh fa-7x pull-right text-default"></i>
-                  <i class="fas fa-smile fa-7x pull-right text-success"></i>
-                  <i class="fas fa-frown fa-7x pull-right text-danger"></i>
-                </div> -->
-                <div id="" class="col-md-12 well text-justify">
+                <div id="" class="col-md-12 well">
+                    <div class="row bias-smile text-justify pull-right">
+                        <i class="fas fa-meh fa-7x pull-right text-default"></i>
+                        <i class="fas fa-smile fa-7x pull-right text-success"></i>
+                        <i class="fas fa-frown fa-7x pull-right text-danger"></i>
+                      </div>
                   <p>Latest Live Prices as of
                     <span id="c-time-stamp"></span>
                   </p>
@@ -201,9 +201,6 @@
 
               <div id="intraday-chart-wrapper" class="text-justify col-md-8">
                 <div class="loader">
-                  <p>Real Time Intraday Chart is Loading Now!
-                  </p>
-                  <i class="fas fa-chart-area fa-10x"></i>
                   <canvas id="intradayChart"></canvas>
                   <!-- <button id="idChartRefresh" type="" class="btn btn-success"> Refresh Chart Automatically.</button> -->
                 </div>
