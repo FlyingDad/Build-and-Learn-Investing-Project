@@ -95,7 +95,7 @@ function parseText(responseAsText) {
   })
   //console.table(etfData[0]);
   // convert to JSON
-  let etfJSON = JSON(etfData);
+  let etfJSON = JSON.stringify(etfData);
   //write new file
   var blob = new Blob([etfJSON], {type: "text/plain;charset=utf-8"});anchor = document.createElement('a');
 

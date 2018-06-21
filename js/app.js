@@ -7,7 +7,7 @@ $("form#selector").submit(function (event) {
 	userInput = $("select#user-input").val();  // deleted the let since it is now a global var
 	// console.log(userInput);
 	$("ul#bias").empty(); // to clear the ul
-	$(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").hide();
+	// $(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").hide();
 	//check for valid input
 	if (userInput !== "none") {
 		$(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").slideDown();
@@ -23,16 +23,16 @@ $("form#selector").submit(function (event) {
 				break;
 		}
 	} else {
-		$(".panel-body").hide();
+		// $(".panel-body").hide();
 	}
 });
 
 // Mikes Code Below
 const alphaVantageGld = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=gld&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
 const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=slv&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
-let alphavantageSMA = function (symbol, period) {
-	return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
-};
+// let alphavantageSMA = function (symbol, period) {
+// 	return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
+// };
 
 let alohaAdvantageIntraday = function (symbol) {
 	return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
@@ -45,46 +45,31 @@ class Bullion {
 		this.lastTimeStamp = lastTimeStamp;   //meta data ['3. Last Refreshed']
 		this.description = description; //get decription
 		this.priceData = priceData;	 // array of 90 days of bullion prices
-		this.sma5Data = [];
-		this.sma20Data = [];
-
-		this.sma50Data = [];
 		this.intraDay15minData;
 
 	}
-
-	get sma5Day() {
-		return this.calcSma(5);   // 5 days
-	}
-
-	get sma20Day() {
-		return this.calcSma(20); // 20 days
-	}
-
-	get sma50Day() {
-		return this.calcSma(50); // 20 days
-	}
-
-	calcSma(days) {
-		// calculate sma's here
-		//get last 'days' closing
-		let sum = 0;
-		for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 but values off as to always use yesterdays data
-			sum += this.priceData[i][4]; // 4th element in each day is closing price
-		}
-		return sum / days;
-	}
-
-	calcVma(days) {
-		// calculate sma's here
-		//get last 'days' closing
-		let sum = 0;
-		for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 as to always use yesterdays data
-			sum += this.priceData[i][5]; // 5th element in each day is volume
-		}
-		return sum / days;
-	}
 }
+
+// function calcSma(days) {
+// 	// calculate sma's here
+// 	//get last 'days' closing
+// 	let sum = 0;
+// 	for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 but values off as to always use yesterdays data
+// 		sum += this.priceData[i][4]; // 4th element in each day is closing price
+// 	}
+// 	return sum / days;
+// }
+
+// function calcVma(days) {
+// 	// calculate sma's here
+// 	//get last 'days' closing
+// 	let sum = 0;
+// 	for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 as to always use yesterdays data
+// 		sum += this.priceData[i][5]; // 5th element in each day is volume
+// 	}
+// 	return sum / days;
+// }
+
 
 function status(response) {
 	if (response.status >= 200 && response.status < 300) {
@@ -157,30 +142,30 @@ function getBullion(url) {
 		});
 }
 
-function getSma(commodity, period) {
-	let url = alphavantageSMA(commodity, period);
-	return getData(url)
-		.then(data => {
-			// get object that has array of daily objects
-			let dailyDataObj = data['Technical Analysis: SMA'];
+// function getSma(commodity, period) {
+// 	let url = alphavantageSMA(commodity, period);
+// 	return getData(url)
+// 		.then(data => {
+// 			// get object that has array of daily objects
+// 			let dailyDataObj = data['Technical Analysis: SMA'];
 
-			for (let i in dailyDataObj) {
-				switch (period) {
-					case 5:
-						bullion.sma5Data.push(dailyDataObj[i]['SMA']);
-						break;
-					case 20:
-						bullion.sma20Data.push(dailyDataObj[i]['SMA']);
-						break;
-					case 50:
-						bullion.sma50Data.push(dailyDataObj[i]['SMA']);
-					default:
-						break;
-				}
+// 			for (let i in dailyDataObj) {
+// 				switch (period) {
+// 					case 5:
+// 						bullion.sma5Data.push(dailyDataObj[i]['SMA']);
+// 						break;
+// 					case 20:
+// 						bullion.sma20Data.push(dailyDataObj[i]['SMA']);
+// 						break;
+// 					case 50:
+// 						bullion.sma50Data.push(dailyDataObj[i]['SMA']);
+// 					default:
+// 						break;
+// 				}
 
-			}
-		});
-}
+// 			}
+// 		});
+// }
 
 function getIntraday(commodity) {
 	let url = alohaAdvantageIntraday(commodity);
@@ -200,58 +185,29 @@ function getIntraday(commodity) {
 function getUserSlected(selected) {
 	getBullion(selected)
 		.then(function () {
+			chart();
+			getCryptoTodayRank();
+			getTodayRank();
+			getWeeklyRank();
+			displayStats();
+			calculateSMABias();
+		})
+		.then(function () {
 			getIntraday(selected).then(function () {
 				intradayChart();
-			})
-				.then(function () {
-					getSma(selected, 5)
-						.then(function () {
-							getSma(selected, 20)
-								.then(function () {
-									getSma(selected, 50)
-										.then(function () {
-											chart();
-											displayStats();
-										});
-								})
-						});
-				})
-
+			});
 		})
 }
 
 function displayStats() {
-	console.log(bullion);
-	//Alphavantage is real time so index of 0 will return current days info
-	//changed first index to 1 as to always use yesterdays data. 
-	//["Date","Open","High","Low","close","volume"]  
+	// console.log(bullion);
 	document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
-
 	document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
 	document.getElementById('c-open-price').innerHTML = `Open: $${(bullion.priceData[0][1].toFixed(2))}`;
 	document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
 	document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
 	document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
 	document.getElementById('c-volume').innerHTML = `Volume: ${bullion.priceData[0][5]}`;
-
-	document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[1][0]}`;
-	document.getElementById('open-price').innerHTML = `Open: $${(bullion.priceData[1][1]).toFixed(2)}`;
-	document.getElementById('high-price').innerHTML = `High: $${(bullion.priceData[1][2]).toFixed(2)}`;
-	document.getElementById('low-price').innerHTML = `Low: $${(bullion.priceData[1][3]).toFixed(2)}`;
-	document.getElementById('close-price').innerHTML = `Close: $${(bullion.priceData[1][4]).toFixed(2)}`;
-	document.getElementById('volume').innerHTML = `Volume: ${bullion.priceData[1][5]}`;
-
-	document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
-	document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
-	document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
-	$("#sma-50day").append(`<br>20 Day VMA: ${bullion.calcVma(20).toFixed(0)}`) //add div?
-
-	//document.getElementById('description').innerHTML = `${bullion.description}`;
-	calculateSMABias();
-	getTodayRank();
-	getWeeklyRank();
-	getCryptoTodayRank()
-
 }
 
 function calculateSMABias() {
@@ -259,18 +215,6 @@ function calculateSMABias() {
 	let sma5 = bullion.sma5Day;
 	let sma20 = bullion.sma20Day;
 	let sma50 = bullion.sma50Day;
-
-	// let cOpen = bullion.priceData[0][1];
-	// let cHigh = bullion.priceData[0][2];
-	// let cLow = bullion.priceData[0][3];	
-	// let cClose = bullion.priceData[0][4];
-	// let cVolume = bullion.priceData[0][5];
-	// let pOpen = bullion.priceData[1][1];
-	// let pHigh = bullion.priceData[1][2];
-	// let pLow = bullion.priceData[1][3];	
-	// let pClose = bullion.priceData[1][4];
-	// let pVolume = bullion.priceData[1][5];
-
 
 	let last = bullion.priceData[1][4]; //last price, settle or close value using
 	let priorLast = bullion.priceData[2][4]; // prior last or....
@@ -281,10 +225,10 @@ function calculateSMABias() {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-danger");
 		$(".panel-bias").addClass("panel-success"); //up day
-		$(".bias-smile").html(`<i class="fas fa-smile fa-7x text-success"></i> `); //up day
-		$(".bias-smile").append(`<i class="fas fa-meh fa-7x text-default"></i> `);
+		$(".bias-smile").html(`<i class="fas fa-smile fa-3x text-success"></i> `); //up day
+		$(".bias-smile").append(`<i class="fas fa-meh fa-3x text-default"></i> `);
 		$("#c-change").removeClass("fa-sort-amount-down");
-		$("#c-change").prepend(` <i class="fas fa-sort-amount-up" style="color:green"></i>`);
+		$("#c-change").append(` <i class="fas fa-sort-amount-up" style="color:green"></i>`);
 		// $("ul#bias").append(`<li><h2>Todays Projected High: ${fibPredictedHigh.toFixed(2)}</h2></li>`);
 
 
@@ -292,17 +236,17 @@ function calculateSMABias() {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").addClass("panel-danger"); //down day
-		$(".bias-smile").html(`<i class="fas fa-frown fa-7x text-danger"></i>`);
-		$(".bias-smile").append(`<i class="fas fa-meh fa-7x text-default"></i>`);
+		$(".bias-smile").html(`<i class="fas fa-frown fa-3x text-danger"></i>`);
+		$(".bias-smile").append(`<i class="fas fa-meh fa-3x text-default"></i>`);
 		$("#c-change").removeClass("fa-sort-amount-up");
-		$("#c-change").prepend(` <i class="fas fa-sort-amount-down" style="color:red"></i>`);
+		$("#c-change").append(` <i class="fas fa-sort-amount-down" style="color:red"></i>`);
 		// $("ul#bias").append(`<li><h2>Todays Projected Low: ${fibPredictedLow.toFixed(2)}</h2></li>`);
 
 	} else {
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").removeClass("panel-danger");
 		$(".panel-bias").addClass("panel-default"); //unchanged
-		$(".bias-smile").html(`<br><i class="fas fa-meh fa-7x text-default text-center"></i>`);
+		$(".bias-smile").html(`<br><i class="fas fa-meh fa-3x text-default text-center"></i>`);
 	}
 
 	let bias = "";
@@ -315,12 +259,6 @@ function calculateSMABias() {
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
 	let r2 = ((fPP - s1) + r1);
 	let s2 = (fPP - (r1 - s1));
-	// console.log(typeof (fPP));
-	console.log(`PP ${fPP} r1 ${r1} s1 ${s1} r2 ${r2} s2 ${s2}`)
-	// $("ul#bias").append(`<li>Mom 1: ${mom1}</li>`)
-	// $("ul#bias").append(`<li>Mom 2: ${mom2}</li>`)
-	// $("ul#bias").append(`<li>Mom 3: ${mom3}</li>`)
-	// $("ul#bias").append(`<li>VMA 20: ${bullion.calcVma(20).toFixed(0)}</li>`)
 
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = `BULLISH ON ${bullion.lastTimeStamp}`;
@@ -333,6 +271,14 @@ function calculateSMABias() {
 		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	}
 	$("ul#bias").append(`<br><li><h2>${userInput.toUpperCase()} BIAS IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
+
+	$(function () {
+		let toClone = $('div.GLD').clone().removeClass("col-md-3");
+		$('#showGold').html(toClone);
+
+		// $(".showmore-daily").show();
+		// $("button#showmore").remove();
+	})
 
 	let xDayDiff = [];
 	let smallestDiff;
@@ -368,28 +314,17 @@ function calculateSMABias() {
 		// idNr7 = 1;
 		$("ul#bias").append(`<li>Buy</li>`)
 	}
-	// //floor traders pivot points for the current session
-	// let fPP = ((bullion.priceData[1][2] + bullion.priceData[1][3] + bullion.priceData[1][4]) / 3);
-	// let r1 = ((fPP * 2) - bullion.priceData[1][3]);
-	// let s1 = ((fPP * 2) - bullion.priceData[1][2]);
-	// let r2 = ((fPP - s1) + r1);
-	// console.log(typeof (fPP));
-	// let s2 = (fPP - (r1 - s1));
 
 
 	//predictions
 	let fibPredictedHigh = ((((bullion.priceData[1][2] - bullion.priceData[1][3]) * 1.618) + (bullion.priceData[1][3])));
 	let fibPredictedLow = ((bullion.priceData[1][2] - ((bullion.priceData[1][2] - bullion.priceData[1][3])) * 1.618));
-	let atrPredictedHigh = 0;
-	let atrPredictedLow = 0;
-	let totHigh;
-	let totLow;
+	// let atrPredictedHigh = 0;
+	// let atrPredictedLow = 0;
+	// let totHigh;
+	// let totLow;
 
 	$(".bias-smile").append(`<ul><li><h3 class="text-primary pull-left">Projected High >= ${fibPredictedHigh.toFixed(2)}</h3></li><li><h3 class="text-primary pull-left">Projected Low <= ${fibPredictedLow.toFixed(2)}</h3></li></ul>`);
-
-	// $("ul#bias").append(`<li><h2 class="text-primary">Projected High >= ${fibPredictedHigh.toFixed(2)}</h2></li><li><h2 class="text-primary">Projected Low <= ${fibPredictedLow.toFixed(2)}</h2></li>`);
-
-	// console.log();
 }
 
 function getTodayRank() {
@@ -398,13 +333,18 @@ function getTodayRank() {
 		.then((data) => {
 			let output = '<h2 class="mb-4">Current ETF-15 Daily Ranking</h2>';
 			data.forEach(function (today) {
-				output += `<div class="col-md-4 etf15 text-justify">
+				// <li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
+				output += `<div class="col-md-3 etf15 text-justify ${today.Symbol}">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
 					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Date:   								${today.date}</li>
 					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
+					</ul>
+					<div class="showmore-daily">
+					<ul class=" list-group mb-3">
+					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
 					<li class="list-group-item">Open:     				${today.open.toFixed(2)}</li>
@@ -425,7 +365,7 @@ function getTodayRank() {
 					<li class="list-group-item">%B Buy?:   ${today.closelessthanbbandlow}</li>
 					<li class="list-group-item">Spike in Volume:   ${today.vspike}</li>
 				</ul>
-				<p>Timestamp: ${today.date}</p>
+				</div>
 				</div>
 			`;
 				// console.log(today);
@@ -439,11 +379,16 @@ function getWeeklyRank() {
 		.then((res) => res.json())
 		.then((data) => {
 			let output = '<h2 class="mb-4">ETF-15 Weekly Ranking</h2>';
+			// <li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
 			data.forEach(function (week) {
-				output += `<div class="col-md-4 etf15 text-justify"
+				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   				<h2>${week.Symbol}</h2></li>
 					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
+					</ul>
+					<div class="showmore-weekly">
+					<ul class=" list-group mb-3">
+					<li class="list-group-item">Name:   								${week.fullname}</li>
 					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
 					<li class="list-group-item">Open:     				${week.open.toFixed(2)}</li>
@@ -463,8 +408,8 @@ function getWeeklyRank() {
 					<li class="list-group-item">RSI Buy?   ${week.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${week.closelessthanbbandlow}</li>
 					<li class="list-group-item">Volume:   ${week.volume}</li>
-
 				</ul>
+				</div>
 				</div>
 			`;
 				// console.log(week);
@@ -474,20 +419,20 @@ function getWeeklyRank() {
 	return
 }
 
-//crypto ranker
 function getCryptoTodayRank() {
 	fetch('./data/rankDailyCrypto3.json')
 		.then((res) => res.json())
 		.then((data) => {
 			let output = '<h2 class="mb-4">Top 3 Cryptos</h2>';
 			data.forEach(function (cryptoToday) {
-				output += `<div class="col-md-4 etf15 text-justify"
+				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
-					<li class="list-group-item">Symbol:   					<h3>${cryptoToday.Symbol}/USD</h3></li>
+				<li class="list-group-item">Symbol:   					<h3>${cryptoToday.Symbol}/USD</h3></li>
+				<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
+				<li class="list-group-item">Date:   								${cryptoToday.date}</li>
+				<li class="list-group-item">Change:   					${cryptoToday.change.toFixed(2)}</li>
+				<li class="list-group-item">Score:   					<h4>${cryptoToday.score}</h4></li>
 					<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
-					<li class="list-group-item">Date:   								${cryptoToday.date}</li>
-					<li class="list-group-item">Change:   					${cryptoToday.change.toFixed(2)}</li>
-					<li class="list-group-item">Score:   					<h4>${cryptoToday.score}</h4></li>
 					<li class="list-group-item">Score Change:    	${cryptoToday.scorechange}</li>
 					<li class="list-group-item">Prev. Score:    	${cryptoToday.yestscore}</li>
 					<li class="list-group-item">Open:     				${cryptoToday.open.toFixed(2)}</li>
@@ -502,37 +447,32 @@ function getCryptoTodayRank() {
 					<li class="list-group-item">Sharpe 21:   ${cryptoToday.sharpe21.toFixed(2)}</li>
 					<li class="list-group-item">RSI Buy?   ${cryptoToday.rsi2lessthan20}</li>
 					<li class="list-group-item">%B Buy?:   ${cryptoToday.closelessthanbbandlow}</li>
-				</ul>
-				</div>
-			`;
+					</ul>
+					</div>
+					`;
 				// console.log(today);
+				document.getElementById('cOutput').innerHTML = output;
+				$('button#showmore').on('click', function () {
+					// $("div.showmore").next().toggle();
+					$('.showmore-crypto').toggle();
+				});
 			});
-			document.getElementById('cOutput').innerHTML = output;
 		})
 	return
 }
 
 function chart() {
-
 	// reset the chart
 	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
 	document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
-	// get smadata 
-	let sma20Data = bullion.sma20Data.slice(0, 100).reverse();
-	let sma50Data = bullion.sma50Data.slice(0, 100).reverse();
-	let sma5Data = bullion.sma5Data.slice(0, 100).reverse();
-
+	let sma5Data = etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
+	let sma20Data = etfData.GLD.sma20.slice(0, etfData.GLD.sma20.length).reverse();
+	let MTbeta2Data = etfData.GLD.MTbeta2.slice(0, etfData.GLD.MTbeta2.length).reverse();
 	var ctx = document.getElementById("myChart");
-	var last50 = [];
-	var last50Dates = [];
-	for (let i = 0; i < 100; i++) {
-		last50.push(bullion.priceData[i][4]);
-		last50Dates.push(bullion.priceData[i][0]);
-	}
-	last50.reverse();
-	last50Dates.reverse();
-	//console.log(last50);
+	var last50 = etfData.GLD.close.slice(0, etfData.GLD.close.length).reverse();
+	var last50Dates = etfData.GLD.dates.slice(0, etfData.GLD.dates.length);
+	// console.log(last50, last50Dates);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -541,7 +481,7 @@ function chart() {
 			datasets: [{
 				label: 'Price',
 				pointStyle: 'circle',
-				radius: 1,
+				radius: 3,
 				data: last50,
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.0)',
@@ -565,19 +505,6 @@ function chart() {
 				borderWidth: 1
 			},
 			{
-				label: 'SMA50',
-				pointStyle: 'circle',
-				radius: 0,
-				data: sma50Data,
-				backgroundColor: [
-					'rgba(100,1, 100, 0.0)',
-				],
-				borderColor: [
-					'rgba(100,1, 100,1)',
-				],
-				borderWidth: 1
-			},
-			{
 				label: 'SMA5',
 				pointStyle: 'circle',
 				radius: 0,
@@ -589,6 +516,20 @@ function chart() {
 					'rgba(255 ,0, 0, 1)',
 				],
 				borderWidth: 1
+			},
+			{
+				label: 'ETF MASTER TRAIL STOP',
+				pointStyle: 'circle',
+				radius: 0,
+				data: MTbeta2Data,
+				backgroundColor: [
+					'rgba(255,0, 0, 0.0)',
+				],
+				borderColor: [
+					'black',
+				],
+				borderWidth: .5,
+				steppedLine: true
 			},
 
 			]
@@ -612,36 +553,18 @@ function intradayChart() {
 	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
 	document.getElementById("intradayChart").remove();
 	document.getElementById("intraday-chart-wrapper").innerHTML = '<canvas id="intradayChart" width="400" height="400"></canvas>';
-
-	// get smadata 
-	// console.log('intraday')
-
-	let intradayData = bullion.sma20Data.slice(0, 100).reverse();
-
 	var ctx = document.getElementById("intradayChart");
 	var intradayPrices = [];
-
 	var intradayTimes = [];
 
 	for (key in bullion.intraDay15minData) {
 		intradayTimes.push(key);
 		intradayPrices.push(bullion.intraDay15minData[key]['4. close']);
 	}
-	//filter to keep only todays data
-	let date = intradayTimes[0].split(' ')[0];
-	let dateSet = false;
-	let filteredTimes = intradayTimes.filter(time => {
-		return time.includes(date)
-	})
-	let filteredPrices = intradayPrices.slice(0, filteredTimes.length);
-	console.log(filteredTimes, filteredPrices);
 
-	// for (let i = 0; bullion.intraDay15minData.length; i++) {
-	// 	intrdayPrices.push(bullion.priceData[i][]);
-	// 	last50Dates.push(bullion.priceData[i][0]);
-	// }
-	// last50.reverse();
-	// last50Dates.reverse();
+	let filteredTimes = intradayTimes.slice(0, 30);
+	let filteredPrices = intradayPrices.slice(0, 30);
+	console.log(filteredTimes, filteredPrices);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -662,47 +585,6 @@ function intradayChart() {
 				borderWidth: 1,
 				// steppedLine: true
 			}
-				// },
-				// {
-				// 	label: 'SMA20',
-				// 	pointStyle: 'circle',
-				// 	radius: 0,
-				// 	data: sma20Data,
-				// 	backgroundColor: [
-				// 		'rgba(2,199, 1, 0.0)',
-				// 	],
-				// 	borderColor: [
-				// 		'rgba(2,199, 1,1)',
-				// 	],
-				// 	borderWidth: 1
-				// },
-				// {
-				// 	label: 'SMA50',
-				// 	pointStyle: 'circle',
-				// 	radius: 0,
-				// 	data: sma50Data,
-				// 	backgroundColor: [
-				// 		'rgba(100,1, 100, 0.0)',
-				// 	],
-				// 	borderColor: [
-				// 		'rgba(100,1, 100,1)',
-				// 	],
-				// 	borderWidth: 1
-				// },
-				// {
-				// 	label: 'SMA5',
-				// 	pointStyle: 'circle',
-				// 	radius: 0,
-				// 	data: sma5Data,
-				// 	backgroundColor: [
-				// 		'rgba(255,0, 0, 0.0)',
-				// 	],
-				// 	borderColor: [
-				// 		'rgba(255 ,0, 0, 1)',
-				// 	],
-				// 	borderWidth: 1
-				// },
-
 
 			]
 
