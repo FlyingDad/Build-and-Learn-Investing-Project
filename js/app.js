@@ -1,6 +1,17 @@
 //UI
 let userInput = $("select#user-input").val();  //placed here so I can use it in the panel header as a title 
 let bullion;
+$('.nav a').on('click', function () {
+	$('.navbar-collapse').collapse('hide')
+});
+$('.videoClick a').on('click', function () {
+	$('#email').toggle()
+});
+$('#bgx').mousemove(function (e) {
+	var amountMovedX = (e.pageX * -1 / 800);
+	var amountMovedY = (e.pageY * -15 / 800);
+	$(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+});
 
 $("form#selector").submit(function (event) {
 	event.preventDefault();

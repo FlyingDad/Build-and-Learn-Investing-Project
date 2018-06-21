@@ -135,11 +135,11 @@ ul {
 
 
 .panel-danger {
-    background-color: #d1c1c3;
+    /* background-color: #d1c1c3; */
 }
 
 .panel-success {
-    background-color: #99b9ca;
+    /* background-color: #99b9ca; */
 }
 
 #basic-data, #technical {
@@ -175,8 +175,8 @@ canvas#intradayChart {
     margin-left: 23px;
 }
 canvas#myChart {
-    max-width: 1300px;
-    max-height: 1100px;
+    max-width: 900px;
+    max-height: 600px;
     margin: 0 auto;
 }
 
