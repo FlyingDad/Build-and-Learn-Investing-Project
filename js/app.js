@@ -35,7 +35,8 @@ const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_
 // };
 
 let alohaAdvantageIntraday = function (symbol) {
-	return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
+	// return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
+	return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=GLD&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
 
 }
 
@@ -186,11 +187,11 @@ function getUserSlected(selected) {
 	getBullion(selected)
 		.then(function () {
 			chart();
-			getCryptoTodayRank();
 			getTodayRank();
 			getWeeklyRank();
-			displayStats();
+			getCryptoTodayRank();
 			calculateSMABias();
+			displayStats();
 		})
 		.then(function () {
 			getIntraday(selected).then(function () {
