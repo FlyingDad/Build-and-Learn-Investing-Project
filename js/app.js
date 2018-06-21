@@ -30,9 +30,9 @@ $("form#selector").submit(function (event) {
 // Mikes Code Below
 const alphaVantageGld = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=gld&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
 const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=slv&outputsize=compact&apikey=US1IZUWPMLEXWK4H'
-let alphavantageSMA = function (symbol, period) {
-	return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
-};
+// let alphavantageSMA = function (symbol, period) {
+// 	return `https://www.alphavantage.co/query?function=SMA&symbol=${symbol}&interval=daily&time_period=${period}&series_type=close&apikey=US1IZUWPMLEXWK4H`;
+// };
 
 let alohaAdvantageIntraday = function (symbol) {
 	return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
@@ -53,17 +53,17 @@ class Bullion {
 
 	}
 
-	get sma5Day() {
-		return this.calcSma(5);   // 5 days
-	}
+	// get sma5Day() {
+	// 	return this.calcSma(5);   // 5 days
+	// }
 
-	get sma20Day() {
-		return this.calcSma(20); // 20 days
-	}
+	// get sma20Day() {
+	// 	return this.calcSma(20); // 20 days
+	// }
 
-	get sma50Day() {
-		return this.calcSma(50); // 20 days
-	}
+	// get sma50Day() {
+	// 	return this.calcSma(50); // 20 days
+	// }
 
 	calcSma(days) {
 		// calculate sma's here
@@ -157,30 +157,30 @@ function getBullion(url) {
 		});
 }
 
-function getSma(commodity, period) {
-	let url = alphavantageSMA(commodity, period);
-	return getData(url)
-		.then(data => {
-			// get object that has array of daily objects
-			let dailyDataObj = data['Technical Analysis: SMA'];
+// function getSma(commodity, period) {
+// 	let url = alphavantageSMA(commodity, period);
+// 	return getData(url)
+// 		.then(data => {
+// 			// get object that has array of daily objects
+// 			let dailyDataObj = data['Technical Analysis: SMA'];
 
-			for (let i in dailyDataObj) {
-				switch (period) {
-					case 5:
-						bullion.sma5Data.push(dailyDataObj[i]['SMA']);
-						break;
-					case 20:
-						bullion.sma20Data.push(dailyDataObj[i]['SMA']);
-						break;
-					case 50:
-						bullion.sma50Data.push(dailyDataObj[i]['SMA']);
-					default:
-						break;
-				}
+// 			for (let i in dailyDataObj) {
+// 				switch (period) {
+// 					case 5:
+// 						bullion.sma5Data.push(dailyDataObj[i]['SMA']);
+// 						break;
+// 					case 20:
+// 						bullion.sma20Data.push(dailyDataObj[i]['SMA']);
+// 						break;
+// 					case 50:
+// 						bullion.sma50Data.push(dailyDataObj[i]['SMA']);
+// 					default:
+// 						break;
+// 				}
 
-			}
-		});
-}
+// 			}
+// 		});
+// }
 
 function getIntraday(commodity) {
 	let url = alohaAdvantageIntraday(commodity);
@@ -216,33 +216,13 @@ function getUserSlected(selected) {
 
 function displayStats() {
 	// console.log(bullion);
-	//Alphavantage is real time so index of 0 will return current days info
-	//changed first index to 1 as to always use yesterdays data. 
-	//["Date","Open","High","Low","close","volume"]  
 	document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
-
 	document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
 	document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.open[0]}`;
-	// document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.rsi2[0]}`;
-	// document.getElementById('c-open-price').innerHTML = `Open: $${etfJSON[SLV].open[0].toFixed(2)}`;
 	document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
 	document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
 	document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
 	document.getElementById('c-volume').innerHTML = `Volume: ${bullion.priceData[0][5]}`;
-
-	// document.getElementById('time-stamp').innerHTML = `Date: ${bullion.priceData[1][0]}`;
-	// document.getElementById('open-price').innerHTML = `Open: $${(bullion.priceData[1][1]).toFixed(2)}`;
-	// document.getElementById('high-price').innerHTML = `High: $${(bullion.priceData[1][2]).toFixed(2)}`;
-	// document.getElementById('low-price').innerHTML = `Low: $${(bullion.priceData[1][3]).toFixed(2)}`;
-	// document.getElementById('close-price').innerHTML = `Close: $${(bullion.priceData[1][4]).toFixed(2)}`;
-	// document.getElementById('volume').innerHTML = `Volume: ${bullion.priceData[1][5]}`;
-
-	// document.getElementById('sma-5day').innerHTML = `5 Day SMA: ${bullion.sma5Day.toFixed(2)}`;
-	// document.getElementById('sma-20day').innerHTML = `20 Day SMA: ${bullion.sma20Day.toFixed(2)}`;
-	// document.getElementById('sma-50day').innerHTML = `50 Day SMA: ${bullion.sma50Day.toFixed(2)}`;
-	// $("#sma-50day").append(`<br>20 Day VMA: ${bullion.calcVma(20).toFixed(0)}`) //add div?
-
-	//document.getElementById('description').innerHTML = `${bullion.description}`;
 }
 
 function calculateSMABias() {
@@ -495,20 +475,17 @@ function getCryptoTodayRank() {
 }
 
 function chart() {
-
 	// reset the chart
 	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
 	document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
-	// get smadata 
-	let sma5Data = etfData.GLD.sma5.slice(0, 50).reverse();
-	let sma20Data = etfData.GLD.sma20.slice(0, 50).reverse();
-
-
+	let sma5Data = etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
+	let sma20Data = etfData.GLD.sma20.slice(0, etfData.GLD.sma20.length).reverse();
+	let MTbeta2Data = etfData.GLD.MTbeta2.slice(0, etfData.GLD.MTbeta2.length).reverse();
 	var ctx = document.getElementById("myChart");
-	var last50 = etfData.GLD.close.slice(0, 50).reverse();
-	var last50Dates = etfData.GLD.dates.slice(0, 50).reverse();;
-	console.log(last50);
+	var last50 = etfData.GLD.close.slice(0, etfData.GLD.close.length).reverse();
+	var last50Dates = etfData.GLD.dates.slice(0, etfData.GLD.dates.length);
+	// console.log(last50, last50Dates);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -517,7 +494,7 @@ function chart() {
 			datasets: [{
 				label: 'Price',
 				pointStyle: 'circle',
-				radius: 1,
+				radius: 3,
 				data: last50,
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.0)',
@@ -553,6 +530,20 @@ function chart() {
 				],
 				borderWidth: 1
 			},
+			{
+				label: 'ETF MASTER TRAIL STOP',
+				pointStyle: 'circle',
+				radius: 0,
+				data: MTbeta2Data,
+				backgroundColor: [
+					'rgba(255,0, 0, 0.0)',
+				],
+				borderColor: [
+					'black',
+				],
+				borderWidth: .5,
+				steppedLine: true
+			},
 
 			]
 
@@ -575,36 +566,18 @@ function intradayChart() {
 	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
 	document.getElementById("intradayChart").remove();
 	document.getElementById("intraday-chart-wrapper").innerHTML = '<canvas id="intradayChart" width="400" height="400"></canvas>';
-
-	// get smadata 
-	// console.log('intraday')
-
-	// let intradayData = bullion.sma20Data.slice(0, 100).reverse();
-
 	var ctx = document.getElementById("intradayChart");
 	var intradayPrices = [];
-
 	var intradayTimes = [];
 
 	for (key in bullion.intraDay15minData) {
 		intradayTimes.push(key);
 		intradayPrices.push(bullion.intraDay15minData[key]['4. close']);
 	}
-	//filter to keep only todays data
-	// let date = intradayTimes[0].split(' ')[0];
-	// let dateSet = false;
-	let filteredTimes = intradayTimes.slice(0, 30);
-	// 	return time.includes(date)
-	// })
-	let filteredPrices = intradayPrices.slice(0, 30);
-	console.log(filteredTimes, filteredPrices);
 
-	// for (let i = 0; bullion.intraDay15minData.length; i++) {
-	// 	intrdayPrices.push(bullion.priceData[i][]);
-	// 	last50Dates.push(bullion.priceData[i][0]);
-	// }
-	// last50.reverse();
-	// last50Dates.reverse();
+	let filteredTimes = intradayTimes.slice(0, 30);
+	let filteredPrices = intradayPrices.slice(0, 30);
+	// console.log(filteredTimes, filteredPrices);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -625,47 +598,6 @@ function intradayChart() {
 				borderWidth: 1,
 				// steppedLine: true
 			}
-				// },
-				// {
-				// 	label: 'SMA20',
-				// 	pointStyle: 'circle',
-				// 	radius: 0,
-				// 	data: sma20Data,
-				// 	backgroundColor: [
-				// 		'rgba(2,199, 1, 0.0)',
-				// 	],
-				// 	borderColor: [
-				// 		'rgba(2,199, 1,1)',
-				// 	],
-				// 	borderWidth: 1
-				// },
-				// {
-				// 	label: 'SMA50',
-				// 	pointStyle: 'circle',
-				// 	radius: 0,
-				// 	data: sma50Data,
-				// 	backgroundColor: [
-				// 		'rgba(100,1, 100, 0.0)',
-				// 	],
-				// 	borderColor: [
-				// 		'rgba(100,1, 100,1)',
-				// 	],
-				// 	borderWidth: 1
-				// },
-				// {
-				// 	label: 'SMA5',
-				// 	pointStyle: 'circle',
-				// 	radius: 0,
-				// 	data: sma5Data,
-				// 	backgroundColor: [
-				// 		'rgba(255,0, 0, 0.0)',
-				// 	],
-				// 	borderColor: [
-				// 		'rgba(255 ,0, 0, 1)',
-				// 	],
-				// 	borderWidth: 1
-				// },
-
 
 			]
 
