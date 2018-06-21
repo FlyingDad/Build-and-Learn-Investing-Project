@@ -211,7 +211,7 @@ i#sauce1 {
     color:black;
 }
 
-.showmore {
+.showmore-daily, .showmore-weekly, .showmore-crypto {
     display: none;
 }
 

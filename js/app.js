@@ -45,46 +45,31 @@ class Bullion {
 		this.lastTimeStamp = lastTimeStamp;   //meta data ['3. Last Refreshed']
 		this.description = description; //get decription
 		this.priceData = priceData;	 // array of 90 days of bullion prices
-		this.sma5Data = [];
-		this.sma20Data = [];
-
-		this.sma50Data = [];
 		this.intraDay15minData;
 
 	}
-
-	// get sma5Day() {
-	// 	return this.calcSma(5);   // 5 days
-	// }
-
-	// get sma20Day() {
-	// 	return this.calcSma(20); // 20 days
-	// }
-
-	// get sma50Day() {
-	// 	return this.calcSma(50); // 20 days
-	// }
-
-	calcSma(days) {
-		// calculate sma's here
-		//get last 'days' closing
-		let sum = 0;
-		for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 but values off as to always use yesterdays data
-			sum += this.priceData[i][4]; // 4th element in each day is closing price
-		}
-		return sum / days;
-	}
-
-	calcVma(days) {
-		// calculate sma's here
-		//get last 'days' closing
-		let sum = 0;
-		for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 as to always use yesterdays data
-			sum += this.priceData[i][5]; // 5th element in each day is volume
-		}
-		return sum / days;
-	}
 }
+
+// function calcSma(days) {
+// 	// calculate sma's here
+// 	//get last 'days' closing
+// 	let sum = 0;
+// 	for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 but values off as to always use yesterdays data
+// 		sum += this.priceData[i][4]; // 4th element in each day is closing price
+// 	}
+// 	return sum / days;
+// }
+
+// function calcVma(days) {
+// 	// calculate sma's here
+// 	//get last 'days' closing
+// 	let sum = 0;
+// 	for (let i = 0; i < days; i++) {  			// NEED TO DOUBLE CHECK THIS changed i to = 1 as to always use yesterdays data
+// 		sum += this.priceData[i][5]; // 5th element in each day is volume
+// 	}
+// 	return sum / days;
+// }
+
 
 function status(response) {
 	if (response.status >= 200 && response.status < 300) {
@@ -218,7 +203,7 @@ function displayStats() {
 	// console.log(bullion);
 	document.getElementById('name').innerHTML = `${userInput.toUpperCase()} (${bullion.name.toUpperCase()})`;
 	document.getElementById('c-time-stamp').innerHTML = `${bullion.lastTimeStamp}`;
-	document.getElementById('c-open-price').innerHTML = `Open: $${etfData.SLV.open[0]}`;
+	document.getElementById('c-open-price').innerHTML = `Open: $${(bullion.priceData[0][1].toFixed(2))}`;
 	document.getElementById('c-high-price').innerHTML = `High: $${(bullion.priceData[0][2].toFixed(2))}`;
 	document.getElementById('c-low-price').innerHTML = `Low: $${(bullion.priceData[0][3].toFixed(2))}`;
 	document.getElementById('c-close-price').innerHTML = `Last Trade: $${(bullion.priceData[0][4]).toFixed(2)}`;
@@ -287,6 +272,9 @@ function calculateSMABias() {
 	}
 	$("ul#bias").append(`<br><li><h2>${userInput.toUpperCase()} BIAS IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
 
+	let toClone = $('div.GLD').clone();
+	$('ul#bias').append(toClone);
+	
 	let xDayDiff = [];
 	let smallestDiff;
 	let averageDiff;
@@ -340,16 +328,16 @@ function getTodayRank() {
 		.then((data) => {
 			let output = '<h2 class="mb-4">Current ETF-15 Daily Ranking</h2>';
 			data.forEach(function (today) {
-				output += `<div class="col-md-4 etf15 text-justify">
+				output += `<div class="col-md-3 etf15 text-justify ${today.Symbol}">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
 					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Date:   								${today.date}</li>
 					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
-					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-primary">Show More Info</li>
+					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
 					</ul>
-					<div class="showmore">
+					<div class="showmore-daily">
 					<ul class=" list-group mb-3">
 					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
@@ -391,9 +379,9 @@ function getWeeklyRank() {
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   				<h2>${week.Symbol}</h2></li>
 					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
-					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-primary">Show More Info</li>
+					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
 					</ul>
-					<div class="showmore">
+					<div class="showmore-weekly">
 					<ul class=" list-group mb-3">
 					<li class="list-group-item">Name:   								${week.fullname}</li>
 					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
@@ -426,7 +414,6 @@ function getWeeklyRank() {
 	return
 }
 
-//crypto ranker
 function getCryptoTodayRank() {
 	fetch('./data/rankDailyCrypto3.json')
 		.then((res) => res.json())
@@ -435,14 +422,14 @@ function getCryptoTodayRank() {
 			data.forEach(function (cryptoToday) {
 				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
-					<li class="list-group-item">Symbol:   					<h3>${cryptoToday.Symbol}/USD</h3></li>
-					<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
-					<li class="list-group-item">Date:   								${cryptoToday.date}</li>
-					<li class="list-group-item">Change:   					${cryptoToday.change.toFixed(2)}</li>
-					<li class="list-group-item">Score:   					<h4>${cryptoToday.score}</h4></li>
-					<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-primary">Show More Info</li>
+				<li class="list-group-item">Symbol:   					<h3>${cryptoToday.Symbol}/USD</h3></li>
+				<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
+				<li class="list-group-item">Date:   								${cryptoToday.date}</li>
+				<li class="list-group-item">Change:   					${cryptoToday.change.toFixed(2)}</li>
+				<li class="list-group-item">Score:   					<h4>${cryptoToday.score}</h4></li>
+				<li class="list-group-item"><button id="showmore" type="submit" class="btn btn-info">More Details</li>
 					</ul>
-					<div class="showmore">
+					<div class="showmore-crypto">
 					<ul class=" list-group mb-3">
 					<li class="list-group-item">Name:   								${cryptoToday.fullname}</li>
 					<li class="list-group-item">Score Change:    	${cryptoToday.scorechange}</li>
@@ -464,11 +451,11 @@ function getCryptoTodayRank() {
 					</div>
 					`;
 				// console.log(today);
-			});
-			document.getElementById('cOutput').innerHTML = output;
-			$('button#showmore').on('click', function () {
-				// $("div.showmore").next().toggle();
-				$('.showmore').toggle()
+				document.getElementById('cOutput').innerHTML = output;
+				$('button#showmore').on('click', function () {
+					// $("div.showmore").next().toggle();
+					$('.showmore-crypto').toggle();
+				});
 			});
 		})
 	return
@@ -577,7 +564,7 @@ function intradayChart() {
 
 	let filteredTimes = intradayTimes.slice(0, 30);
 	let filteredPrices = intradayPrices.slice(0, 30);
-	// console.log(filteredTimes, filteredPrices);
+	console.log(filteredTimes, filteredPrices);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
