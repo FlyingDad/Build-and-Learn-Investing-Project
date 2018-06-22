@@ -106,9 +106,9 @@
           <h3 class="">Maximize the use of our information</h3>
           <p>Click here to watch a quick 2 minute video explaining EXACTLY how to get started now and use this information.</p>
           <img src="img/wick2.png" alt="Wick 2" class="img img-responsive">
-          <button type="button" class="btn btn-deisabled btn-lg aligh-center">
+          <!-- <button type="button" class="btn btn-disabled btn-lg">
             <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Watch Video
-          </button>
+          </button> -->
           <!-- <iframe width="100%" height="415" src="https://www.youtube.com/embed/ek1ePFp-nBI" frameborder="0" allow="autoplay; encrypted-media"
             allowfullscreen></iframe> -->
         </div>
@@ -120,7 +120,7 @@
           <i class="fas fa-greater-than-equal fa-3x text-center" style="color: yellow"></i>
         </div>
         <div class="col-sm-4">
-          <i class="fas fa-arrow-down fa-10x text-center" style="color: limegreen"> Do It</i>
+          <i class="fas fa-arrow-down fa-10x text-center" style="color: #30c2f1"> Do It</i>
         </div>
         <div class="col-sm-4">
           <i class="fas fa-not-equal fa-5x text-center" style="color: red"></i>
@@ -144,7 +144,6 @@
                 <!-- <option value="silver">Silver</option> -->
               </select>
               <br>
-              <i class="fas fa-arrow-down fa-3x text-primary" style="color: limegreen"> Do It</i>
               <br>
               <button id="" type="submit" class="btn btn-success">
                 CLICK HERE GET
@@ -152,15 +151,15 @@
               </span>
             </div>
           </form>
-
+          
           <div class="panel-bias panel-body">
             <div class="row">
-              <div id="chart-wrapper" class="bias col-md-12">
+              <div id="chart-wrapper" class="well margin col-sm-12">
                 <canvas id="myChart"></canvas>
               </div>
             </div>
             <div class="row">
-              <div class="text-justify col-md-4">
+              <div class="text-justify col-md-6">
                 <ul id="bias" class="text-justify">bias
                 </ul>
                 <div id="" class="col-md-12 well">
@@ -199,7 +198,7 @@
 
               </div>
 
-              <div id="intraday-chart-wrapper" class="text-justify col-md-8">
+              <div id="intraday-chart-wrapper" class="text-justify col-md-6">
                 <div class="loader">
                   <canvas id="intradayChart"></canvas>
                   <!-- <button id="idChartRefresh" type="" class="btn btn-success"> Refresh Chart Automatically.</button> -->
@@ -214,21 +213,21 @@
         </div>
       </div>
       <div class="row">
-        <div id="cOutput"></div>
-      </div>
-      <div class="row">
         <div id="dOutput"></div>
       </div>
       <div class="row">
         <div id="wOutput"></div>
       </div>
-
+      <div class="row">
+        <div id="cOutput"></div>
+      </div>
+      <i class="fas fa-arrow-up fa-7x text-primary" style="color: #30c2f1"> Do It</i>
     </div>
 
     <!-- Third Container (Video bkgr) call to action-->
     <div id="where" class="videoBlock">
       <video preload="preload" id="video" autoplay="autoplay" loop="loop" muted>
-        <source src="img/stockmkt2.mp4" type="video/mp4"></source>
+        <source src="img/LightStreaksDeepBlueHD (1).mp4" type="video/mp4"></source>
       </video>
       <div id="videoMessage">
         <h1>The Early Bird...</h1>
@@ -256,28 +255,14 @@
       <br> The publishers do not guarantee the accuracy or completeness of the information displayed in any section of the web
       site.
     </p>
-    <div id="email" class="info-request">
+    <!-- <div id="email" class="info-request">
       <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdbYdFDf1nAOVUxPhxFoJ7_gpPityNJKljxrVXqqyoPBSTHKQ/viewform?embedded=true"
         width="90%" height="1500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-    </div>
+    </div> -->
   </footer>
 
   <script src="js/get_new_data_json.js"></script>
   <script src="js/app.js"></script>
-
-  <script>
-    $('.nav a').on('click', function () {
-      $('.navbar-collapse').collapse('hide')
-    });
-    $('.videoClick a').on('click', function () {
-      $('#email').toggle()
-    });
-    $('#bgx').mousemove(function (e) {
-      var amountMovedX = (e.pageX * -1 / 800);
-      var amountMovedY = (e.pageY * -15 / 800);
-      $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
-    });
-  </script>
 </body>
 
 </html>

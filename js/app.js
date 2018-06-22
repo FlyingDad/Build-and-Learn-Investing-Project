@@ -1,6 +1,17 @@
 //UI
 let userInput = $("select#user-input").val();  //placed here so I can use it in the panel header as a title 
 let bullion;
+$('.nav a').on('click', function () {
+	$('.navbar-collapse').collapse('hide')
+});
+$('.videoClick a').on('click', function () {
+	$('#email').toggle()
+});
+$('#bgx').mousemove(function (e) {
+	var amountMovedX = (e.pageX * -1 / 800);
+	var amountMovedY = (e.pageY * -15 / 800);
+	$(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+});
 
 $("form#selector").submit(function (event) {
 	event.preventDefault();
@@ -35,7 +46,8 @@ const alphaVantageSLV = 'https://www.alphavantage.co/query?function=TIME_SERIES_
 // };
 
 let alohaAdvantageIntraday = function (symbol) {
-	return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
+	// return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
+	return `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=GLD&interval=15min&outputsize=compact&apikey=US1IZUWPMLEXWK4H`;
 
 }
 
@@ -186,11 +198,11 @@ function getUserSlected(selected) {
 	getBullion(selected)
 		.then(function () {
 			chart();
-			getCryptoTodayRank();
 			getTodayRank();
 			getWeeklyRank();
-			displayStats();
+			getCryptoTodayRank();
 			calculateSMABias();
+			displayStats();
 		})
 		.then(function () {
 			getIntraday(selected).then(function () {
@@ -259,16 +271,16 @@ function calculateSMABias() {
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
 	let r2 = ((fPP - s1) + r1);
 	let s2 = (fPP - (r1 - s1));
-
+	etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = `BULLISH ON ${bullion.lastTimeStamp}`;
 		biasText = `Secret Sauce is looking for price to advance higher.<br> If it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
 		bias = `BEARISH ON ${bullion.lastTimeStamp}`
-		biasText = `Secret Sauce is looking for price to decline lower.<br> If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
+		biasText = `Secret Sauce is looking for price to decline lower.<br>If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
 	} else {
 		bias = `NEUTRAL ON ${bullion.lastTimeStamp}`
-		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
+		biasText = `No clues right now, as both short and mid term indicators are in flux.<br>Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	}
 	$("ul#bias").append(`<br><li><h2>${userInput.toUpperCase()} BIAS IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
 
@@ -466,7 +478,7 @@ function chart() {
 	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
 	document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
-	let sma5Data = etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
+	// let sma5Data = etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
 	let sma20Data = etfData.GLD.sma20.slice(0, etfData.GLD.sma20.length).reverse();
 	let MTbeta2Data = etfData.GLD.MTbeta2.slice(0, etfData.GLD.MTbeta2.length).reverse();
 	var ctx = document.getElementById("myChart");
@@ -481,13 +493,13 @@ function chart() {
 			datasets: [{
 				label: 'Price',
 				pointStyle: 'circle',
-				radius: 3,
+				radius: 1,
 				data: last50,
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.0)',
 				],
 				borderColor: [
-					'rgba(4, 55, 137,1)',
+					'#428bca',
 				],
 				borderWidth: 3
 			},
@@ -500,23 +512,23 @@ function chart() {
 					'rgba(2,199, 1, 0.0)',
 				],
 				borderColor: [
-					'rgba(2,199, 1,1)',
+					'#5cb85c',
 				],
 				borderWidth: 1
 			},
-			{
-				label: 'SMA5',
-				pointStyle: 'circle',
-				radius: 0,
-				data: sma5Data,
-				backgroundColor: [
-					'rgba(255,0, 0, 0.0)',
-				],
-				borderColor: [
-					'rgba(255 ,0, 0, 1)',
-				],
-				borderWidth: 1
-			},
+			// {
+			// 	label: 'SMA5',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma5Data,
+			// 	backgroundColor: [
+			// 		'rgba(255,0, 0, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'#5cb85c)',
+			// 	],
+			// 	borderWidth: 2
+			// },
 			{
 				label: 'ETF MASTER TRAIL STOP',
 				pointStyle: 'circle',
@@ -526,9 +538,9 @@ function chart() {
 					'rgba(255,0, 0, 0.0)',
 				],
 				borderColor: [
-					'black',
+					'#d9534f',
 				],
-				borderWidth: .5,
+				borderWidth: 1,
 				steppedLine: true
 			},
 
@@ -577,12 +589,12 @@ function intradayChart() {
 				radius: 5,
 				data: filteredPrices.reverse(),
 				backgroundColor: [
-					'#474e5d',//'rgba(255, 99, 132, 0.0)',
+					'lightgrey',
 				],
 				borderColor: [
-					'#5cb85c', //'rgba(4, 55, 137,1)',
+					'#428bca', //'rgba(4, 55, 137,1)',
 				],
-				borderWidth: 1,
+				borderWidth: 3,
 				// steppedLine: true
 			}
 
