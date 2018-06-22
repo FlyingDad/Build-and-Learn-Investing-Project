@@ -493,13 +493,13 @@ function chart() {
 			datasets: [{
 				label: 'Price',
 				pointStyle: 'circle',
-				radius: 3,
+				radius: 1,
 				data: last50,
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.0)',
 				],
 				borderColor: [
-					'rgba(4, 55, 137,1)',
+					'#428bca',
 				],
 				borderWidth: 3
 			},
@@ -512,23 +512,23 @@ function chart() {
 					'rgba(2,199, 1, 0.0)',
 				],
 				borderColor: [
-					'rgba(2,199, 1,1)',
+					'#5cb85c',
 				],
 				borderWidth: 1
 			},
-			{
-				label: 'SMA5',
-				pointStyle: 'circle',
-				radius: 0,
-				data: sma5Data,
-				backgroundColor: [
-					'rgba(255,0, 0, 0.0)',
-				],
-				borderColor: [
-					'rgba(255 ,0, 0, 1)',
-				],
-				borderWidth: 1
-			},
+			// {
+			// 	label: 'SMA5',
+			// 	pointStyle: 'circle',
+			// 	radius: 0,
+			// 	data: sma5Data,
+			// 	backgroundColor: [
+			// 		'rgba(255,0, 0, 0.0)',
+			// 	],
+			// 	borderColor: [
+			// 		'#5cb85c)',
+			// 	],
+			// 	borderWidth: 2
+			// },
 			{
 				label: 'ETF MASTER TRAIL STOP',
 				pointStyle: 'circle',
@@ -538,9 +538,9 @@ function chart() {
 					'rgba(255,0, 0, 0.0)',
 				],
 				borderColor: [
-					'black',
+					'#d9534f',
 				],
-				borderWidth: .5,
+				borderWidth: 1,
 				steppedLine: true
 			},
 
@@ -589,12 +589,12 @@ function intradayChart() {
 				radius: 5,
 				data: filteredPrices.reverse(),
 				backgroundColor: [
-					'#474e5d',//'rgba(255, 99, 132, 0.0)',
+					'lightgrey',
 				],
 				borderColor: [
-					'#5cb85c', //'rgba(4, 55, 137,1)',
+					'#428bca', //'rgba(4, 55, 137,1)',
 				],
-				borderWidth: 1,
+				borderWidth: 3,
 				// steppedLine: true
 			}
 

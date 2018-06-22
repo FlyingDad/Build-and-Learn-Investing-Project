@@ -169,8 +169,8 @@ ul {
 
 
 canvas#intradayChart {
-    max-width: 100vw;
-    max-height: 86vh;
+    max-width: 90vw;
+    max-height: 80vh;
     padding-right: 0px;
     margin-left: 23px;
 }
