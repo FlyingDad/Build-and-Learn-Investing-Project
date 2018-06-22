@@ -271,16 +271,16 @@ function calculateSMABias() {
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
 	let r2 = ((fPP - s1) + r1);
 	let s2 = (fPP - (r1 - s1));
-
+	etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = `BULLISH ON ${bullion.lastTimeStamp}`;
 		biasText = `Secret Sauce is looking for price to advance higher.<br> If it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
 		bias = `BEARISH ON ${bullion.lastTimeStamp}`
-		biasText = `Secret Sauce is looking for price to decline lower.<br> If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
+		biasText = `Secret Sauce is looking for price to decline lower.<br>If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
 	} else {
 		bias = `NEUTRAL ON ${bullion.lastTimeStamp}`
-		biasText = `No clues right now, as both short and mid term indicators are in flux.<br> Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
+		biasText = `No clues right now, as both short and mid term indicators are in flux.<br>Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
 	}
 	$("ul#bias").append(`<br><li><h2>${userInput.toUpperCase()} BIAS IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
 
@@ -478,7 +478,7 @@ function chart() {
 	// https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data
 	document.getElementById("myChart").remove();
 	document.getElementById("chart-wrapper").innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
-	let sma5Data = etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
+	// let sma5Data = etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
 	let sma20Data = etfData.GLD.sma20.slice(0, etfData.GLD.sma20.length).reverse();
 	let MTbeta2Data = etfData.GLD.MTbeta2.slice(0, etfData.GLD.MTbeta2.length).reverse();
 	var ctx = document.getElementById("myChart");

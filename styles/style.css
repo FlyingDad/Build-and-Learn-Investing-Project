@@ -59,6 +59,9 @@ p {
     cursor:hand;
 }
 
+h3 {
+    color: #6bdaff;
+}
 .videoBlock {
     position: relative;
 }
