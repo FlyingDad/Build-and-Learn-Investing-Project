@@ -218,6 +218,10 @@ i#sauce1 {
     display: none;
 }
 
+#cOutput, #wOutput {
+    display: none;
+}
+
 .list-group-item {
     background-color: white;
 }
