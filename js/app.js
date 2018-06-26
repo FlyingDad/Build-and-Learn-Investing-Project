@@ -237,8 +237,8 @@ function calculateSMABias() {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-danger");
 		$(".panel-bias").addClass("panel-success"); //up day
-		$(".bias-smile").html(`<i class="fas fa-smile fa-3x text-success"></i> `); //up day
-		$(".bias-smile").append(`<i class="fas fa-meh fa-3x text-default"></i> `);
+		// $(".bias-smile").html(`<i class="fas fa-smile fa-3x text-success"></i> `); //up day
+		// $(".bias-smile").append(`<i class="fas fa-meh fa-3x text-default"></i> `);
 		$("#c-change").removeClass("fa-sort-amount-down");
 		$("#c-change").append(` <i class="fas fa-sort-amount-up" style="color:green"></i>`);
 		// $("ul#bias").append(`<li><h2>Todays Projected High: ${fibPredictedHigh.toFixed(2)}</h2></li>`);
@@ -248,8 +248,8 @@ function calculateSMABias() {
 		$(".panel-bias").removeClass("panel-default");
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").addClass("panel-danger"); //down day
-		$(".bias-smile").html(`<i class="fas fa-frown fa-3x text-danger"></i>`);
-		$(".bias-smile").append(`<i class="fas fa-meh fa-3x text-default"></i>`);
+		// $(".bias-smile").html(`<i class="fas fa-frown fa-3x text-danger"></i>`);
+		// $(".bias-smile").append(`<i class="fas fa-meh fa-3x text-default"></i>`);
 		$("#c-change").removeClass("fa-sort-amount-up");
 		$("#c-change").append(` <i class="fas fa-sort-amount-down" style="color:red"></i>`);
 		// $("ul#bias").append(`<li><h2>Todays Projected Low: ${fibPredictedLow.toFixed(2)}</h2></li>`);
@@ -258,7 +258,7 @@ function calculateSMABias() {
 		$(".panel-bias").removeClass("panel-success");
 		$(".panel-bias").removeClass("panel-danger");
 		$(".panel-bias").addClass("panel-default"); //unchanged
-		$(".bias-smile").html(`<br><i class="fas fa-meh fa-3x text-default text-center"></i>`);
+		// $(".bias-smile").html(`<br><i class="fas fa-meh fa-3x text-default text-center"></i>`);
 	}
 
 	let bias = "";
