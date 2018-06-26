@@ -568,15 +568,18 @@ function intradayChart() {
 	var ctx = document.getElementById("intradayChart");
 	var intradayPrices = [];
 	var intradayTimes = [];
+	var intradayVolume = [];
 
 	for (key in bullion.intraDay15minData) {
 		intradayTimes.push(key);
 		intradayPrices.push(bullion.intraDay15minData[key]['4. close']);
+		intradayVolume.push(bullion.intraDay15minData[key]['5. volume']);
 	}
 
 	let filteredTimes = intradayTimes.slice(0, 30);
 	let filteredPrices = intradayPrices.slice(0, 30);
-	console.log(filteredTimes, filteredPrices);
+	let filteredVolume = intradayVolume.slice(0, 30);
+	console.log(filteredTimes, filteredPrices, filteredVolume);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -600,7 +603,8 @@ function intradayChart() {
 
 			]
 
-		},
+		}, 
+
 		options: {
 			scales: {
 				yAxes: [{
