@@ -75,11 +75,11 @@
           <br>
           <p>If you would like to bottle our sauce, just ask about our API.</p>
           <h3 class="margin">How to trade using this site in less than 2 minutes.</h3>
-          <p>Step 1: Watch this video now. Time Estimate: 1 minutes</p>
+          <p>Step 1: Watch this video now. Time Estimate: 1 minute.</p>
           <p class="">Step 2: Get your free ETF Master Trading Guide that includes a step by step professional trading plan. Time Estimate:
-            30 seconds.</p>
-          <p class="">Step 3: Tune in Each Morning for our live video broadcast as we offer direct insight into the upcoming trade day.
-            OPTIONAL- less than 5 Minutes a day, and free.</p>
+            45 seconds.</p>
+          <p class="">Step 3: Tune in this weekend for our live video broadcast as we offer direct insight into the upcoming trade week.
+          </p>
 
         </div>
         <div class="text-justify col-sm-4">
@@ -103,9 +103,10 @@
         </div>
 
         <div class="text-justify col-sm-4">
-          <h3 class="">Maximize the use of our information</h3>
+          <i id="gold1" class="fas fa-video fa-10x" style="color: #30c2f1"></i>
+          <h3 class="margin">Maximize the use of our information</h3>
           <p>Click here to watch a quick 2 minute video explaining EXACTLY how to get started now and use this information.</p>
-          <img src="img/wick2.png" alt="Wick 2" class="img img-responsive">
+          <!-- <img src="img/wick2.png" alt="Wick 2" class="img img-responsive"> -->
           <!-- <button type="button" class="btn btn-disabled btn-lg">
             <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Watch Video
           </button> -->
@@ -208,7 +209,7 @@
           </div>
         </div>
       </div>
-      <i class="fas fa-arrow-up fa-7x text-info margin" > Do It</i>
+      <i class="fas fa-arrow-up fa-7x text-info margin"> Do It</i>
       <div class="margin col-md-12 well bias">
         <div class="col-md-4 text-center">
           <button class="btn btn-info margin" id="dOutputButton">SHOW FREE DAILY ETF-15 SCORES</button>
@@ -272,24 +273,24 @@
   <script src="js/get_new_data_json.js"></script>
   <script src="js/app.js"></script>
   <script>
-      $(function () {
-        $("button#dOutputButton").click(function () {
-          $("#cOutput").hide();
-          $("#wOutput").hide();
-          $("#dOutput").slideToggle(); 
-        });
-        $("button#wOutputButton").click(function () {
-          $("#dOutput").hide();
-          $("#cOutput").hide();
-          $("#wOutput").slideToggle();
-        });
-        $("button#cOutputButton").click(function () {
-          $("#dOutput").hide();
-          $("#wOutput").hide();
-          $("#cOutput").slideToggle();
-        });
+    $(function () {
+      $("button#dOutputButton").click(function () {
+        $("#cOutput").hide();
+        $("#wOutput").hide();
+        $("#dOutput").slideToggle();
       });
-    </script>
+      $("button#wOutputButton").click(function () {
+        $("#dOutput").hide();
+        $("#cOutput").hide();
+        $("#wOutput").slideToggle();
+      });
+      $("button#cOutputButton").click(function () {
+        $("#dOutput").hide();
+        $("#wOutput").hide();
+        $("#cOutput").slideToggle();
+      });
+    });
+  </script>
 </body>
 
 </html>
