@@ -1,3 +1,4 @@
+// jshint esversion: 6
 // ETF Object
 // name: name,
 //       dates: [],
