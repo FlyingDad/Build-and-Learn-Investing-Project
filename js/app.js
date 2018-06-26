@@ -346,7 +346,7 @@ function getTodayRank() {
 			let output = '<h2 class="mb-4">Current ETF-15 Daily Ranking</h2>';
 			data.forEach(function (today) {
 				// <li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
-				output += `<div class="col-md-3 etf15 text-justify ${today.Symbol}">
+				output += `<div class="col-md-4 etf15 text-justify ${today.Symbol}">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
 					<li class="list-group-item">Name:   								${today.fullname}</li>
