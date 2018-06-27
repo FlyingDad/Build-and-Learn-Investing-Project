@@ -18,6 +18,7 @@ $("form#selector").submit(function (event) {
 	userInput = $("select#user-input").val();  // deleted the let since it is now a global var
 	// console.log(userInput);
 	$("ul#bias").empty(); // to clear the ul
+	$("#selector").empty(); // to clear the ul
 	// $(".panel-body, .basic-data, .data-box, #chart-wrapper, #myChart").hide();
 	//check for valid input
 	if (userInput !== "none") {
@@ -351,6 +352,7 @@ function getTodayRank() {
 					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
 					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Date:   								${today.date}</li>
+					<li class="list-group-item">Close:    ${today.close.toFixed(2)}</li>
 					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
 					</ul>
