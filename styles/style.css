@@ -54,7 +54,7 @@ p {
 }
 
 .navbar-nav li a:hover {
-    color: orange !important;
+    color: #30c2f1 !important;
     cursor:pointer;
     cursor:hand;
 }
