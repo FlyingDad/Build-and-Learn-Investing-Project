@@ -402,6 +402,7 @@ function getWeeklyRank() {
 				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
 					<li class="list-group-item">Symbol:   				<h2>${week.Symbol}</h2></li>
+					<li class="list-group-item">Date:   								${week.date}</li>
 					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
 					</ul>
 					<div class="showmore-weekly">
