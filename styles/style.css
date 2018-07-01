@@ -166,6 +166,15 @@ ul {
     /* border: none; */
 }
 
+.well2 {
+    background-color:  #474e5d;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin: 10px 0px;
+    min-height: 200px;
+}
+
 .bias {
     line-height: 1.5em; 
 }

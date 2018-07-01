@@ -401,15 +401,16 @@ function getWeeklyRank() {
 			data.forEach(function (week) {
 				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
-					<li class="list-group-item">Symbol:   				<h2>${week.Symbol}</h2></li>
-					<li class="list-group-item">Date:   								${week.date}</li>
+				<li class="list-group-item">Symbol:   				<h3>${week.Symbol}</h3></li>
+				<li class="list-group-item">Name:   								${week.fullname}</li>
+					<li class="list-group-item">Close:    ${week.close.toFixed(2)}</li>
+					<li class="list-group-item">Change:   					${week.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
+					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
+					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
 					</ul>
 					<div class="showmore-weekly">
 					<ul class=" list-group mb-3">
-					<li class="list-group-item">Name:   								${week.fullname}</li>
-					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
-					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
 					<li class="list-group-item">Open:     				${week.open.toFixed(2)}</li>
 					<li class="list-group-item">High:     				${week.high.toFixed(2)}</li>
 					<li class="list-group-item">Low:      ${week.low.toFixed(2)}</li>
