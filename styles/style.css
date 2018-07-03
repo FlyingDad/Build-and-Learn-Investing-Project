@@ -311,7 +311,11 @@ i#sauce1 {
 }
 
 /* table */
-table { font-family: Courier, monospace; }
+table {
+    font-family: Courier, monospace;
+    margin: 0 auto;
+
+}
 .stocks-container {
   margin-bottom: 1.5em;
   width: 100%;

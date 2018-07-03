@@ -4,7 +4,7 @@ const DEFAULT_PORTFOLIOS = [
   {'name': 'THE ETF MASTER 15', 'symbols': ['EZA', 'DBC', 'TLT', 'USO', 'IEV', 'FXI', 'SHY', 'GLD', 'SLV', 'EWJ', 'ILF', 'SPY', 'EWZ', 'IWM', 'QQQ']},
   // {'name': 'Sector ETFs', 'symbols': ['XLF', 'XLK', 'XLV', 'XLP', 'XLY', 'XLE', 'XLB', 'XLI', 'XLU', 'XLRE']},
   // {'name': 'Banks', 'symbols': ['GS', 'MS', 'JPM', 'WFC', 'C', 'BAC', 'BCS', 'DB', 'CS', 'RBS']},
-  {'name': 'FANG+', 'symbols': ['FB', 'AAPL', 'NFLX', 'GOOG', 'AMZN', 'NVDA', 'TSLA']},
+  // {'name': 'FANG+', 'symbols': ['FB', 'AAPL', 'NFLX', 'GOOG', 'AMZN', 'NVDA', 'TSLA']},
   // {'name': 'Bond ETFs', 'symbols': ['BND', 'BIV', 'JNK']},
   // {'name': 'Other ETFs', 'symbols': ['VOO', 'VTI', 'VGK', 'VPL', 'VWO', 'VDE', 'XOP', 'VFH', 'VHT', 'VIG', 'VYM', 'VAW', 'REM', 'XHB', 'GLD']},
   // {'name': 'Mortgage REITs', 'symbols': ['EFC', 'EARN', 'NLY', 'AGNC', 'CIM', 'TWO', 'NRZ']},
