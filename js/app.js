@@ -359,12 +359,12 @@ function getTodayRank() {
 					<li class="list-group-item">Close:    ${today.close.toFixed(2)}</li>
 					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
+					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
 					</ul>
 					<div class="showmore-daily">
 					<ul class=" list-group mb-3">
 					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
-					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
 					<li class="list-group-item">Open:     				${today.open.toFixed(2)}</li>
 					<li class="list-group-item">High:     				${today.high.toFixed(2)}</li>
 					<li class="list-group-item">Low:      ${today.low.toFixed(2)}</li>

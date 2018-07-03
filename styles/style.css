@@ -309,3 +309,38 @@ i#sauce1 {
         min-height: 50px;
     }
 }
+
+/* table */
+table { font-family: Courier, monospace; }
+.stocks-container {
+  margin-bottom: 1.5em;
+  width: 100%;
+  max-width: 600px;
+}
+.stocks-container a { text-decoration: none; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 1.1em;
+}
+.stock-symbol {
+  width: 12%;
+  padding: 2px 4px 2px 0px;
+}
+.stock-price, .stock-change, .stock-change-pct, .stock-mkt-cap {
+  width: 22%;
+  text-align: right;
+  padding: 2px 4px;
+}
+@media (max-width: 576px) {
+  table { margin-bottom: 3em; }
+  .stock-mkt-cap { display: none; }
+  .stock-symbol { width: 16%; }
+  .stock-price, .stock-change, .stock-change-pct { width: 28%; }
+  td.stock-symbol, td.stock-price, td.stock-change, td.stock-change-pct {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+}
+summary:hover { cursor: pointer; }
+summary::-webkit-details-marker { display: none; }
