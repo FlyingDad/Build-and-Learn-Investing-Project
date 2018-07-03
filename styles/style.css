@@ -53,6 +53,10 @@ p {
     float: none;
 }
 
+.row {
+    margin: 5px 5px
+}
+
 .navbar-nav li a:hover {
     color: #30c2f1 !important;
     cursor:pointer;
@@ -181,10 +185,10 @@ ul {
 
 
 canvas#intradayChart {
-    max-width: 90vw;
+    max-width: 85vw;
     max-height: 60vh;
-    /* padding-right: 0px; */
-    margin-left: 23px;
+    /* padding-left: 10px; */
+    /* margin-left: 23px; */
 }
 canvas#myChart {
     max-width: 900px;
@@ -224,7 +228,7 @@ i#sauce1 {
 }
 
 .showmore-daily, .showmore-weekly, .showmore-crypto {
-    display: none;
+    /* display: none; */
 }
 
 #cOutput, #wOutput {

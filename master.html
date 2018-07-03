@@ -34,10 +34,12 @@
       <div id="navbar-collapse" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#">Home</a>
+            <!-- <a href="#">Home</a> -->
           </li>
           <li>
-            <a href="#what">Free</a>
+            <a href="#what">Premium Account Status:
+              <em>Granted</em>
+            </a>
           </li>
           <!-- <li>
             <a href="#where">Premium</a>
@@ -59,7 +61,31 @@
   </header>
 
   <main>
+    <div class="col-md-12 well bias text-center">
+      <div class="col-md-4 margin">
+        <button class="btn btn-info " id="">Manage Site Profile and Account</button>
+      </br>
+      </br>
+      </br>
+        <button class="btn btn-info " id="">Access Online Course</button>
+      </div>
+      <div class="col-md-4 margin">
+        <button class="btn btn-info" id="">Manage Competition Sweepstake Entries</button>
+      </br>
+      </br>
+      </br>
+        <button class="btn btn-info" id="">Join Weekly Master Classes</button>
+      </div>
+      <div class="col-md-4 margin">
+        <button class="btn btn-info" id="">Show your ETFM Portfolio</button>
+      </br>
+      </br>
+      </br>
+        <button class="btn btn-info" id="">Log Out</button>
+      </div>
+    </div>
     <div id="pick1" class="bg-2 col-md-12 container-fluid">
+
       <div class="panel panel-bias panel-default">
         <div class="panel-heading">
           <h1 class="panel-title">REAL TIME ETFMASTER.COM 15 ANALYSIS:
@@ -84,17 +110,42 @@
           </div>
         </form>
 
-        <div class="panel-bias panel-body">
+        <div class="bias">
           <div class="row">
-            <div class="stocks-container bias col-md-4">
-              <p class="updated-timestamp"></p>
-              <p class="attribution">
-                Real Time Data provided for free by
-                <a href="https://iextrading.com/developer/" target="_blank">IEX</a>. Subject to
-                <a href="https://iextrading.com/api-exhibit-a/" target="_blank">IEX Exhibit A</a>.
+            <div class="row col-sm-5">
+              <div class="stocks-container bias ">
+              </div>
+              <div>
+                <p class="updated-timestamp"> </p>
+                <p class="attribution">Auto refreshes every 10 seconds.</br> Real Time Data provided for free by
+                  <a href="https://iextrading.com/developer/" target="_blank">IEX</a>. Subject to
+                  <a href="https://iextrading.com/api-exhibit-a/" target="_blank">IEX Exhibit A</a>.
+                </p>
+              </div>
+            </div>
+
+
+            <div id="sym_description">
+              <p>Profile Date Here:</p>
+            </div>
+            <div id="sym_pastdata">
+              <p>
+                Historical Table of Key Figures(signals)
               </p>
             </div>
-            <div id="intraday-chart-wrapper" class="text-justify col-md-7">
+            <div id="sym_gauges">
+              <p>Strength Gauges</p>
+            </div>
+            <div id="sym_signals">
+              <p>Todays Signals</p>
+            </div>
+            <div id="sym_forecast">
+              <p>Todays Forecasted Prices</p>
+            </div>
+            <div id="sym_masternotes">
+              <p>ETFMASTER.COM MASTER NOTES for Todays Session</p>
+            </div>
+            <div id="intraday-chart-wrapper" class="text-justify col-sm-6 margin">
               <div class="loader">
                 <canvas id="intradayChart"></canvas>
                 <button id="idChartRefresh" type="" class="btn btn-success"> Refresh Chart Automatically.</button>
@@ -106,14 +157,14 @@
               <canvas id="myChart"></canvas>
             </div>
             <div class="text-justify col-md-5">
+              <div class="row bias-smile text-justify pull-right">
+                <i class="fas fa-meh fa-7x pull-right text-default"></i>
+                <i class="fas fa-smile fa-7x pull-right text-success"></i>
+                <i class="fas fa-frown fa-7x pull-right text-danger"></i>
+              </div>
               <ul id="bias" class="text-justify">bias
               </ul>
               <div id="" class="col-md-12">
-                <div class="row bias-smile text-justify pull-right">
-                  <i class="fas fa-meh fa-7x pull-right text-default"></i>
-                  <i class="fas fa-smile fa-7x pull-right text-success"></i>
-                  <i class="fas fa-frown fa-7x pull-right text-danger"></i>
-                </div>
                 <p>Latest Live Prices as of
                   <span id="c-time-stamp"></span>
                 </p>
