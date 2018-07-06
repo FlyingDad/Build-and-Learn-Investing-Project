@@ -64,23 +64,23 @@
     <div class="col-md-12 well bias text-center">
       <div class="col-md-4 margin">
         <button class="btn btn-info " id="">Manage Site Profile and Account</button>
-      </br>
-      </br>
-      </br>
+        </br>
+        </br>
+        </br>
         <button class="btn btn-info " id="">Access Online Course</button>
       </div>
       <div class="col-md-4 margin">
         <button class="btn btn-info" id="">Manage Competition Sweepstake Entries</button>
-      </br>
-      </br>
-      </br>
+        </br>
+        </br>
+        </br>
         <button class="btn btn-info" id="">Join Weekly Master Classes</button>
       </div>
       <div class="col-md-4 margin">
         <button class="btn btn-info" id="">Show your ETFM Portfolio</button>
-      </br>
-      </br>
-      </br>
+        </br>
+        </br>
+        </br>
         <button class="btn btn-info" id="">Log Out</button>
       </div>
     </div>
@@ -125,44 +125,65 @@
             </div>
 
 
-            <div id="sym_description">
-              <p>Profile Date Here:</p>
+            <!-- <div id="sym_description" class="row col-md-6">
+              <p>Name</p>
+              <p>Description</p>
             </div>
-            <div id="sym_pastdata">
-              <p>
-                Historical Table of Key Figures(signals)
-              </p>
+            <div id="sym_pastdata" class="col-md-6">
+              <table>
+                <tr>
+                  <th colspan="2">
+                    <h3>Past Results</h3>
+                  </th>
+                </tr>
+                <tr>
+                  <td>Date</td>
+                  <td>Score</td>
+                  <td>RSI BUY</td>
+                  <td>%B BUY</td>
+                  <td>Trifecta</td>
+                </tr>
+                <tr>
+                  <td>01-01-1900</td>
+                  <td>1</td>
+                  <td>TRUE</td>
+                  <td>FALSE</td>
+                  <td>SPY,DBC,SHY</td>
+                </tr>
+              </table>
             </div>
-            <div id="sym_gauges">
+            <div id="sym_gauges" class="row col-md-6">
               <p>Strength Gauges</p>
+              <img src="https://qlikies.files.wordpress.com/2016/03/circular-gauge-4.png"
+                alt="" class="img-responsive">
+              <div id="sym_signals" class="row col-md-6">
+                <p>Todays Signals</p>
+              </div>
+              <div id="sym_forecast" class="row col-md-6">
+                <p>Todays Forecasted Prices</p>
+              </div>
             </div>
-            <div id="sym_signals">
-              <p>Todays Signals</p>
-            </div>
-            <div id="sym_forecast">
-              <p>Todays Forecasted Prices</p>
-            </div>
-            <div id="sym_masternotes">
+            <div id="sym_masternotes" class="row col-md-6">
               <p>ETFMASTER.COM MASTER NOTES for Todays Session</p>
+            </div> -->
+            <div id="chart-wrapper" class="well margin col-md-6">
+              <canvas id="myChart"></canvas>
             </div>
+          </div>
+          <div class="row">
             <div id="intraday-chart-wrapper" class="text-justify col-sm-6 margin">
               <div class="loader">
                 <canvas id="intradayChart"></canvas>
                 <button id="idChartRefresh" type="" class="btn btn-success"> Refresh Chart Automatically.</button>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div id="chart-wrapper" class="well margin col-md-7">
-              <canvas id="myChart"></canvas>
-            </div>
-            <div class="text-justify col-md-5">
-              <div class="row bias-smile text-justify pull-right">
-                <i class="fas fa-meh fa-7x pull-right text-default"></i>
-                <i class="fas fa-smile fa-7x pull-right text-success"></i>
-                <i class="fas fa-frown fa-7x pull-right text-danger"></i>
+            <div class="col-md-5">
+              <div class="row bias-smile text-center">
+                <i class="fas fa-meh fa-7x text-center text-default"></i>
+                <i class="fas fa-smile fa-7x text-center text-success"></i>
+                <i class="fas fa-frown fa-7x text-center text-danger"></i>
               </div>
-              <ul id="bias" class="text-justify">bias
+              <ul id="bias" class="">
               </ul>
               <div id="" class="col-md-12">
                 <p>Latest Live Prices as of

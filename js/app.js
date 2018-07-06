@@ -341,7 +341,7 @@ function calculateSMABias() {
 	// let totHigh;
 	// let totLow;
 
-	$(".bias-smile").append(`<ul><li><h3 class="text-primary pull-left">Projected High >= ${fibPredictedHigh.toFixed(2)}</h3></li><li><h3 class="text-primary pull-left">Projected Low <= ${fibPredictedLow.toFixed(2)}</h3></li></ul>`);
+	$(".bias-smile").prepend(`<ul><li><h3 class="text-primary">Projected High >= ${fibPredictedHigh.toFixed(2)}</h3></li></br><li><h3 class="text-primary">Projected Low <= ${fibPredictedLow.toFixed(2)}</h3></li></ul></br>`);
 }
 
 function getTodayRank() {
