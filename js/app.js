@@ -355,6 +355,7 @@ function getTodayRank() {
 				<ul class=" list-group mb-3">
 				<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
 				<li class="list-group-item">Name:   								${today.fullname}</li>
+				<li class="list-group-item">Description:   								${today.profile}</li>
 				<li class="list-group-item">Date:   								${today.date}</li>
 				<li class="list-group-item">Close:    ${today.close.toFixed(2)}</li>
 				<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>

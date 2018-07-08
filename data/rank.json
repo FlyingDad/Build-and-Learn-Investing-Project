@@ -34,6 +34,7 @@
     "dpp": 58.5000012,
     "weeklypp": 56.1233328999997,
     "fullname": "iShares MSCI South Africa Index Fund",
+    "profile": "The investment seeks to track the investment results of the MSCI South Africa 25/50 Index. The fund normally invests at least 95% of its total assets in the securities of its underlying index and in depositary receipts representing securities in its underlying index. The underlying index uses a capping methodology to limit the weight of any single component to a maximum of 25% of the underlying index. The underlying index may include large-, mid- or small- capitalization companies. The fund is non-diversified.",
     "date": "07/06/2018",
     "": ""
   },
@@ -72,6 +73,7 @@
     "dpp": 30.1266663333333,
     "weeklypp": 29.3866672000001,
     "fullname": "iShares Latin America 40 Index Fund",
+    "profile": "The investment seeks to track the investment results of the S&P Latin America 40TM composed of 40 of the largest Latin American equities. The fund generally invests at least 90% of its assets in securities of the underlying index and in depositary receipts representing securities of the underlying index. It seeks to track the investment results of the S&P Latin America 40TM (the \"underlying index\"), which is comprised of selected equities trading on the exchanges of five Latin American countries. The fund is non-diversified.",
     "date": "07/06/2018",
     "": ""
   },
@@ -110,6 +112,7 @@
     "dpp": 122.296666,
     "weeklypp": 121.62,
     "fullname": "iShares Lehman 20 Year Treasury Bond Fund",
+    "profile": "The investment seeks to track the investment results of the ICE U.S. Treasury 20+ Year Bond Index (the \"underlying index\"). The fund generally invests at least 90% of its assets in the bonds of the underlying index and at least 95% of its assets in U.S. government bonds. The underlying index measures the performance of public obligations of the U.S. Treasury that have a remaining maturity greater than twenty years.",
     "date": "07/06/2018",
     "": ""
   },
@@ -148,6 +151,7 @@
     "dpp": 45.2033334666667,
     "weeklypp": 44.5599987666665,
     "fullname": "iShares S&P Europe 350 Index Fund",
+    "profile": "The investment seeks to track the investment results of the S&P Europe 350TM, which measures the performance of the stocks of leading companies in the following countries: Austria, Belgium, Denmark, Finland, France, Germany, Ireland, Italy, Luxembourg, the Netherlands, Norway, Portugal, Spain, Sweden, Switzerland and the United Kingdom. The fund generally invests at least 90% of its assets in securities of the index and in depositary receipts representing securities of the index. It may invest the remainder of its assets in certain futures, options and swap contracts, cash and cash equivalents, as well as in securities not included in the index.",
     "date": "07/06/2018",
     "": ""
   },
@@ -186,6 +190,7 @@
     "dpp": 14.8433326666667,
     "weeklypp": 14.6233326666668,
     "fullname": "United States Oil Fund",
+    "profile": "The investment seeks the daily changes in percentage terms of its shares¿ per share net asset value (¿NAV¿) to reflect the daily changes in percentage terms of the spot price of light, sweet crude oil delivered to Cushing, Oklahoma, as measured by the daily changes in the price of a specified short-term futures contract on light, sweet crude oil called the ¿Benchmark Oil Futures Contract,¿ less USO¿s expenses. USO seeks to achieve its investment objective by investing primarily in futures contracts for light, sweet crude oil, other types of crude oil, diesel-heating oil, gasoline, natural gas, and other petroleum-based fuels.",
     "date": "07/06/2018",
     "": ""
   },
@@ -224,6 +229,7 @@
     "dpp": 17.3833325,
     "weeklypp": 17.5183334,
     "fullname": "Invesco DB Commodity Index Tracking Fund",
+    "profile": "The investment seeks to track changes, whether positive or negative, in the level of the Deutsche Bank G10 Currency Future Harvest Index®¿Excess Return. The index is comprised of long futures positions in the three eligible index currencies associated with the highest interest rates and short futures positions in the three eligible index currencies associated with the lowest interest rates. The index¿s six component currencies from time-to-time, comprised of the three long and three short futures positions, are referred to as the index currencies and are used to calculate the value of the index.",
     "date": "07/06/2018",
     "": ""
   },
@@ -262,6 +268,7 @@
     "dpp": 166.186665666667,
     "weeklypp": 164.456664666667,
     "fullname": "iShares Russell 2000",
+    "profile": "The investment seeks to track the investment results of the Russell 2000® Index, which measures the performance of the small-capitalization sector of the U.S. equity market. The fund generally invests at least 90% of its assets in securities of the underlying index and in depositary receipts representing securities of the underlying index. It may invest the remainder of its assets in certain futures, options and swap contracts, cash and cash equivalents, as well as in securities not included in the underlying index, but which the advisor believes will help the fund track the underlying index.",
     "date": "07/06/2018",
     "": ""
   },
@@ -300,6 +307,7 @@
     "dpp": 32.355,
     "weeklypp": 31.9300000000002,
     "fullname": "iShares MSCI Brazil Index Fund",
+    "profile": "The investment seeks to track the investment results of the MSCI Brazil 25/50 Index. The fund invests at least 95% of its assets in the securities of its underlying index and in depositary receipts representing securities in its underlying index. The index, consists of stocks traded primarily on B3 (the largest Brazilian exchange), is a free float-adjusted market capitalization-weighted index with a capping methodology applied to issuer weights so that no single issuer of a component exceeds 25% of the underlying index weight, and all issuers with weight above 5% do not cumulatively exceed 50% of the underlying index weight. The fund is non-diversified.",
     "date": "07/06/2018",
     "": ""
   },
@@ -338,6 +346,7 @@
     "dpp": 272.387796666667,
     "weeklypp": 271.231658666667,
     "fullname": "SPDR S&P 500",
+    "profile": "The investment seeks to provide investment results that, before expenses, correspond generally to the price and yield performance of the S&P 500® Index. The Trust seeks to achieve its investment objective by holding a portfolio of the common stocks that are included in the index (the ¿Portfolio¿), with the weight of each stock in the Portfolio substantially corresponding to the weight of such stock in the index.",
     "date": "07/06/2018",
     "": ""
   },
@@ -376,6 +385,7 @@
     "dpp": 119.05,
     "weeklypp": 118.963335333333,
     "fullname": "SPDR Gold Trust",
+    "profile": "The investment seeks to reflect the performance of the price of gold bullion, less the expenses of the Trust¿s operations. The Trust holds gold bars and from time to time, issues Baskets in exchange for deposits of gold and distributes gold in connection with redemptions of Baskets. The investment objective of the Trust is for the Shares to reflect the performance of the price of gold bullion, less the Trust¿s expenses. The Sponsor believes that, for many investors, the Shares represent a cost-effective investment in gold.",
     "date": "07/06/2018",
     "": ""
   },
@@ -414,6 +424,7 @@
     "dpp": 41.9299989666667,
     "weeklypp": 42.7483329333332,
     "fullname": "iShares China Large-Cap Index Fund",
+    "profile": "The investment seeks to track the investment results of the FTSE China 50 Index composed of large-capitalization Chinese equities that trade on the Hong Kong Stock Exchange. The fund generally invests at least 90% of its assets in securities of the underlying index and in depositary receipts representing securities of the underlying index. The index is designed to track the performance of the largest companies in the Chinese equity market that trade on the Hong Kong Stock Exchange and are available to international investors, as determined by FTSE International Limited (the \"index provider\" or \"FTSE\"). The fund is non-diversified.",
     "date": "07/06/2018",
     "": ""
   },
@@ -452,6 +463,7 @@
     "dpp": 56.8183326,
     "weeklypp": 58.0999997,
     "fullname": "iShares MSCI Japan Index Fund",
+    "profile": "The investment seeks to track the investment results of the MSCI Japan Index. The fund will at all times invest at least 90% of its assets in the securities of its underlying index and in depositary receipts representing securities in its underlying index. The underlying index consists of stocks traded primarily on the Tokyo Stock Exchange. It may include large-, mid- or small-capitalization companies.",
     "date": "07/06/2018",
     "": ""
   },
@@ -490,6 +502,7 @@
     "dpp": 83.2450663,
     "weeklypp": 83.3633345999993,
     "fullname": "iShares Lehman Short Treasury Bond Fund",
+    "profile": "The investment seeks to track the investment results of the ICE U.S. Treasury 1-3 Year Bond Index (the \"underlying index\"). The fund generally invests at least 90% of its assets in the bonds of the underlying index and at least 95% of its assets in U.S. government bonds. The underlying index measures the performance of public obligations of the U.S. Treasury that have a remaining maturity of greater than one year and less than or equal to three years.",
     "date": "07/06/2018",
     "": ""
   },
@@ -528,6 +541,7 @@
     "dpp": 172.336664333333,
     "weeklypp": 171.603332,
     "fullname": "Invesco QQQ Trust Series 1",
+    "profile": "The investment seeks investment results that generally correspond to the price and yield performance of the index. To maintain the correspondence between the composition and weights of the securities in the trust (the \"securities\") and the stocks in the NASDAQ-100 Index®, the adviser adjusts the securities from time to time to conform to periodic changes in the identity and/or relative weights of index securities. The composition and weighting of the securities portion of a portfolio deposit are also adjusted to conform to changes in the index.",
     "date": "07/06/2018",
     "": ""
   },
@@ -566,6 +580,7 @@
     "dpp": 15.0966666,
     "weeklypp": 15.1783329333334,
     "fullname": "iShares Silver Trust",
+    "profile": "The investment seeks to reflect generally the performance of the price of silver. The Trust seeks to reflect such performance before payment of the Trust¿s expenses and liabilities. It is not actively managed. The Trust does not engage in any activities designed to obtain a profit from, or to ameliorate losses caused by, changes in the price of silver. The Trust seeks to reflect generally the performance of the price of silver. The Trust seeks to reflect such performance before payment of the Trust¿s expenses and liabilities.",
     "date": "07/06/2018",
     "": ""
   }
