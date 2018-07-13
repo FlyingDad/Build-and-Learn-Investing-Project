@@ -350,12 +350,12 @@ function getTodayRank() {
 		.then((data) => {
 			let output = '<h2 class="mb-4">Current ETF-15 Daily Ranking</h2>';
 			data.forEach(function (today) {
-			// <li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
+				// <li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
+				// <li class="list-group-item">Description:   								${today.profile}</li>
 				output += `<div class="col-md-4 etf15 text-justify ${today.Symbol}">
 				<ul class=" list-group mb-3">
 				<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
 				<li class="list-group-item">Name:   								${today.fullname}</li>
-				<li class="list-group-item">Description:   								${today.profile}</li>
 				<li class="list-group-item">Date:   								${today.date}</li>
 				<li class="list-group-item">Close:    ${today.close.toFixed(2)}</li>
 				<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
