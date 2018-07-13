@@ -272,16 +272,20 @@ function calculateSMABias() {
 	let s1 = ((fPP * 2) - bullion.priceData[1][2]);
 	let r2 = ((fPP - s1) + r1);
 	let s2 = (fPP - (r1 - s1));
+	let r3 = ((fPP - s1) + r2);
+	let s3 = (fPP - (r2 - s1));
+
+
 	etfData.GLD.sma5.slice(0, etfData.GLD.sma5.length).reverse();
 	if (mom1 >= 0 && mom2 >= 0 && mom3 >= 0) {
 		bias = `BULLISH ON ${bullion.lastTimeStamp}`;
-		biasText = `Secret Sauce is looking for price to advance higher.<br> If it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
+		biasText = `Secret Sauce is looking for price to advance higher.<br> If it is an up day, look for price to potentially trade up to or through the 'Projected High' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)} followed by ${r3.toFixed(2)}<br>If price reverses and goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)} followed by ${s3.toFixed(2)}`
 	} else if (mom1 <= 0 && mom2 <= 0 && mom3 <= 0) {
 		bias = `BEARISH ON ${bullion.lastTimeStamp}`
-		biasText = `Secret Sauce is looking for price to decline lower.<br>If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}`
+		biasText = `Secret Sauce is looking for price to decline lower.<br>If it is a down day, look for price to potentially trade down to or through the 'Projected Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price continues to go down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)} followed by ${s3.toFixed(2)}<br>If price reverses and goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)} followed by ${r3.toFixed(2)}`
 	} else {
 		bias = `NEUTRAL ON ${bullion.lastTimeStamp}`
-		biasText = `No clues right now, as both short and mid term indicators are in flux.<br>Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)}`
+		biasText = `No clues right now, as both short and mid term indicators are in flux.<br>Price may advance towards the 'Predicted High or Predicted Low' listed below.<br>Look for significant price action along with volume around the price of: ${fPP.toFixed(2)}<br>If price goes up, look for the next target area of ${r1.toFixed(2)} and then ${r2.toFixed(2)} followed by ${r3.toFixed(2)}<br>If price goes down, look for the next target area of ${s1.toFixed(2)} and then ${s2.toFixed(2)} followed by ${s3.toFixed(2)}`
 	}
 	$("ul#bias").append(`<br><li><h2>${userInput.toUpperCase()} BIAS IS ${bias}</h2></li><li>${biasText}<br></li><br>`);
 
@@ -337,7 +341,7 @@ function calculateSMABias() {
 	// let totHigh;
 	// let totLow;
 
-	$(".bias-smile").append(`<ul><li><h3 class="text-primary pull-left">Projected High >= ${fibPredictedHigh.toFixed(2)}</h3></li><li><h3 class="text-primary pull-left">Projected Low <= ${fibPredictedLow.toFixed(2)}</h3></li></ul>`);
+	$(".bias-smile").prepend(`<ul><li><h3 class="text-primary">Projected High >= ${fibPredictedHigh.toFixed(2)}</h3></li></br><li><h3 class="text-primary">Projected Low <= ${fibPredictedLow.toFixed(2)}</h3></li></ul></br>`);
 }
 
 function getTodayRank() {
@@ -347,20 +351,21 @@ function getTodayRank() {
 			let output = '<h2 class="mb-4">Current ETF-15 Daily Ranking</h2>';
 			data.forEach(function (today) {
 				// <li class="list-group-item"><button id="showmore" type="submit" class="btn btn-disabled">Coming Soon</li>
+				// <li class="list-group-item">Description:   								${today.profile}</li>
 				output += `<div class="col-md-4 etf15 text-justify ${today.Symbol}">
 				<ul class=" list-group mb-3">
-					<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
-					<li class="list-group-item">Name:   								${today.fullname}</li>
-					<li class="list-group-item">Date:   								${today.date}</li>
-					<li class="list-group-item">Close:    ${today.close.toFixed(2)}</li>
-					<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
-					<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
+				<li class="list-group-item">Symbol:   					<h3>${today.Symbol}</h3></li>
+				<li class="list-group-item">Name:   								${today.fullname}</li>
+				<li class="list-group-item">Date:   								${today.date}</li>
+				<li class="list-group-item">Close:    ${today.close.toFixed(2)}</li>
+				<li class="list-group-item">Change:   					${today.change.toFixed(2)}</li>
+				<li class="list-group-item">Score:   					<h4>${today.score}</h4></li>
+				<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
 					</ul>
 					<div class="showmore-daily">
 					<ul class=" list-group mb-3">
 					<li class="list-group-item">Name:   								${today.fullname}</li>
 					<li class="list-group-item">Score Change:    	${today.scorechange}</li>
-					<li class="list-group-item">Prev. Score:    	${today.yestscore}</li>
 					<li class="list-group-item">Open:     				${today.open.toFixed(2)}</li>
 					<li class="list-group-item">High:     				${today.high.toFixed(2)}</li>
 					<li class="list-group-item">Low:      ${today.low.toFixed(2)}</li>
@@ -397,14 +402,16 @@ function getWeeklyRank() {
 			data.forEach(function (week) {
 				output += `<div class="col-md-4 etf15 text-justify">
 				<ul class=" list-group mb-3">
-					<li class="list-group-item">Symbol:   				<h2>${week.Symbol}</h2></li>
+				<li class="list-group-item">Symbol:   				<h3>${week.Symbol}</h3></li>
+				<li class="list-group-item">Name:   								${week.fullname}</li>
+					<li class="list-group-item">Close:    ${week.close.toFixed(2)}</li>
+					<li class="list-group-item">Change:   					${week.change.toFixed(2)}</li>
 					<li class="list-group-item">Score:   					<h4>${week.score}</h4></li>
+					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
+					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
 					</ul>
 					<div class="showmore-weekly">
 					<ul class=" list-group mb-3">
-					<li class="list-group-item">Name:   								${week.fullname}</li>
-					<li class="list-group-item">Score Change:    	${week.scorechange}</li>
-					<li class="list-group-item">Prev. Score:    	${week.yestscore}</li>
 					<li class="list-group-item">Open:     				${week.open.toFixed(2)}</li>
 					<li class="list-group-item">High:     				${week.high.toFixed(2)}</li>
 					<li class="list-group-item">Low:      ${week.low.toFixed(2)}</li>
@@ -605,7 +612,7 @@ function intradayChart() {
 
 			]
 
-		}, 
+		},
 
 		options: {
 			scales: {

@@ -53,6 +53,10 @@ p {
     float: none;
 }
 
+.row {
+    margin: 5px 5px
+}
+
 .navbar-nav li a:hover {
     color: #30c2f1 !important;
     cursor:pointer;
@@ -166,16 +170,25 @@ ul {
     /* border: none; */
 }
 
+.well2 {
+    background-color:  #474e5d;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin: 10px 0px;
+    min-height: 200px;
+}
+
 .bias {
     line-height: 1.5em; 
 }
 
 
 canvas#intradayChart {
-    max-width: 90vw;
-    max-height: 80vh;
-    padding-right: 0px;
-    margin-left: 23px;
+    max-width: 85vw;
+    max-height: 60vh;
+    /* padding-left: 10px; */
+    /* margin-left: 23px; */
 }
 canvas#myChart {
     max-width: 900px;
@@ -300,3 +313,42 @@ i#sauce1 {
         min-height: 50px;
     }
 }
+
+/* table */
+table {
+    font-family: Courier, monospace;
+    margin: 0 auto;
+
+}
+.stocks-container {
+  margin-bottom: 1.5em;
+  width: 100%;
+  max-width: 600px;
+}
+.stocks-container a { text-decoration: none; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 1.1em;
+}
+.stock-symbol {
+  width: 12%;
+  padding: 2px 4px 2px 0px;
+}
+.stock-price, .stock-change, .stock-change-pct, .stock-mkt-cap {
+  width: 22%;
+  text-align: right;
+  padding: 2px 4px;
+}
+@media (max-width: 576px) {
+  table { margin-bottom: 3em; }
+  .stock-mkt-cap { display: none; }
+  .stock-symbol { width: 16%; }
+  .stock-price, .stock-change, .stock-change-pct { width: 28%; }
+  td.stock-symbol, td.stock-price, td.stock-change, td.stock-change-pct {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+}
+summary:hover { cursor: pointer; }
+summary::-webkit-details-marker { display: none; }
