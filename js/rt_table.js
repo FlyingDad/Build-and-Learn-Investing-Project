@@ -95,7 +95,7 @@ function updateDataForBatch(symbols, addTitle) {
       let formattedChange = data.quote.change.toLocaleString('en', {'minimumFractionDigits': 2});
       let formattedChangePercent = (data.quote.changePercent * 100).toFixed(1) + '%';
       let formattedMarketCap = formatMarketCap(data.quote.marketCap);
-      let rgbColor = data.quote.changePercent > 0 ? '0,255,0' : '255,0,0';
+      let rgbColor = data.quote.changePercent > 0 ? '107,218,255' : '255,0,0';
       let rgbOpacity = Math.min(Math.abs(data.quote.changePercent) * 20, 1);
 
       document.querySelectorAll(`[data-symbol="${symbol}"] .stock-price`).forEach(e => {
